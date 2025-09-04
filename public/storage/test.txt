@@ -1,0 +1,348 @@
+XXX INICIO DOCUMENTO
+========== AREA IDENTIFICACION DEL DOCUMENTO
+Tipo Documento Tributario Electronico            : 52
+Folio Documento                                  : 0000000001
+Fecha de Emision                                 : 2020-01-28
+Indicador No rebaja                              :
+Tipo de Despacho                                 : 2
+Indicador de Traslado                            : 6
+Tipo Impresion                                   :
+Indicador de servicio                            :
+Indicador de Montos Brutos                       :
+Indicador de Montos Netos                        :
+Forma de Pago                                    :
+Forma de Pago Exportacion                        :
+Fecha de Cancelacion                             :
+Monto Cancelado                                  :
+Saldo Insoluto                                   :
+Fecha de Pago                                    :
+Fecha de Pago                                    :
+Fecha de Pago                                    :
+Fecha de Pago                                    :
+Periodo Desde                                    :
+Periodo Hasta                                    :
+Medio de Pago                                    :
+Tipo de Cuenta de Pago                           :
+Numero de Cuenta de Pago                         :
+Banco de Pago                                    :
+Codigo Terminos de Pago                          :
+Glosa del Termino de Pago                        :
+Dias del Termino de Pago                         :
+Fecha de Vencimiento                             :
+========== AREA EMISOR
+Rut Emisor                                       : 96651910-K
+Razon Social Emisor                              : COMPASS CATERING SA
+Giro del Emisor                                  : Servicios de Alimentacion
+Telefono                                         : 225910600
+Correo Emisor                                    :
+ACTECO                                           : 602300
+Codigo Emisor Traslado Excepcional               :
+Folio Autorizacion                               :
+Fecha Autorizacion                               :
+Direccion de Origen Emisor                       : AV. DEL VALLE N° 787, OF. 501
+Comuna de Origen Emisor                          : HUECHARUBA
+Ciudad de Origen Emisor                          : SANTIAGO
+Nombre Sucursal                                  :
+Codigo Sucursal                                  : 
+Codigo Adicional Sucursal                        :
+Codigo Vendedor                                  :
+Identificador Adicional del Emisor               :
+RUT Mandante                                     :
+========== AREA RECEPTOR
+Rut Receptor                                     : 76003885-7
+Codigo Interno Receptor                          : 
+Nombre o Razon Social Receptor                   : Australis Mar S.A
+Numero Identificador Receptor Extranjero         :
+Nacionalidad del Receptor Extranjero             :
+Identificador Adicional Receptor Extranjero      :
+Giro del negocio del Receptor                    : Lorem Ipsum
+Contacto                                         : 
+Correo Receptor                                  :
+Direccion Receptor                               : Lorem Ipsum
+Comuna Receptor                                  : Lorem Ipsum
+Ciudad Receptor                                  : Lorem Ipsum
+Direccion Postal Receptor                        :
+Comuna Postal Receptor                           :
+Ciudad Postal Receptor                           :
+Rut Solicitante de Factura                       :
+========== AREA TRANSPORTES
+Patente                                          : 
+RUT Transportista                                :
+Rut Chofer                                       : 30686957-4
+Nombre del Chofer                                : Test
+Direccion Destino                                : Muelle Frowuar
+Comuna Destino                                   : Calbuco
+Ciudad Destino                                   : San Jose
+Modalidad De Ventas                              :
+Clausula de Venta Exportacion                    :
+Total Clausula de Venta Exportacion              :
+Via de Transporte                                :
+Nombre del Medio de Transporte                   :
+RUT Compania de Transporte                       :
+Nombre Compania de Transporte                    :
+Identificacion Adicional Compania de Transporte  :
+Booking                                          :
+Operador                                         :
+Puerto de Embarque                               :
+Identificador Adicional Puerto de Embarque       :
+Puerto Desembarque                               :
+Identificador Adicional Puerto de Desembarque    :
+Tara                                             :
+Unidad de Medida Tara                            :
+Total Peso Bruto                                 :
+Unidad de Peso Bruto                             :
+Total Peso Neto                                  :
+Unidad de Peso Neto                              :
+Total Items                                      :
+Total Bultos                                     :
+Codigo Tipo de Bulto                             :
+Codigo Tipo de Bulto                             :
+Codigo Tipo de Bulto                             :
+Codigo Tipo de Bulto                             :
+Flete                                            :
+Seguro                                           :
+Codigo Pais Receptor                             :
+Codigo Pais Destino                              :
+========== AREA TOTALES
+Tipo Moneda Transaccion                          :
+Monto Neto                                       : 0
+Monto Exento                                     : 0
+Monto Base Faenamiento de Carne                  :
+Monto Base de Margen de  Comercializacion        :
+Tasa IVA                                         : 0
+IVA                                              : 19
+IVA Propio                                       :
+IVA Terceros                                     :
+Impuesto Adicional                               :
+Impuesto Adicional                               :
+Impuesto Adicional                               :
+Impuesto Adicional                               :
+Impuesto Adicional                               :
+Impuesto Adicional                               :
+IVA no Retenido                                  :
+Credito Especial Emp. Constructoras              :
+Garantia Deposito Envases                        :
+Valor Neto Comisiones                            :
+Valor Exento Comisiones                          :
+IVA Comisiones                                   :
+Monto Total                                      : 36394
+Monto No Facturable                              :
+Monto Periodo                                    :
+Saldo Anterior                                   :
+Valor a Pagar                                    :
+========== AREA OTRA MONEDA
+Tipo Moneda                                      :
+Tipo Cambio                                      :
+Monto Neto Otra Moneda                           :
+Monto Exento Otra Moneda                         :
+Monto Base Faenamiento de Carne Otra Moneda      :
+Monto Margen Comerc. Otra Moneda                 :
+IVA Otra Moneda                                  :
+IVA Propio                                       :
+Tasa Imp. Otra Moneda                            :
+Valor Imp. Otra Moneda                           :
+IVA No Retenido Otra Moneda                      :
+Monto Total Otra Moneda                          :
+========== DETALLE DE PRODUCTOS Y SERVICIOS
+                                                 INTERNO   200000002                                                                                                                                                                                                                                                                                                                                                                                   8M LIMPIADOR LAVANDA DIVERSEY 5LT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               5.00                                                                                                                                                                                                                                                                                                                                         2019                        2020-10-29                                                                                                                                                                                                                                                                                                                                                                                                                                      10095             
+                                                 INTERNO   200000028                                                                                                                                                                                                                                                                                                                                                                                   DESINFECT AER.LYS ORIG LYSOFORM 360CC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           6.00                                                                                                                                                                                                                                                                                                                                         2142                        2020-10-29                                                                                                                                                                                                                                                                                                                                                                                                                                      12852             
+                                                 INTERNO   200000037                                                                                                                                                                                                                                                                                                                                                                                   DETERGENTE VIM LIQUIDO UN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       2.00                                                                                                                                                                                                                                                                                                                                         2261                        2020-10-29                                                                                                                                                                                                                                                                                                                                                                                                                                      4522              
+                                                 INTERNO   200000112                                                                                                                                                                                                                                                                                                                                                                                   INSECTICIDA CASA JARDIN RAID 360CC UN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           5.00                                                                                                                                                                                                                                                                                                                                         1785                        2020-10-29                                                                                                                                                                                                                                                                                                                                                                                                                                      8925              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+========== FIN DETALLE
+========== SUB TOTALES INFORMATIVO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+========== DESCUENTOS Y RECARGOS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+========== INFORMACION DE REFERENCIA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+========== COMISIONES Y OTROS CARGOS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+========== CAMPOS PERSONALIZADOS
+COLUMNAS_DETALLE                                 : 5
+COLUMNA_DETALLE_1                                : Cantidad
+ANCHO_COLUMNA_1                                  : 3.0cm
+DATO_COLUMNA_1                                   : D30
+ALINEACION_COLUMNA_1                             : C
+COLUMNA_DETALLE_2                                : DESCRIPCION ITEM
+ANCHO_COLUMNA_2                                  : 8.0cm
+DATO_COLUMNA_2                                   : D26
+ALINEACION_COLUMNA_2                             : L
+COLUMNA_DETALLE_3                                : Unidad de Medida
+ANCHO_COLUMNA_3                                  : 2.5cm
+DATO_COLUMNA_3                                   : D49
+ALINEACION_COLUMNA_3                             : C
+COLUMNA_DETALLE_4                                : PRECIO UNITARIO
+ANCHO_COLUMNA_4                                  : 3.0cm
+DATO_COLUMNA_4                                   : D46
+ALINEACION_COLUMNA_4                             : R
+COLUMNA_DETALLE_5                                : MONTO ITEM
+ANCHO_COLUMNA_5                                  : 4.1cm
+DATO_COLUMNA_5                                   : D88
+ALINEACION_COLUMNA_5                             : R
+ID_INTERNO                                       : 80618498
+CARRO                                            : JF4286
+IMPRESORA                                        : ZPTO
+SEIMPRIME(1_SI_-2_NO)                            : 1
+ORIGEN_DESTINO                                   : ASIAN VISION-PTO. SAN ANTONIO
+NAVE                                             :
+PUERTO                                           :
+DESTINO                                          :
+TEXTO_VARIABLE                                   :
+CopiaNormal                                      : 2
+CopiaCedible                                     : C
+CopiaCedible                                     : C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+XXX FIN DOCUMENTO

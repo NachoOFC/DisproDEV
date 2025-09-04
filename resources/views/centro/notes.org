@@ -1,0 +1,7 @@
+* Tasks
+** TODO 
+   [2020-01-30 Thu]
+   [[file:~/Projects/mline-siger/resources/views/centro/index.blade.php:://TODO: Agregar Habilitado/Inhabilitado]]
+** TODO 
+   [2020-01-30 Thu]
+   [[file:~/Projects/mline-siger/resources/views/centro/index.blade.php:://TODO: Agregar Habilitado/Inhabilitado]]

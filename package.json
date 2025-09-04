@@ -1,0 +1,53 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@mdi/font": "^5.5.55",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.5.0",
+    "cross-env": "^5.1",
+    "jquery": "^3.5.1",
+    "laravel-mix": "^4.0.7",
+    "lodash": "^4.17.19",
+    "popper.js": "^1.16.1",
+    "resolve-url-loader": "^2.3.1",
+    "sass": "^1.26.10",
+    "sass-loader": "7.*",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "dependencies": {
+    "@ag-grid-community/all-modules": "^22.1.1",
+    "@ag-grid-community/vue": "^22.1.2",
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "ag-grid-community": "^22.1.1",
+    "chart.js": "^2.9.3",
+    "datatables.net-bs4": "^1.10.21",
+    "datatables.net-buttons-bs4": "^1.6.2",
+    "datatables.net-fixedheader-dt": "^3.1.7",
+    "datatables.net-responsive-bs4": "^2.2.5",
+    "datatables.net-scroller-bs4": "^2.0.2",
+    "font-awesome": "^4.7.0",
+    "jszip": "^3.5.0",
+    "pdfmake": "^0.1.67",
+    "sweetalert2": "^9.17.1",
+    "tailwindcss": "^1.5.2",
+    "vue-chartjs": "^3.5.0",
+    "vue-property-decorator": "^8.5.1",
+    "vue-select": "^3.10.7",
+    "vue-slim-tabs": "^0.4.0",
+    "vue-tables-2": "^1.6.25",
+    "vuetable-2": "^2.0.0-beta.4",
+    "vuetify": "^2.3.9"
+  }
+}
