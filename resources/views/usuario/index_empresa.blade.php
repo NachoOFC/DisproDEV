@@ -31,8 +31,8 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->userable->nombre }}</td>
                                 <td>
-                                    <a class="btn btn-primary" href="{{ route('user.editCentro', $user)}}"><i class="fas fa-edit"></i></a>
-                                    <delete-btn-component action="{{ route('user.destroyCentro', $user) }}"></delete-btn-component>
+                                    <a class="btn btn-primary" href="{{ route('user.editCentro', $user)}}" title="Editar usuario" aria-label="Editar usuario {{ $user->name }}"><i class="fas fa-edit" aria-hidden="true"></i><span class="sr-only">Editar</span></a>
+                                    <delete-btn-component action="{{ route('user.destroyCentro', $user) }}" title="Eliminar usuario" aria-label="Eliminar usuario {{ $user->name }}"></delete-btn-component>
                                 </td>
                             </tr>
                         @endforeach

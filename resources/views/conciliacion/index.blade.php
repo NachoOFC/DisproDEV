@@ -78,7 +78,7 @@
                                         @method("DELETE")
                                         @csrf
 
-                                        <button class="btn btn-danger deleteBtn" type="submit">Eliminar</button>
+                                        <button class="btn btn-danger deleteBtn" type="submit" title="Eliminar" aria-label="Eliminar elemento">Eliminar</button>
                                     </form>
                                     @endif
                                 </div>

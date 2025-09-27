@@ -45,9 +45,9 @@
                     <td>{{ isset($empresa->habilitado) ? (($empresa->habilitado) ?  'Habilitado' : 'Inhabilitado') : 'Segun Horario'}}</td>
                     <td><a class="btn btn-success" href="{{ $empresa->productosIndexRoute }}">Lista de Productos</a></td>
                     <td>
-                      <a class="btn btn-warning" href="{{ route('empresas.habilitar.get', $empresa) }}">Estado</a>
-                      <a class="btn btn-primary" href="{{route('empresas.edit', $empresa)}}"><i class="fas fa-edit"></i></a>
-                      <delete-btn-component action="{{ route('empresas.destroy', $empresa) }}"></delete-btn-component>
+                      <a class="btn btn-warning" href="{{ route('empresas.habilitar.get', $empresa) }}" title="Cambiar estado" aria-label="Cambiar estado de empresa {{ $empresa->razon_social }}">Estado</a>
+                      <a class="btn btn-primary" href="{{route('empresas.edit', $empresa)}}" title="Editar empresa" aria-label="Editar empresa {{ $empresa->razon_social }}"><i class="fas fa-edit" aria-hidden="true"></i><span class="sr-only">Editar</span></a>
+                      <delete-btn-component action="{{ route('empresas.destroy', $empresa) }}" title="Eliminar empresa" aria-label="Eliminar empresa {{ $empresa->razon_social }}"></delete-btn-component>
                     </td>
                   </tr>
                 @endforeach

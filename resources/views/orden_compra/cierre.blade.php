@@ -50,12 +50,12 @@
                                     <a href="{{ asset($orden->documento) }}" target="_BLANK">Ver PDF</a>
 
                                     @if (Auth::user()->userable instanceof \App\Empresa)
-                                    <a href="{{ route("orden_compra_edit", $orden) }}" class="btn btn-warning mx-2">Editar</a>
-                                    <form method="POST" action="{{ route('orden_compra_delete', $orden)  }}">
+                                        <a href="{{ route("orden_compra_edit", $orden) }}" class="btn btn-warning mx-2" title="Editar orden" aria-label="Editar orden {{ $orden->id }}">Editar</a>
+                                        <form method="POST" action="{{ route('orden_compra_delete', $orden)  }}" aria-label="Eliminar orden {{ $orden->id }}">
                                         @csrf
                                         @method("DELETE")
 
-                                        <button class="btn btn-danger deleteBtn" type="submit">Eliminar</button>
+                                            <button class="btn btn-danger deleteBtn" type="submit" title="Eliminar orden" aria-label="Eliminar orden {{ $orden->id }}">Eliminar</button>
                                     </form>
                                     @endif
                                 </div>

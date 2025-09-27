@@ -33,8 +33,8 @@
                                         <td>{{ $abastecimiento->comuna }}</td>
                                         <td>{{ $abastecimiento->ciudad }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="{{route('abastecimientos.edit', $abastecimiento)}}"><i class="fas fa-edit"></i></a>
-                                            <delete-btn-component action="{{ route('abastecimientos.destroy', $abastecimiento) }}"></delete-btn-component>
+                                            <a class="btn btn-primary" href="{{route('abastecimientos.edit', $abastecimiento)}}" title="Editar abastecimiento" aria-label="Editar abastecimiento {{ $abastecimiento->id }}"><i class="fas fa-edit" aria-hidden="true"></i><span class="sr-only">Editar</span></a>
+                                            <delete-btn-component action="{{ route('abastecimientos.destroy', $abastecimiento) }}" title="Eliminar abastecimiento" aria-label="Eliminar abastecimiento {{ $abastecimiento->id }}"></delete-btn-component>
                                         </td>
                                     </tr>
                                 @endforeach

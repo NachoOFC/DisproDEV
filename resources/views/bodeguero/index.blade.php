@@ -31,8 +31,8 @@
                                         <td>{{ $bodeguero->nombre }}</td>
                                         <td>{{ $bodeguero->rut }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="{{route('bodegueros.edit', $bodeguero)}}"><i class="fas fa-edit"></i></a>
-                                            <delete-btn-component action="{{ route('bodegueros.destroy', $bodeguero) }}"></delete-btn-component>
+                                            <a class="btn btn-primary" href="{{route('bodegueros.edit', $bodeguero)}}" title="Editar bodeguero" aria-label="Editar bodeguero {{ $bodeguero->name }}"><i class="fas fa-edit" aria-hidden="true"></i><span class="sr-only">Editar</span></a>
+                                            <delete-btn-component action="{{ route('bodegueros.destroy', $bodeguero) }}" title="Eliminar bodeguero" aria-label="Eliminar bodeguero {{ $bodeguero->name }}"></delete-btn-component>
                                         </td>
                                     </tr>
                                 @endforeach

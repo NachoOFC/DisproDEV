@@ -52,8 +52,8 @@
                                     
                                    
                                 <td>
-                                    <a class="btn btn-primary" href="{{route('usuarios.edit', $user)}}"><i class="fas fa-edit"></i></a>
-                                    <delete-btn-component action="{{ route('usuarios.destroy', $user) }}"></delete-btn-component>
+                                    <a class="btn btn-primary" href="{{route('usuarios.edit', $user)}}" title="Editar usuario" aria-label="Editar usuario {{ $user->name }}"><i class="fas fa-edit" aria-hidden="true"></i><span class="sr-only">Editar</span></a>
+                                    <delete-btn-component action="{{ route('usuarios.destroy', $user) }}" title="Eliminar usuario" aria-label="Eliminar usuario {{ $user->name }}"></delete-btn-component>
                                 </td>
                             </tr>
                         @endforeach

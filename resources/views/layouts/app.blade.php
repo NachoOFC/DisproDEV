@@ -7,17 +7,88 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+            <link rel="dns-prefetch" href="//fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+            <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 
     <title>Alogis</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 
     <!-- Style -->
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
+    
+            <!-- Hotfix styles: tipografía y sidebar pulido (temporal en layout, migrar a SASS) -->
+            <style>
+                :root{
+                    --brand-500: #0ea5a4; /* solo referencia, no usar en sidebar */
+                    --muted-600: #55606a; /* item padre */
+                    --muted-800: #1f2937; /* subitem */
+                    --icon-600: #4b5563;
+                    --accent-100: rgba(14,165,164,0.06);
+                    --radius-sm: 6px;
+                }
+
+                html,body{
+                    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+                    color: #0f172a;
+                    font-size: 14px;
+                    line-height: 1.45;
+                    -webkit-font-smoothing:antialiased;
+                    -moz-osx-font-smoothing:grayscale;
+                }
+
+                h1{font-size:1.6rem;font-weight:700;margin-bottom:.4rem}
+                h2{font-size:1.25rem;font-weight:600;margin-bottom:.35rem}
+                h3{font-size:1.05rem;font-weight:600;margin-bottom:.3rem}
+                small{font-size:.825rem;color:#6b7280}
+
+                /* Sidebar refinements */
+                nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar{
+                    background: #ffffff;
+                    font-size: .95rem;
+                }
+
+                .sidebar .nav-link{
+                    color: var(--muted-600) !important;
+                    padding: 10px 12px;
+                    border-radius: var(--radius-sm);
+                    transition: background .18s ease, color .12s ease, transform .12s ease;
+                }
+
+                .sidebar .nav-link:hover{
+                    background: var(--accent-100) !important;
+                    color: var(--muted-800) !important;
+                    transform: translateX(2px);
+                }
+
+                /* indicador vertical para el item activo */
+                .sidebar .nav-link.active{
+                    color: var(--muted-800) !important;
+                    background: linear-gradient(90deg, rgba(14,165,164,0.03), transparent) !important;
+                    box-shadow: 0 1px 0 rgba(15,23,42,0.04) inset;
+                }
+
+                .sidebar .nav-link.active::before{
+                    content: '';
+                    display:inline-block;
+                    width:4px;height:28px;border-radius:4px;margin-right:10px;background:var(--brand-500);vertical-align:middle;
+                }
+
+                .sidebar .dropdown-item{
+                    color: var(--muted-800) !important;
+                    padding-left: 28px !important;
+                    font-weight:500 !important;
+                }
+
+                /* icons */
+                .sidebar i, .sidebar .mdi, .sidebar svg{ color: var(--icon-600) !important; }
+
+                /* Small utility adjustments */
+                .card{ border-radius: 10px; }
+                .btn{ border-radius: 8px; }
+            </style>
 
 </head>
 

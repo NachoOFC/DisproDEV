@@ -3,11 +3,11 @@
 @section('title', 'Nota de Credito | Mline SIGER')
 
 @if ((Auth::user()->userable instanceof \App\CompassRole))
-@section('home-route', route('compass.home'))
-@section('nav-menu')
+                                    <a href="{{ route("nota_credito_edit", $nota) }}" class="btn btn-warning mx-2" title="Editar nota" aria-label="Editar nota {{ $nota->id }}">Editar</a>
+                                    <form method="POST" action="{{ route('nota_credito_delete', $nota)  }}" class="deleteForm">
 @include('compass.menu')
 @endsection
-@else
+                                        <button class="btn btn-danger deleteBtn" type="submit" title="Eliminar nota" aria-label="Eliminar nota {{ $nota->id }}">Eliminar</button>
 @section('home-route', route('cliente.home'))
 @section('nav-menu')
 @include('cliente.menu')
