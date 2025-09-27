@@ -1,13 +1,47 @@
 <!-- Inline accordion styles/scripts: fallback inmediato mientras no se vuelvan a compilar los assets -->
 <style>
-.sidebar .accordion-item { border-radius: 4px; overflow: hidden; }
-.sidebar .accordion-toggle { display: flex; align-items: center; justify-content: space-between; padding-right: 8px; cursor: pointer; }
-.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .2s ease; margin-left: 8px; }
-.sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .2s ease; padding-left: 12px; padding-top: 0; padding-bottom: 0; }
-.sidebar .accordion-item.open > .accordion-panel { max-height: 1000px; padding-top: .35rem; padding-bottom: .35rem; }
+.@font-face{font-family: 'InterLocal'; src: local('Inter'), local('Segoe UI'), local('Helvetica Neue');}
+/* Aplicar Inter y jerarquía de colores: padres gris medio, subitems gris oscuro */
+.bg-light.sidebar, nav.bg-light.sidebar, .d-md-block.bg-light.sidebar, .sidebar { font-family: 'Inter', 'InterLocal', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial !important; background-color: #ffffff !important; }
+.bg-light.sidebar a.nav-link, nav.bg-light.sidebar a.nav-link, .d-md-block.bg-light.sidebar a.nav-link, .sidebar a.nav-link { color: #55606a !important; text-decoration: none !important; font-weight:600 !important; }
+.bg-light.sidebar .dropdown-menu a.dropdown-item, .sidebar .dropdown-item { color: #1f2937 !important; text-decoration: none !important; font-weight:500 !important; }
+.sidebar .nav-item{ margin: 6px 0; }
+
+.sidebar .accordion-item { border-radius: 6px; overflow: hidden; }
+.sidebar .accordion-toggle { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; cursor: pointer; font-weight: 600; font-size: 0.95rem; }
+.sidebar .accordion-toggle i, .sidebar .nav-link i, .sidebar .dropdown-item i { width: 20px; text-align: center; color: #55606a; }
+.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .18s ease; margin-left: 8px; color: #8a9199; }
+
+.sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .18s ease; padding-left: 14px; padding-top: 0; padding-bottom: 0; }
+.sidebar .accordion-item.open > .accordion-panel { max-height: 1000px; padding-top: .28rem; padding-bottom: .28rem; }
 .sidebar .accordion-item.open > .accordion-toggle .fa-chevron-down{ transform: rotate(180deg); }
+
 .sidebar .dropdown-menu.accordion-panel { background: transparent; border: none; box-shadow: none; padding-left: 0; position: static !important; transform: none !important; }
-.sidebar .dropdown-menu.accordion-panel a.dropdown-item { padding-left: 18px; }
+.sidebar .dropdown-menu.accordion-panel a.dropdown-item { padding-left: 20px; color: #1f2937; padding: 8px 12px; display: block; border-radius: 4px; }
+
+/* Hover / active states: colores profesionales */
+.bg-light.sidebar a.nav-link:hover, .bg-light.sidebar a.dropdown-item:hover, .sidebar a.nav-link:hover, .sidebar a.dropdown-item:hover{ background-color: #f2f5f7 !important; color: #334155 !important; text-decoration: none !important; }
+.bg-light.sidebar a.nav-link.active, .bg-light.sidebar a.dropdown-item.active, .sidebar a.nav-link.active, .sidebar a.dropdown-item.active{ background-color: #eef1f4 !important; color: #334155 !important; }
+
+/* Subitems slightly smaller to create hierarchy */
+.sidebar .dropdown-item{ font-size: 0.9rem; font-weight: 500; }
+
+/* Divider subtle */
+.sidebar .dropdown-divider{ border-top: 1px solid #eef2f4; margin: 8px 0; }
+
+/* Ajustes para iconos de material/v-icon cuando existan */
+.sidebar v-icon{ color: #55606a; margin-right: 8px; vertical-align: middle; }
+
+/* Mejor contraste para textos y accesibilidad */
+.sidebar, .sidebar a{ color-scheme: light; }
+
+/* Forzar colores para estados activos / abiertos que el CSS compilado marca en azul */
+.bg-light.sidebar a.nav-link.active, nav.bg-light.sidebar a.nav-link.active, .bg-light.sidebar .nav-link.active {
+    color: #334155 !important;
+}
+.bg-light.sidebar .accordion-item.open > .accordion-toggle, .bg-light.sidebar .accordion-toggle.active, .bg-light.sidebar .accordion-toggle[aria-expanded="true"] {
+    color: #334155 !important;
+}
 </style>
 
 <li class="nav-item">
@@ -282,4 +316,28 @@
         if(a) a.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
     }, false);
 })();
+</script>
+
+<!-- Forzar color por JS para evitar que reglas externas lo pongan en azul -->
+<script>
+    (function(){
+        try{
+            var containers = document.querySelectorAll('nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar');
+            containers.forEach(function(c){
+                c.querySelectorAll('a').forEach(function(a){
+                    if (a.classList.contains('dropdown-item')){
+                        a.style.setProperty('color','#1f2937','important');
+                        a.style.setProperty('font-weight','500','important');
+                    } else {
+                        a.style.setProperty('color','#55606a','important');
+                        a.style.setProperty('font-weight','600','important');
+                    }
+                    a.style.setProperty('text-decoration','none','important');
+                });
+                c.querySelectorAll('i, v-icon').forEach(function(ic){
+                    ic.style.setProperty('color','#4b5563','important');
+                });
+            });
+        }catch(e){console && console.error && console.error(e);}    
+    })();
 </script>

@@ -1,3 +1,35 @@
+<!-- Estilos locales para el menú de cliente: usar acento gris oscuro -->
+<style>
+nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial !important;
+}
+nav.bg-light.sidebar a.nav-link, .bg-light.sidebar a.nav-link, .sidebar a.nav-link {
+    color: #55606a !important; /* padres: gris medio */
+    font-weight: 600 !important;
+}
+nav.bg-light.sidebar a.nav-link i, .bg-light.sidebar a.nav-link i, .sidebar a.nav-link i {
+    color: #4b5563 !important;
+}
+nav.bg-light.sidebar a.nav-link:hover, .bg-light.sidebar a.nav-link:hover, .sidebar a.nav-link:hover {
+    background-color: #f2f4f6 !important;
+    color: #334155 !important;
+}
+nav.bg-light.sidebar .dropdown-menu a.dropdown-item, .bg-light.sidebar .dropdown-menu a.dropdown-item {
+    color: #2b2f33 !important; /* subitems: gris oscuro */
+}
+nav.bg-light.sidebar .dropdown-menu a.dropdown-item:hover, .bg-light.sidebar .dropdown-menu a.dropdown-item:hover {
+    background-color: #eef1f4 !important;
+    color: #334155 !important;
+}
+/* Forzar colores para estados activos / abiertos para evitar que reglas compiladas los pongan en azul */
+.bg-light.sidebar a.nav-link.active, nav.bg-light.sidebar a.nav-link.active, .bg-light.sidebar .nav-link.active {
+    color: #334155 !important;
+}
+.bg-light.sidebar .accordion-item.open > .accordion-toggle, .bg-light.sidebar .accordion-toggle.active, .bg-light.sidebar .accordion-toggle[aria-expanded="true"] {
+    color: #334155 !important;
+}
+</style>
+
 <li class="nav-item">
     <a class="nav-link" href="{{ route('cliente.home')}}">
         <i class="fas fa-home mr-2"></i>
@@ -91,6 +123,31 @@
     </div>
 </li>
 @endif
+
+<!-- Forzar color por JS para evitar que reglas externas lo pongan en azul -->
+<script>
+    (function(){
+        try{
+            var containers = document.querySelectorAll('nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar');
+            containers.forEach(function(c){
+                c.querySelectorAll('a').forEach(function(a){
+                        // distinguir padres y subitems: si es dropdown-item -> subitem
+                        if (a.classList.contains('dropdown-item')){
+                            a.style.setProperty('color','#2b2f33','important');
+                            a.style.setProperty('font-weight','500','important');
+                        } else {
+                            a.style.setProperty('color','#55606a','important');
+                            a.style.setProperty('font-weight','600','important');
+                        }
+                        a.style.setProperty('text-decoration','none','important');
+                    });
+                c.querySelectorAll('i, v-icon').forEach(function(ic){
+                    ic.style.setProperty('color','#4b5563','important');
+                });
+            });
+        }catch(e){}
+    })();
+</script>
 @if(Auth::user()->userable instanceof App\Empresa)
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownProductos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
