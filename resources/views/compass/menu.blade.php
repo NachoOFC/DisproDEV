@@ -1,33 +1,48 @@
 <!-- Inline accordion styles/scripts: fallback inmediato mientras no se vuelvan a compilar los assets -->
 <style>
+.bg-light.sidebar nav, nav.bg-light.sidebar, .d-md-block.bg-light.sidebar {} /* placeholder to increase specificity */
+.bg-light.sidebar nav .accordion-toggle, nav.bg-light.sidebar .accordion-toggle, .d-md-block.bg-light.sidebar .accordion-toggle { position: relative !important; }
+.bg-light.sidebar nav .accordion-toggle .fa-chevron-down, nav.bg-light.sidebar .accordion-toggle .fa-chevron-down, .d-md-block.bg-light.sidebar .accordion-toggle .fa-chevron-down { position: absolute !important; right: 12px !important; top: 50% !important; transform: translateY(-50%) !important; margin-left: 0 !important; }
+.bg-light.sidebar nav .accordion-toggle, nav.bg-light.sidebar .accordion-toggle, .d-md-block.bg-light.sidebar .accordion-toggle { padding-right: 48px !important; }
+.bg-light.sidebar nav .accordion-toggle .chev, nav.bg-light.sidebar .accordion-toggle .chev, .d-md-block.bg-light.sidebar .accordion-toggle .chev { display: none !important; }
 .@font-face{font-family: 'InterLocal'; src: local('Inter'), local('Segoe UI'), local('Helvetica Neue');}
-/* Aplicar Inter y jerarquía de colores: padres gris medio, subitems gris oscuro */
+/* Aplicar Inter y jerarquía de colores: padres gris medio, subitems gris oscuro
+   Estética en cuadros blancos: cada item será una tarjeta ligera con sombra sutil,
+   márgenes y bordes redondeados. Mantener fondo blanco por pedido. */
 .bg-light.sidebar, nav.bg-light.sidebar, .d-md-block.bg-light.sidebar, .sidebar { font-family: 'Inter', 'InterLocal', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial !important; background-color: #ffffff !important; }
-.bg-light.sidebar a.nav-link, nav.bg-light.sidebar a.nav-link, .d-md-block.bg-light.sidebar a.nav-link, .sidebar a.nav-link { color: #55606a !important; text-decoration: none !important; font-weight:600 !important; }
-.bg-light.sidebar .dropdown-menu a.dropdown-item, .sidebar .dropdown-item { color: #1f2937 !important; text-decoration: none !important; font-weight:500 !important; }
-.sidebar .nav-item{ margin: 6px 0; }
 
-.sidebar .accordion-item { border-radius: 6px; overflow: hidden; }
-.sidebar .accordion-toggle { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; cursor: pointer; font-weight: 600; font-size: 0.95rem; }
-.sidebar .accordion-toggle i, .sidebar .nav-link i, .sidebar .dropdown-item i { width: 20px; text-align: center; color: #55606a; }
-.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .18s ease; margin-left: 8px; color: #8a9199; }
+/* Card-like container for each nav item */
+.sidebar .nav-item { margin: 8px 12px; border-radius: 8px; overflow: visible; }
 
-.sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .18s ease; padding-left: 14px; padding-top: 0; padding-bottom: 0; }
-.sidebar .accordion-item.open > .accordion-panel { max-height: 1000px; padding-top: .28rem; padding-bottom: .28rem; }
-.sidebar .accordion-item.open > .accordion-toggle .fa-chevron-down{ transform: rotate(180deg); }
+.sidebar .accordion-item { border-radius: 4px; overflow: hidden; box-shadow: 0 8px 28px rgba(15,23,42,0.12); background: #ffffff; border: 0; }
 
+/* Estética más cuadrada y tipografía más grande */
+.sidebar .accordion-toggle, .sidebar a.nav-link { display: flex; align-items: center; justify-content: flex-start; padding: 14px 16px; cursor: pointer; font-weight: 700; font-size: 1.08rem; color: #374151 !important; text-decoration: none !important; position: relative; padding-right: 44px; }
+.sidebar .accordion-toggle i, .sidebar .nav-link i, .sidebar .dropdown-item i { width: 20px; text-align: center; color: #54646f; margin-right: 12px; }
+.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .18s ease; color: #9aa4ad; font-size: 0.95rem; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); margin-left: 0; }
+
+/* placeholder span.chev (hidden) kept for compatibility */
+.sidebar .accordion-toggle .chev{ display: none; }
+
+/* Forzar chevron al final: envolver iconos izquierdo y mover chevron con utilidades */
+.sidebar .accordion-toggle .left-icon { margin-right: 12px; }
+.sidebar .accordion-toggle .chev { margin-left: auto; }
+
+/* Subitems appear inside the card with a softer background to separate visually */
+.sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .18s ease; padding: 0 12px; }
+.sidebar .accordion-item.open > .accordion-panel { max-height: 1000px; padding: .4rem 12px .6rem; }
 .sidebar .dropdown-menu.accordion-panel { background: transparent; border: none; box-shadow: none; padding-left: 0; position: static !important; transform: none !important; }
-.sidebar .dropdown-menu.accordion-panel a.dropdown-item { padding-left: 20px; color: #1f2937; padding: 8px 12px; display: block; border-radius: 4px; }
+.sidebar .dropdown-menu.accordion-panel a.dropdown-item { display: block; padding: 8px 12px; color: #1f2937 !important; font-weight: 500 !important; border-radius: 6px; margin: 4px 0; }
 
-/* Hover / active states: colores profesionales */
-.bg-light.sidebar a.nav-link:hover, .bg-light.sidebar a.dropdown-item:hover, .sidebar a.nav-link:hover, .sidebar a.dropdown-item:hover{ background-color: #f2f5f7 !important; color: #334155 !important; text-decoration: none !important; }
-.bg-light.sidebar a.nav-link.active, .bg-light.sidebar a.dropdown-item.active, .sidebar a.nav-link.active, .sidebar a.dropdown-item.active{ background-color: #eef1f4 !important; color: #334155 !important; }
+/* Hover / active states: mantener blanco general, resaltar cuadro con sombra y leve fondo */
+.bg-light.sidebar a.nav-link:hover, .bg-light.sidebar a.dropdown-item:hover, .sidebar a.nav-link:hover, .sidebar a.dropdown-item:hover{ background-color: #ffffff !important; box-shadow: 0 4px 16px rgba(15,23,42,0.06); color: #334155 !important; text-decoration: none !important; }
+.bg-light.sidebar a.nav-link.active, .bg-light.sidebar a.dropdown-item.active, .sidebar a.nav-link.active, .sidebar a.dropdown-item.active{ background-color: #ffffff !important; box-shadow: 0 6px 20px rgba(15,23,42,0.08); color: #334155 !important; }
 
 /* Subitems slightly smaller to create hierarchy */
-.sidebar .dropdown-item{ font-size: 0.9rem; font-weight: 500; }
+.sidebar .dropdown-item{ font-size: 0.9rem; }
 
 /* Divider subtle */
-.sidebar .dropdown-divider{ border-top: 1px solid #eef2f4; margin: 8px 0; }
+.sidebar .dropdown-divider{ border-top: 1px solid #f1f5f9; margin: 8px 0; }
 
 /* Ajustes para iconos de material/v-icon cuando existan */
 .sidebar v-icon{ color: #55606a; margin-right: 8px; vertical-align: middle; }
@@ -49,8 +64,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownRequerimientos" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-clipboard-list mr-2"></i>
+        <i class="fas fa-clipboard-list left-icon"></i>
         Ordenes de Pedido
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('pedidos.indexEmpresa')}}">Lista</a>
@@ -68,8 +84,9 @@
 @if (Auth::user()->userable->name === 'Compras')
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownCentros" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-route mr-2"></i>
+        <i class="fas fa-route left-icon"></i>
         Puntos de Abastecimientos
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('abastecimientos.index')}}">Lista</a>
@@ -78,8 +95,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownCentrosB" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-address-card mr-2"></i>
+        <i class="fas fa-address-card left-icon"></i>
         Bodegueros
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('bodegueros.index')}}">Lista</a>
@@ -88,8 +106,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownHoldings" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-building mr-2"></i>
+        <i class="fas fa-building left-icon"></i>
         Holdings
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('holdings.index')}}">Lista</a>
@@ -99,8 +118,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownEmpresas" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-industry mr-2"></i>
+        <i class="fas fa-industry left-icon"></i>
         Empresas
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('empresas.index')}}">Lista</a>
@@ -112,8 +132,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownCentrosCultivo" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-warehouse mr-2"></i>
+        <i class="fas fa-warehouse left-icon"></i>
         Centros de Cultivos
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('centros.index')}}">Lista</a>
@@ -123,8 +144,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownUsuariosMain" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-users mr-2"></i>
+        <i class="fas fa-users left-icon"></i>
         Usuarios
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('usuarios.index', 'r')}}">Usuarios</a>
@@ -136,8 +158,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownReportesMain" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-list mr-2"></i>
+        <i class="fas fa-list left-icon"></i>
         Reportes
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('reportes.packs')}}">Generar Packs</a>
@@ -148,8 +171,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownEstados" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-clipboard-check mr-2"></i>
+        <i class="fas fa-clipboard-check left-icon"></i>
         Estados de Pago
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('estado_pago_general')}}">Estados de Pago</a>
@@ -159,8 +183,9 @@
 </li>
 <li class="nav-item accordion-item">
     <a class="nav-link accordion-toggle" href="#" role="button" id="dropdownCierre" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-clipboard-check mr-2"></i>
+        <i class="fas fa-clipboard-check left-icon"></i>
         Control OC/NC/FE
+        <span class="chev"></span>
     </a>
     <div class="accordion-panel">
         <a class="dropdown-item" href="{{route('orden_compra_index')}}">Orden de Compra</a>
@@ -259,7 +284,15 @@
         if (!t.querySelector('.fa-chevron-down')){
             var icon = document.createElement('i');
             icon.className = 'fas fa-chevron-down';
+            // force position via inline styles to avoid being overwritten by compiled CSS
+            icon.style.setProperty('position','absolute');
+            icon.style.setProperty('right','12px');
+            icon.style.setProperty('top','50%');
+            icon.style.setProperty('transform','translateY(-50%)');
+            icon.style.setProperty('margin-left','0');
             t.appendChild(icon);
+            // ensure the toggle is positioned relatively (inline) so absolute positions work
+            try{ t.style.setProperty('position','relative','important'); }catch(e){}
         }
     }
 
@@ -333,6 +366,9 @@
                         a.style.setProperty('font-weight','600','important');
                     }
                     a.style.setProperty('text-decoration','none','important');
+                        // ensure toggles have space for chevron and relative positioning
+                        a.style.setProperty('padding-right','48px','important');
+                        a.style.setProperty('position','relative','important');
                 });
                 c.querySelectorAll('i, v-icon').forEach(function(ic){
                     ic.style.setProperty('color','#4b5563','important');
