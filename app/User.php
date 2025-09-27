@@ -63,11 +63,11 @@ class User extends Authenticatable
     public function requerimientos()
     {
         if ($this->centro_id) {
-        return $this->belongsToMany('App\Requerimiento')
+        return $this->belongsToMany(Requerimiento::class)
             ->where('centro_id', $this->centro_id)
             ->withPivot('nombre');
     } else {
-        return $this->belongsToMany('App\Requerimiento')->withPivot('nombre');
+        return $this->belongsToMany(Requerimiento::class)->withPivot('nombre');
     }
     }
 
@@ -83,7 +83,7 @@ public static function getEmpresaUsersWithoutCentros()
 }
 public function centros()
     {
-        return $this->belongsToMany(\App\Centro::class, 'centro_user', 'user_id', 'centro_id');
+        return $this->belongsToMany(Centro::class, 'centro_user', 'user_id', 'centro_id');
     }
     /**
      * Retorna el Nombre o la Razon Social del Objeto Relacionado

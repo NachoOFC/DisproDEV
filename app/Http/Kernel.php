@@ -14,10 +14,19 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        // Manejo de proxies (Laravel 10 ya integra esto, no se usa Fideloper)
         \App\Http\Middleware\TrustProxies::class,
-        \App\Http\Middleware\CheckForMaintenanceMode::class,
+
+        // Bloquea requests si la app está en mantenimiento (php artisan down)
+        \Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance::class,
+
+        // Valida que los POST no superen el tamaño permitido
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+
+        // Recorta espacios de los inputs
         \App\Http\Middleware\TrimStrings::class,
+
+        // Convierte "" en null
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
@@ -65,7 +74,7 @@ class Kernel extends HttpKernel
         'cliente' => \App\Http\Middleware\CheckCliente::class,
         'type' => \App\Http\Middleware\CheckClienteType::class,
         'create' => \App\Http\Middleware\checkHorarioCrear::class,
-        'validar' => \App\Http\Middleware\checkHorarioValidar::class
+        'validar' => \App\Http\Middleware\checkHorarioValidar::class,
     ];
 
     /**

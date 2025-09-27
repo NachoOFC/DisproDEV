@@ -44,17 +44,17 @@ class Requerimiento extends Model
 
     public function historialEstados()
     {
-        return $this->hasMany("App\HistorialEstado");
+        return $this->hasMany(HistorialEstado::class);
     }
 
     public function estados()
     {
-        return $this->hasManyThrough("App\Estado", "App\HistorialEstado");
+        return $this->hasManyThrough(Estado::class, HistorialEstado::class);
     }
 
     public function productosRechazados()
     {
-        return $this->hasManyThrough("App\Rechazo", "App\GuiaDespacho");
+        return $this->hasManyThrough(Rechazo::class, GuiaDespacho::class);
     }
 
     /**
@@ -64,7 +64,7 @@ class Requerimiento extends Model
      */
     public function productos()
     {
-        return $this->belongsToMany('App\Producto')->withPivot('cantidad', 'precio', 'real', 'observacion', 'fecha_vencimiento');
+        return $this->belongsToMany(Producto::class)->withPivot('cantidad', 'precio', 'real', 'observacion', 'fecha_vencimiento');
     }
 
     /**
@@ -74,7 +74,7 @@ class Requerimiento extends Model
      */
     public function centro()
     {
-        return $this->belongsTo('App\Centro');
+        return $this->belongsTo(Centro::class);
     }
 
     /**
@@ -84,7 +84,7 @@ class Requerimiento extends Model
      */
     public function transporte()
     {
-        return $this->belongsTo('App\Transporte');
+        return $this->belongsTo(Transporte::class);
     }
 
     /**
@@ -94,12 +94,12 @@ class Requerimiento extends Model
      */
     public function bodeguero()
     {
-        return $this->belongsTo('App\Bodeguero');
+        return $this->belongsTo(Bodeguero::class);
     }
 
     public function guiasDespacho()
     {
-        return $this->hasMany('App\GuiaDespacho');
+        return $this->hasMany(GuiaDespacho::class);
     }
 
     /**
@@ -109,7 +109,7 @@ class Requerimiento extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\Requerimiento')->withPivot('nombre');
+        return $this->belongsToMany(User::class)->withPivot('nombre');
     }
 
 

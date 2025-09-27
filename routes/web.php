@@ -318,7 +318,7 @@ Route::get('/presupuesto/editar',  'PresupuestoController@editar')
             Route::get('armar/{requerimiento}', 'RequerimientoController@showCaja')->name('compass.pedidos.show');
             Route::post('armar-caja/{requerimiento}', 'RequerimientoController@armarCaja')->name('compass.pedidos.armarCaja');
 
-            Route::get('despachar', 'RequerimientoController@despacharView')->name('compass.pedidos.despachar');
+            Route::get('despachar', 'Requeri mientoController@despacharView')->name('compass.pedidos.despachar');
 
             Route::get('programar-despacho', 'TransporteController@create')->name('compass.pedidos.programarDespachos');
             Route::post('programar-despacho', 'TransporteController@store')->name('compass.pedidos.programarDespachos.post');

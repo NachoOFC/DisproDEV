@@ -37,6 +37,57 @@ body {
   background-color: #ffffff;
 }
 
+/* Acordeón del menú Compass - estilo profesional */
+.sidebar {
+  background: #ffffff; /* blanco limpio */
+  border-right: 1px solid #e6e9ee;
+}
+
+.sidebar .nav-link {
+  font-family: 'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-size: 14px;
+  color: #2b3a42;
+  padding: .6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  border-radius: 6px;
+}
+
+.sidebar .nav-link i,
+.sidebar .nav-link v-icon {
+  color: #6b7b84; /* icon color */
+  min-width: 20px;
+}
+
+.sidebar .nav-link:hover {
+  background: #f6f8fa;
+  color: #0d6efd; /* azul suave en hover */
+  text-decoration: none;
+}
+
+.sidebar .accordion-item { border-radius: 6px; overflow: hidden; }
+.sidebar .accordion-toggle { display: flex; align-items: center; justify-content: space-between; padding-right: 8px; cursor: pointer; font-weight: 600; color: #21303a; }
+.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .22s ease, color .18s ease; margin-left: 8px; color: #9aa6b2; }
+
+.sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .2s ease; padding-left: 12px; padding-top: 0; padding-bottom: 0; }
+.sidebar .accordion-item.open > .accordion-panel { padding-top: .35rem; padding-bottom: .35rem; }
+.sidebar .accordion-item.open > .accordion-toggle .fa-chevron-down{ transform: rotate(180deg); color: #0d6efd; }
+
+.sidebar .accordion-panel a.dropdown-item { color: #556b74; padding: .35rem 1rem; display: block; border-radius: 6px; }
+.sidebar .accordion-panel a.dropdown-item:hover { background: #eef4ff; color: #0d6efd; text-decoration: none; }
+
+.sidebar .accordion-panel { position: static !important; transform: none !important; }
+
+.sidebar .nav-link.active,
+.sidebar .accordion-item.open > .accordion-toggle { color: #0d6efd; }
+
+/* Small visual polish */
+.sidebar-heading { color: #61707a; font-weight: 700; font-size: 12px; letter-spacing: .04em; }
+
+/* Make sure nested panels transition smoothly when using inline maxHeight */
+.accordion-panel { will-change: max-height; }
+
 .sidebar {
   position: fixed;
   top: 0;

@@ -174,3 +174,39 @@ $(document).ready(function() {
     }
   });
 });
+
+// Script para el acordeón del menú Compass (delegación de eventos)
+(function(){
+  function ensureChevron(t){
+    if (!t.querySelector('.fa-chevron-down')){
+      var icon = document.createElement('i');
+      icon.className = 'fas fa-chevron-down';
+      t.appendChild(icon);
+    }
+  }
+
+  try{
+    document.querySelectorAll('.accordion-toggle').forEach(function(t){ ensureChevron(t); });
+  }catch(e){}
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('.accordion-toggle');
+    if(!t) return;
+    e.preventDefault();
+    ensureChevron(t);
+
+    var item = t.closest('.accordion-item');
+    if(!item) return;
+
+    var container = item.parentElement;
+    if(container){
+      var siblings = container.querySelectorAll(':scope > .accordion-item');
+      siblings.forEach(function(s){ if(s !== item) s.classList.remove('open'); });
+    }
+
+    item.classList.toggle('open');
+    var expanded = item.classList.contains('open');
+    var a = item.querySelector('.accordion-toggle');
+    if(a) a.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  }, false);
+})();

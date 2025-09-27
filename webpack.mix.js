@@ -11,12 +11,22 @@ const mix = require('laravel-mix');
  |
  */
 
+// JavaScript compilation
 mix.js('resources/js/app.js', 'public/js')
+   .js('resources/js/app1.js', 'public/js')
+   .vue();
 
-const tailwindcss = require('tailwindcss')
-
+// Sass compilation with Tailwind CSS
 mix.sass('resources/sass/app.scss', 'public/css')
-  .options({
-    processCssUrls: false,
-    postCss: [tailwindcss('tailwind.config.js')]
-  })
+   .options({
+       processCssUrls: false,
+       postCss: [
+           require('tailwindcss'),
+           require('autoprefixer'),
+       ]
+   });
+
+// Version files in production
+if (mix.inProduction()) {
+    mix.version();
+}
