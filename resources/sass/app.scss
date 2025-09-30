@@ -29,9 +29,7 @@
 @import "./scss/brands.scss";
 
 // Tailwind
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Removed Tailwind directives: @tailwind base; @tailwind components; @tailwind utilities; */
 
 body {
   background-color: #ffffff;
@@ -45,13 +43,13 @@ body {
 
 .sidebar .nav-link {
   font-family: 'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  font-size: 14px;
+  font-size: 1.02rem; /* aumentar legibilidad */
   color: #2b3a42;
-  padding: .6rem 1rem;
+  padding: 0.9rem 1rem;
   display: flex;
   align-items: center;
   gap: .6rem;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .sidebar .nav-link i,
@@ -62,25 +60,25 @@ body {
 
 .sidebar .nav-link:hover {
   background: #f6f8fa;
-  color: #0d6efd; /* azul suave en hover */
+  color: #0f1724; /* usar color oscuro en hover para mantener contraste */
   text-decoration: none;
 }
 
-.sidebar .accordion-item { border-radius: 6px; overflow: hidden; }
-.sidebar .accordion-toggle { display: flex; align-items: center; justify-content: space-between; padding-right: 8px; cursor: pointer; font-weight: 600; color: #21303a; }
-.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .22s ease, color .18s ease; margin-left: 8px; color: #9aa6b2; }
+.sidebar .accordion-item { border-radius: 8px; overflow: hidden; box-shadow: 0 8px 28px rgba(15,23,42,0.10); }
+.sidebar .accordion-toggle { display: flex; align-items: center; justify-content: flex-start; padding: 14px 16px; padding-right: 56px; cursor: pointer; font-weight: 700; color: #374151; font-size: 1.12rem; }
+.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .22s ease, color .18s ease; margin-left: 8px; color: #9aa6b2; font-size: 1.02rem; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); }
 
 .sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .2s ease; padding-left: 12px; padding-top: 0; padding-bottom: 0; }
-.sidebar .accordion-item.open > .accordion-panel { padding-top: .35rem; padding-bottom: .35rem; }
-.sidebar .accordion-item.open > .accordion-toggle .fa-chevron-down{ transform: rotate(180deg); color: #0d6efd; }
+.sidebar .accordion-item.open > .accordion-panel { padding-top: .45rem; padding-bottom: .45rem; }
+.sidebar .accordion-item.open > .accordion-toggle .fa-chevron-down{ transform: rotate(180deg); color: #374151; }
 
-.sidebar .accordion-panel a.dropdown-item { color: #556b74; padding: .35rem 1rem; display: block; border-radius: 6px; }
-.sidebar .accordion-panel a.dropdown-item:hover { background: #eef4ff; color: #0d6efd; text-decoration: none; }
+.sidebar .accordion-panel a.dropdown-item { color: #374151; padding: .5rem 1rem; display: block; border-radius: 6px; font-size: 1.00rem; font-weight: 600; }
+.sidebar .accordion-panel a.dropdown-item:hover { background: #f1f5f9; color: #0f1724; text-decoration: none; }
 
 .sidebar .accordion-panel { position: static !important; transform: none !important; }
 
 .sidebar .nav-link.active,
-.sidebar .accordion-item.open > .accordion-toggle { color: #0d6efd; }
+.sidebar .accordion-item.open > .accordion-toggle { color: #0f1724; }
 
 /* Small visual polish */
 .sidebar-heading { color: #61707a; font-weight: 700; font-size: 12px; letter-spacing: .04em; }

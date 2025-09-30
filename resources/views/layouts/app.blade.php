@@ -50,6 +50,13 @@
                     font-size: .95rem;
                 }
 
+                /* Fix: reservar espacio para sidebar en pantallas md+ y evitar solapamiento al hacer zoom */
+                @media (min-width: 768px) {
+                    #sidenav { width: 260px; flex: 0 0 260px; }
+                    nav.bg-light.sidebar, .bg-light.sidebar { width: 260px; box-sizing: border-box; }
+                    main.col { margin-left: 260px; }
+                }
+
                 .sidebar .nav-link{
                     color: var(--muted-600) !important;
                     padding: 10px 12px;

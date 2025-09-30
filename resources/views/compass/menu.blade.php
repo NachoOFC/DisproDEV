@@ -1,25 +1,24 @@
 <!-- Inline accordion styles/scripts: fallback inmediato mientras no se vuelvan a compilar los assets -->
 <style>
+/* High-specificity small patch to ensure the sidebar keeps a white, card-like aesthetic
+   Ajustes de tipografía: aumentar peso y tamaño de texto para items y subitems */
 .bg-light.sidebar nav, nav.bg-light.sidebar, .d-md-block.bg-light.sidebar {} /* placeholder to increase specificity */
 .bg-light.sidebar nav .accordion-toggle, nav.bg-light.sidebar .accordion-toggle, .d-md-block.bg-light.sidebar .accordion-toggle { position: relative !important; }
 .bg-light.sidebar nav .accordion-toggle .fa-chevron-down, nav.bg-light.sidebar .accordion-toggle .fa-chevron-down, .d-md-block.bg-light.sidebar .accordion-toggle .fa-chevron-down { position: absolute !important; right: 12px !important; top: 50% !important; transform: translateY(-50%) !important; margin-left: 0 !important; }
-.bg-light.sidebar nav .accordion-toggle, nav.bg-light.sidebar .accordion-toggle, .d-md-block.bg-light.sidebar .accordion-toggle { padding-right: 48px !important; }
+.bg-light.sidebar nav .accordion-toggle, nav.bg-light.sidebar .accordion-toggle, .d-md-block.bg-light.sidebar .accordion-toggle { padding-right: 56px !important; }
 .bg-light.sidebar nav .accordion-toggle .chev, nav.bg-light.sidebar .accordion-toggle .chev, .d-md-block.bg-light.sidebar .accordion-toggle .chev { display: none !important; }
 .@font-face{font-family: 'InterLocal'; src: local('Inter'), local('Segoe UI'), local('Helvetica Neue');}
-/* Aplicar Inter y jerarquía de colores: padres gris medio, subitems gris oscuro
-   Estética en cuadros blancos: cada item será una tarjeta ligera con sombra sutil,
-   márgenes y bordes redondeados. Mantener fondo blanco por pedido. */
 .bg-light.sidebar, nav.bg-light.sidebar, .d-md-block.bg-light.sidebar, .sidebar { font-family: 'Inter', 'InterLocal', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial !important; background-color: #ffffff !important; }
 
 /* Card-like container for each nav item */
-.sidebar .nav-item { margin: 8px 12px; border-radius: 8px; overflow: visible; }
+.sidebar .nav-item { margin: 10px 10px; border-radius: 10px; overflow: visible; }
 
-.sidebar .accordion-item { border-radius: 4px; overflow: hidden; box-shadow: 0 8px 28px rgba(15,23,42,0.12); background: #ffffff; border: 0; }
+.sidebar .accordion-item { border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(15,23,42,0.14); background: #ffffff; border: 0; }
 
-/* Estética más cuadrada y tipografía más grande */
-.sidebar .accordion-toggle, .sidebar a.nav-link { display: flex; align-items: center; justify-content: flex-start; padding: 14px 16px; cursor: pointer; font-weight: 700; font-size: 1.08rem; color: #374151 !important; text-decoration: none !important; position: relative; padding-right: 44px; }
-.sidebar .accordion-toggle i, .sidebar .nav-link i, .sidebar .dropdown-item i { width: 20px; text-align: center; color: #54646f; margin-right: 12px; }
-.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .18s ease; color: #9aa4ad; font-size: 0.95rem; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); margin-left: 0; }
+/* Estética: tipografía más grande y peso mayor */
+.sidebar .accordion-toggle, .sidebar a.nav-link { display: flex; align-items: center; justify-content: flex-start; padding: 16px 18px; cursor: pointer; font-weight: 700; font-size: 1.16rem; color: #374151 !important; text-decoration: none !important; position: relative; padding-right: 56px; line-height: 1.2; }
+.sidebar .accordion-toggle i, .sidebar .nav-link i, .sidebar .dropdown-item i { width: 22px; text-align: center; color: #54646f; margin-right: 14px; font-size: 1.05rem; }
+.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .18s ease; color: #9aa4ad; font-size: 1.02rem; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); margin-left: 0; }
 
 /* placeholder span.chev (hidden) kept for compatibility */
 .sidebar .accordion-toggle .chev{ display: none; }
@@ -29,17 +28,17 @@
 .sidebar .accordion-toggle .chev { margin-left: auto; }
 
 /* Subitems appear inside the card with a softer background to separate visually */
-.sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .18s ease; padding: 0 12px; }
-.sidebar .accordion-item.open > .accordion-panel { max-height: 1000px; padding: .4rem 12px .6rem; }
+.sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .18s ease; padding: 0 14px; }
+.sidebar .accordion-item.open > .accordion-panel { max-height: 1000px; padding: .5rem 14px .8rem; }
 .sidebar .dropdown-menu.accordion-panel { background: transparent; border: none; box-shadow: none; padding-left: 0; position: static !important; transform: none !important; }
-.sidebar .dropdown-menu.accordion-panel a.dropdown-item { display: block; padding: 8px 12px; color: #1f2937 !important; font-weight: 500 !important; border-radius: 6px; margin: 4px 0; }
+.sidebar .dropdown-menu.accordion-panel a.dropdown-item { display: block; padding: 10px 14px; color: #111827 !important; font-weight: 600 !important; border-radius: 6px; margin: 6px 0; font-size: 1.00rem; }
 
 /* Hover / active states: mantener blanco general, resaltar cuadro con sombra y leve fondo */
-.bg-light.sidebar a.nav-link:hover, .bg-light.sidebar a.dropdown-item:hover, .sidebar a.nav-link:hover, .sidebar a.dropdown-item:hover{ background-color: #ffffff !important; box-shadow: 0 4px 16px rgba(15,23,42,0.06); color: #334155 !important; text-decoration: none !important; }
-.bg-light.sidebar a.nav-link.active, .bg-light.sidebar a.dropdown-item.active, .sidebar a.nav-link.active, .sidebar a.dropdown-item.active{ background-color: #ffffff !important; box-shadow: 0 6px 20px rgba(15,23,42,0.08); color: #334155 !important; }
+.bg-light.sidebar a.nav-link:hover, .bg-light.sidebar a.dropdown-item:hover, .sidebar a.nav-link:hover, .sidebar a.dropdown-item:hover{ background-color: #ffffff !important; box-shadow: 0 6px 20px rgba(15,23,42,0.08); color: #0f1724 !important; text-decoration: none !important; }
+.bg-light.sidebar a.nav-link.active, .bg-light.sidebar a.dropdown-item.active, .sidebar a.nav-link.active, .sidebar a.dropdown-item.active{ background-color: #ffffff !important; box-shadow: 0 8px 28px rgba(15,23,42,0.10); color: #0f1724 !important; }
 
-/* Subitems slightly smaller to create hierarchy */
-.sidebar .dropdown-item{ font-size: 0.9rem; }
+/* Subitems slightly smaller but clearer to read */
+.sidebar .dropdown-item{ font-size: 1.00rem; }
 
 /* Divider subtle */
 .sidebar .dropdown-divider{ border-top: 1px solid #f1f5f9; margin: 8px 0; }
@@ -52,10 +51,10 @@
 
 /* Forzar colores para estados activos / abiertos que el CSS compilado marca en azul */
 .bg-light.sidebar a.nav-link.active, nav.bg-light.sidebar a.nav-link.active, .bg-light.sidebar .nav-link.active {
-    color: #334155 !important;
+    color: #0f1724 !important;
 }
 .bg-light.sidebar .accordion-item.open > .accordion-toggle, .bg-light.sidebar .accordion-toggle.active, .bg-light.sidebar .accordion-toggle[aria-expanded="true"] {
-    color: #334155 !important;
+    color: #0f1724 !important;
 }
 </style>
 
