@@ -68,7 +68,9 @@
                                             "detalle",
                                             "pivot"], pivot: "cantidad"},
                                             { data: @json(["total" => "$" . number_format($requerimiento->getTotal()) ]), type: "Object", keys: ["total"]}
-                                            ]'>Ver Orden de Pedido</modal-btn-component>
+                                            ]'>
+                                    <i class="fas fa-eye fa-lg btn btn-primary" style="cursor: pointer; padding: 8px 12px; color: black;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver Orden de Pedido"></i>
+                                </modal-btn-component>
                                             </div>
                                 @if (Auth::user()->userable instanceof \App\Centro)
                                 @if ( $requerimiento->estado === 'DESPACHADO')
@@ -83,6 +85,7 @@
                                 </a>
                                 @endif
                                 @if ( $requerimiento->estado === 'DESPACHADO')
+                                <div style="margin-right: 10px;">
                                 <modal-btn-component title="Orden de Pedido" :message='[
                                                 { data: @json([
                                                 "nombre" => $requerimiento->nombre_transportista,
@@ -91,7 +94,10 @@
                                                 ])
                                                 , type: "Object", keys: ["nombre",
                                                 "rut", "contacto"]}
-                                                ]'>Ver Transporte</modal-btn-component>
+                                                ]'>
+                                    <i class="fas fa-truck fa-lg btn btn-primary" style="cursor: pointer; padding: 8px 12px; color: black;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver transporte"></i>
+                                </modal-btn-component>
+                                </div>
                                 @endif
                             </div>
                         </td>

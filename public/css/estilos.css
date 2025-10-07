@@ -46,3 +46,88 @@
   background-color: #a65523;
   color: white;
 }
+
+/* FORZAR SIDEBAR BLANCO - BACKUP AGRESIVO */
+.sidebar *,
+.sidebar a,
+.sidebar span,
+.sidebar div,
+.sidebar li,
+.sidebar p,
+.sidebar i,
+.sidebar .fas,
+.sidebar .far,
+.sidebar .fab,
+.sidebar .nav-link,
+.sidebar .nav-item,
+.sidebar .accordion-toggle,
+.sidebar .accordion-item,
+nav.bg-light.sidebar *,
+nav.bg-light.sidebar a,
+nav.bg-light.sidebar span,
+nav.bg-light.sidebar div,
+nav.bg-light.sidebar li,
+nav.bg-light.sidebar i,
+nav.bg-light.sidebar .nav-link,
+.bg-light.sidebar *,
+.bg-light.sidebar a,
+.bg-light.sidebar span,
+.bg-light.sidebar div,
+.bg-light.sidebar li,
+.bg-light.sidebar i,
+.bg-light.sidebar .nav-link,
+.d-md-block.bg-light.sidebar *,
+.d-md-block.bg-light.sidebar a,
+.d-md-block.bg-light.sidebar .nav-link {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* Sobrescribir clases Bootstrap específicas en sidebar */
+.sidebar .text-dark,
+.sidebar .text-muted,
+.sidebar .text-secondary,
+.sidebar .text-primary,
+.sidebar .text-info,
+.sidebar .text-warning,
+.sidebar .text-success,
+.sidebar .text-danger,
+nav.bg-light.sidebar .text-dark,
+nav.bg-light.sidebar .text-muted,
+nav.bg-light.sidebar .text-secondary,
+.bg-light.sidebar .text-dark,
+.bg-light.sidebar .text-muted,
+.bg-light.sidebar .text-secondary {
+  color: #ffffff !important;
+}
+
+/* Estados activos y hover del sidebar */
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover,
+.sidebar .accordion-toggle.active,
+.sidebar .accordion-item.open > .accordion-toggle,
+nav.bg-light.sidebar .nav-link.active,
+nav.bg-light.sidebar .nav-link:hover,
+.bg-light.sidebar .nav-link.active,
+.bg-light.sidebar .nav-link:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Iconos del sidebar */
+.sidebar i,
+.sidebar .fas,
+.sidebar .far,
+.sidebar .fab,
+.sidebar .feather,
+nav.bg-light.sidebar i,
+nav.bg-light.sidebar .fas,
+nav.bg-light.sidebar .far,
+nav.bg-light.sidebar .fab,
+.bg-light.sidebar i,
+.bg-light.sidebar .fas,
+.bg-light.sidebar .far,
+.bg-light.sidebar .fab {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}

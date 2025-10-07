@@ -18,6 +18,7 @@
 
     <!-- Style -->
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
+    <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
     
             <!-- Hotfix styles: tipografía y sidebar pulido (temporal en layout, migrar a SASS) -->
             <style>
@@ -37,6 +38,15 @@
                     line-height: 1.45;
                     -webkit-font-smoothing:antialiased;
                     -moz-osx-font-smoothing:grayscale;
+                    /* Prevenir flash durante recarga */
+                    overflow-x: hidden;
+                }
+
+                /* Prevenir flash de contenido sin estilo (FOUC) */
+                .sidebar, #sidenav {
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    transform: none !important;
                 }
 
                 h1{font-size:1.6rem;font-weight:700;margin-bottom:.4rem}
@@ -46,35 +56,51 @@
 
                 /* Sidebar refinements */
                 nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar{
-                    background: #ffffff;
+                    background: #1a1a1a !important;
                     font-size: .95rem;
                 }
 
                 /* Fix: reservar espacio para sidebar en pantallas md+ y evitar solapamiento al hacer zoom */
                 @media (min-width: 768px) {
-                    #sidenav { width: 260px; flex: 0 0 260px; }
-                    nav.bg-light.sidebar, .bg-light.sidebar { width: 260px; box-sizing: border-box; }
-                    main.col { margin-left: 260px; }
+                    #sidenav { 
+                        width: 260px; 
+                        flex: 0 0 260px; 
+                        /* Prevenir cambios de tamaño durante recarga */
+                        min-width: 260px;
+                        max-width: 260px;
+                    }
+                    nav.bg-light.sidebar, .bg-light.sidebar { 
+                        width: 260px; 
+                        box-sizing: border-box;
+                        /* Estabilizar dimensiones */
+                        min-width: 260px;
+                        max-width: 260px;
+                    }
+                    main.col { 
+                        margin-left: 260px;
+                        /* Prevenir saltos de layout */
+                        transition: none;
+                    }
                 }
 
                 .sidebar .nav-link{
-                    color: var(--muted-600) !important;
+                    color: #ffffff !important;
                     padding: 10px 12px;
                     border-radius: var(--radius-sm);
                     transition: background .18s ease, color .12s ease, transform .12s ease;
                 }
 
                 .sidebar .nav-link:hover{
-                    background: var(--accent-100) !important;
-                    color: var(--muted-800) !important;
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    color: #ffffff !important;
                     transform: translateX(2px);
                 }
 
                 /* indicador vertical para el item activo */
                 .sidebar .nav-link.active{
-                    color: var(--muted-800) !important;
-                    background: linear-gradient(90deg, rgba(14,165,164,0.03), transparent) !important;
-                    box-shadow: 0 1px 0 rgba(15,23,42,0.04) inset;
+                    color: #ffffff !important;
+                    background: linear-gradient(90deg, rgba(14,165,164,0.2), transparent) !important;
+                    box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset;
                 }
 
                 .sidebar .nav-link.active::before{
@@ -84,13 +110,56 @@
                 }
 
                 .sidebar .dropdown-item{
-                    color: var(--muted-800) !important;
+                    color: #ffffff !important;
                     padding-left: 28px !important;
                     font-weight:500 !important;
                 }
 
                 /* icons */
-                .sidebar i, .sidebar .mdi, .sidebar svg{ color: var(--icon-600) !important; }
+                .sidebar i, .sidebar .mdi, .sidebar svg{ color: #ffffff !important; }
+
+                /* FORZAR TODOS LOS TEXTOS DEL SIDEBAR A BLANCO - AGRESIVO */
+                .sidebar *, 
+                .sidebar a, 
+                .sidebar span, 
+                .sidebar div, 
+                .sidebar li, 
+                .sidebar p,
+                .sidebar .nav-item,
+                .sidebar .nav-item a,
+                .sidebar .nav-item span,
+                .sidebar .dropdown-item,
+                .sidebar .dropdown-menu a,
+                .sidebar .accordion-toggle,
+                .sidebar .accordion-item,
+                .sidebar .text-dark,
+                .sidebar .text-muted,
+                .sidebar .text-secondary,
+                .sidebar .text-primary,
+                nav.bg-light.sidebar *,
+                nav.bg-light.sidebar a,
+                nav.bg-light.sidebar span,
+                nav.bg-light.sidebar div,
+                nav.bg-light.sidebar li,
+                .bg-light.sidebar *,
+                .bg-light.sidebar a,
+                .bg-light.sidebar span,
+                .bg-light.sidebar div,
+                .bg-light.sidebar li {
+                    color: #ffffff !important;
+                }
+
+                /* Sobrescribir clases Bootstrap específicas */
+                .sidebar .text-dark,
+                .sidebar .text-muted,
+                .sidebar .text-secondary,
+                .sidebar .text-primary,
+                .sidebar .text-info,
+                .sidebar .text-warning,
+                .sidebar .text-success,
+                .sidebar .text-danger {
+                    color: #ffffff !important;
+                }
 
                 /* Small utility adjustments */
                 .card{ border-radius: 10px; }
@@ -140,10 +209,10 @@
                 @endif
             </header>
 
-            <div class="container-fluid mt-40">
-                <div class="row">
-                    <div id="sidenav" class="col-md-2 collapse show ">
-                        <nav class="d-none d-md-block bg-light sidebar pt-8 ">
+            <div class="container-fluid mt-40" style="overflow-x: hidden;">
+                <div class="row" style="margin: 0; padding: 0;">
+                    <div id="sidenav" class="col-md-2 collapse show" style="padding: 0;">
+                        <nav class="d-none d-md-block bg-light sidebar pt-8" style="position: fixed; height: 100vh; overflow-y: auto;">
                             <div class="nav flex-column mt-4">
                                 @hasSection('nav-menu')
                                 @yield('nav-menu')
@@ -152,7 +221,7 @@
                         </nav>
                     </div>
 
-                    <main class="col pt-4 w-96">
+                    <main class="col pt-4 w-96" style="padding-left: 0; margin-left: 260px; min-height: 100vh;">
                         @hasSection('main')
                         @yield('main')
                         @endif

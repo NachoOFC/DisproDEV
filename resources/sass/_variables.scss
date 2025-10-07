@@ -9,7 +9,7 @@ $line-height-base: 1.6;
 $fa-font-path: "../webfonts";
 
 // Colors
-$blue: #ad9a64;
+$blue: #007bff;
 $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66d9b;
@@ -19,3 +19,12 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+// Sidebar Variables
+$sidebar-bg: #1a1a1a;
+$sidebar-text: #ffffff;
+$sidebar-text-hover: #ffffff;
+$sidebar-bg-hover: rgba(255, 255, 255, 0.1);
+$sidebar-active-bg: rgba(14, 165, 164, 0.2);
+$sidebar-active-text: #ffffff;
+$sidebar-icon-color: #ffffff;
