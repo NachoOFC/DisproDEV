@@ -80,9 +80,9 @@
           </div>
         </div>
       </div>
-      <div class="row mt-2">
-        <div class="container table-responsive">
-          <table id="datatable" class="table table-sm">
+      <div class="w-100 mt-2">
+        <div class="table-responsive">
+          <table id="datatable" class="table table-sm table-striped">
             <thead>
               <tr>
                 <th scope="col">SKU</th>

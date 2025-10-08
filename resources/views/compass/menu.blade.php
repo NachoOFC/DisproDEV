@@ -8,7 +8,7 @@
 .bg-light.sidebar nav .accordion-toggle, nav.bg-light.sidebar .accordion-toggle, .d-md-block.bg-light.sidebar .accordion-toggle { padding-right: 40px !important; display: flex !important; align-items: center !important; justify-content: flex-start !important; }
 .bg-light.sidebar nav .accordion-toggle .chev, nav.bg-light.sidebar .accordion-toggle .chev, .d-md-block.bg-light.sidebar .accordion-toggle .chev { display: inline-block !important; visibility: visible !important; opacity: 1 !important; min-width: 12px !important; width: 12px !important; height: 12px !important; font-size: 12px !important; flex-shrink: 0 !important; }
 .@font-face{font-family: 'InterLocal'; src: local('Inter'), local('Segoe UI'), local('Helvetica Neue');}
-.bg-light.sidebar, nav.bg-light.sidebar, .d-md-block.bg-light.sidebar, .sidebar { font-family: 'Inter', 'InterLocal', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial !important; background-color: #1a1a1a !important; }
+.bg-light.sidebar, nav.bg-light.sidebar, .d-md-block.bg-light.sidebar, .sidebar { font-family: 'Inter', 'InterLocal', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial !important; background-color: #374151 !important; }
 
 /* Card-like container for each nav item */
 .sidebar .nav-item { margin: 10px 10px; border-radius: 10px; overflow: visible; }

@@ -56,30 +56,70 @@
 
                 /* Sidebar refinements */
                 nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar{
-                    background: #1a1a1a !important;
+                    background: #374151 !important;
                     font-size: .95rem;
                 }
 
-                /* Fix: reservar espacio para sidebar en pantallas md+ y evitar solapamiento al hacer zoom */
+                /* Fix: asegurar que el sidebar y contenido funcionen correctamente */
                 @media (min-width: 768px) {
-                    #sidenav { 
-                        width: 260px; 
-                        flex: 0 0 260px; 
-                        /* Prevenir cambios de tamaño durante recarga */
-                        min-width: 260px;
-                        max-width: 260px;
+                    .col-md-2 { 
+                        flex: 0 0 16.666667%;
+                        max-width: 16.666667%;
+                    }
+                    .col-md-10 { 
+                        flex: 0 0 83.333333%;
+                        max-width: 83.333333%;
                     }
                     nav.bg-light.sidebar, .bg-light.sidebar { 
-                        width: 260px; 
                         box-sizing: border-box;
-                        /* Estabilizar dimensiones */
-                        min-width: 260px;
-                        max-width: 260px;
                     }
-                    main.col { 
-                        margin-left: 260px;
-                        /* Prevenir saltos de layout */
-                        transition: none;
+                }
+
+                /* Fix para pantallas grandes: limitar ancho de sidebar */
+                @media (min-width: 1200px) {
+                    .col-md-2 { 
+                        flex: 0 0 250px;
+                        max-width: 250px;
+                        width: 250px;
+                    }
+                    .col-md-10 { 
+                        flex: 1;
+                        max-width: calc(100% - 250px);
+                        margin-left: 250px;
+                    }
+                    #sidenav {
+                        position: fixed;
+                        left: 0;
+                        top: 0;
+                        height: 100vh;
+                        z-index: 999;
+                        padding-top: 70px; /* Altura del header */
+                    }
+                    main.col-md-10 {
+                        margin-left: 250px;
+                        width: calc(100% - 250px);
+                    }
+                }
+
+                /* Fix para pantallas extra grandes: mantener sidebar controlado */
+                @media (min-width: 1400px) {
+                    .col-md-2 { 
+                        flex: 0 0 280px;
+                        max-width: 280px;
+                        width: 280px;
+                    }
+                    .col-md-10 { 
+                        flex: 1;
+                        max-width: calc(100% - 280px);
+                        margin-left: 280px;
+                    }
+                    #sidenav {
+                        width: 280px;
+                        padding-top: 70px;
+                    }
+                    main.col-md-10 {
+                        margin-left: 280px;
+                        width: calc(100% - 280px);
                     }
                 }
 
@@ -171,7 +211,7 @@
 <body class="bg-grey-lightest font-sans leading-normal tracking-normal">
     <div id="app">
         <v-app>
-            <header class="navbar navbar-dark bg-gray-200 flex-md-nowrap px-4 py-1 shadow z-10 fixed top-0 left-0 right-0">
+            <header class="navbar navbar-dark flex-md-nowrap px-4 py-1 shadow" style="position: relative; z-index: 1000; background-color: #374151;">
                 @auth
                 <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#sidenav" aria-expanded="true" aria-controls="sidenav" id="sidenavBtn" hidden>
                     <i class="fas fa-bars"></i>
@@ -209,11 +249,11 @@
                 @endif
             </header>
 
-            <div class="container-fluid mt-40" style="overflow-x: hidden;">
-                <div class="row" style="margin: 0; padding: 0;">
+            <div class="container-fluid" style="padding: 0;">
+                <div class="row" style="margin: 0;">
                     <div id="sidenav" class="col-md-2 collapse show" style="padding: 0;">
-                        <nav class="d-none d-md-block bg-light sidebar pt-8" style="position: fixed; height: 100vh; overflow-y: auto;">
-                            <div class="nav flex-column mt-4">
+                        <nav class="d-none d-md-block bg-light sidebar" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; margin-top: 0 !important;">
+                            <div class="nav flex-column" style="margin-top: 0 !important;">
                                 @hasSection('nav-menu')
                                 @yield('nav-menu')
                                 @endif
@@ -221,7 +261,7 @@
                         </nav>
                     </div>
 
-                    <main class="col pt-4 w-96" style="padding-left: 0; margin-left: 260px; min-height: 100vh;">
+                    <main class="col-md-10" style="min-height: 100vh; padding: 1rem;">
                         @hasSection('main')
                         @yield('main')
                         @endif

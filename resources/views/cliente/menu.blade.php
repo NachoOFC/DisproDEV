@@ -2,7 +2,7 @@
 <style>
 nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar {
     font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial !important;
-    background-color: #1a1a1a !important;
+    background-color: #374151 !important;
 }
 nav.bg-light.sidebar a.nav-link, .bg-light.sidebar a.nav-link, .sidebar a.nav-link {
     color: #ffffff !important; /* padres: blanco */

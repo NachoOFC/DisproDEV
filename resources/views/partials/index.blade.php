@@ -1,6 +1,7 @@
 @if ($type === 0)
 <!-- Tipo Centro -->
-<table id="datatable" class="table">
+<div class="table-responsive">
+    <table id="datatable" class="table table-striped mb-0">
     <thead>
         <tr>
             <th scope="col">Nombre</th>
@@ -72,11 +73,12 @@
         </tr>
         @endforeach
     </tbody>
-</table>
+    </table>
+</div>
 @elseif ($type === 1)
 <!-- Tipo Empresa -->
 <div class="table-responsive">
-    <table id="datatable" class="table table-sm">
+    <table id="datatable" class="table table-striped table-sm mb-0">
         <thead>
             <tr>
                 <th scope="col" rowspan="2">Nombre</th>
@@ -159,7 +161,7 @@
 @elseif ($type === 2)
 <!-- Tipo Holding -->
 <div class="table-responsive">
-    <table id="datatable" class="table table-sm">
+    <table id="datatable" class="table table-striped table-sm mb-0">
         <thead class="" style='color: #B5B2B2; background-color:#383636'>
             <tr>
                 <th scope="col" rowspan="2" class="border-solid border border-white " ><div class="text-center">Nombre</div></th>

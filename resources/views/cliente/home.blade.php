@@ -9,8 +9,8 @@
 @endsection
 
 @section('main')
-<div class="container">
-    <div class="card">
+<div class="w-100">
+    <div class="card w-100">
         <h3 class="card-header font-bold text-xl bg-color-text-white"  >{{ Auth::user()->getNombreRelacionado() }}: Dashboard</h3>
         <div class="card-body">
             <div class="card mb-3">

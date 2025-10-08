@@ -9,8 +9,8 @@
 @endsection
 
 @section('main')
-    <div class="container ">
-        <div class="card w-full">
+    <div class="w-100">
+        <div class="card w-100">
             <div class="card-header font-bold text-xl"> Dashboard</div>
             <div class="card-body">
                 <div class="card mb-3">

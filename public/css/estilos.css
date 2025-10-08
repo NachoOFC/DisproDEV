@@ -101,6 +101,15 @@ nav.bg-light.sidebar .text-secondary,
   color: #ffffff !important;
 }
 
+/* Color de fondo del sidebar */
+.sidebar,
+nav.bg-light.sidebar,
+.bg-light.sidebar,
+nav.sidebar,
+.sidenav {
+  background-color: #374151 !important;
+}
+
 /* Estados activos y hover del sidebar */
 .sidebar .nav-link.active,
 .sidebar .nav-link:hover,

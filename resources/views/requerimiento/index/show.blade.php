@@ -16,26 +16,27 @@
 
 
 @section('main')
-<div class="container">
-<input type="button"  class="btn btn-secondary" value="Página anterior" onClick="history.go(-1);">
+<div class="w-100">
+<input type="button"  class="btn btn-secondary mb-3" value="Página anterior" onClick="history.go(-1);">
 
-    <div class="card">
+    <div class="card w-100">
         <h3 class="card-header font-bold text-xl">Lista de Ordenes de Pedido</h3>
-        <div class="card-body">
-            <h5 class="card-title h4 text-center border-bottom">{{$centro->nombre}}</h5>
-            <table id="datatable" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Folio</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Estado</th>
-                        @if ((Auth::user()->userable instanceof \App\Centro))
-                        <th scope="col">Libreria</th>
-                        @endif
-                        <th scope="col">Fecha de Creacion</th>
-                        <th scope="col">Accion</th>
-                    </tr>
-                </thead>
+        <div class="card-body p-0">
+            <h5 class="card-title h4 text-center border-bottom p-3 mb-0">{{$centro->nombre}}</h5>
+            <div class="table-responsive">
+                <table id="datatable" class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Folio</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Estado</th>
+                            @if ((Auth::user()->userable instanceof \App\Centro))
+                            <th scope="col">Libreria</th>
+                            @endif
+                            <th scope="col">Fecha de Creacion</th>
+                            <th scope="col">Accion</th>
+                        </tr>
+                    </thead>
                 <tbody>
                     @foreach($requerimientos as $requerimiento)
                     @if ( $requerimiento->estado != 'ELIMINADO')
@@ -104,8 +105,9 @@
                     </tr>
                     @endif
                     @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

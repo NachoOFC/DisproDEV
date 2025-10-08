@@ -15,11 +15,11 @@
 @endif
 
 @section('main')
-<div class="container">
-    <div class="card">
+<div class="w-100">
+    <div class="card w-100">
         <h3 class="card-header font-bold text-xl">{{ Auth::user()->getNombreRelacionado() }}: Conciliacion OC/NC por EP</h3>
-        <div class="card-body">
-            <div class="container mt-2">
+        <div class="card-body p-3">
+            <div class="w-100 mt-2">
                 <div class="d-flex flex-column mb-4">
                     <span>
                         <b>Liquidacion:</b>
@@ -39,13 +39,14 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <th>Fecha</th>
-                                                <th>Folio</th>
-                                                <th>Monto</th>
-                                                <th>PDF</th>
-                                            </thead>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-sm mb-0">
+                                                <thead>
+                                                    <th>Fecha</th>
+                                                    <th>Folio</th>
+                                                    <th>Monto</th>
+                                                    <th>PDF</th>
+                                                </thead>
                                             <tbody>
                                                 @foreach($facturasElectronica as $factura)
                                                 <tr>
@@ -57,8 +58,9 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -78,13 +80,14 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <th>Fecha</th>
-                                                <th>Folio</th>
-                                                <th>Monto</th>
-                                                <th>PDF</th>
-                                            </thead>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-sm mb-0">
+                                                <thead>
+                                                    <th>Fecha</th>
+                                                    <th>Folio</th>
+                                                    <th>Monto</th>
+                                                    <th>PDF</th>
+                                                </thead>
                                             <tbody>
                                                 @foreach($ordenesCompra as $orden)
                                                 <tr>
@@ -96,8 +99,9 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -117,13 +121,14 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <th>Fecha</th>
-                                                <th>Folio</th>
-                                                <th>Monto</th>
-                                                <th>PDF</th>
-                                            </thead>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-sm mb-0">
+                                                <thead>
+                                                    <th>Fecha</th>
+                                                    <th>Folio</th>
+                                                    <th>Monto</th>
+                                                    <th>PDF</th>
+                                                </thead>
                                             <tbody>
                                                 @foreach($notasCreditoTributaria as $notas)
                                                 <tr>
@@ -135,8 +140,9 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +150,8 @@
                     </span>
                 </div>
 
-                <table class="table table-sm">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm mb-0">
                     <thead>
                         <tr>
                             <th class="border-r text-left">RESUMEN EDP</th>
@@ -175,9 +182,11 @@
                             <td class="text-right">{{ number_format($cuadratura, 0)  }}</td>
                         </tr>
                     </tbody>
-                </table>
+                    </table>
+                </div>
 
-                <table class="table table-sm" id="datatable">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm mb-0" id="datatable">
                     <thead>
                         <tr>
                             <th class="text-right">Centro</th>
@@ -208,13 +217,14 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <table class="table table-sm">
-                                                    <thead>
-                                                        <th>Fecha</th>
-                                                        <th>Folio</th>
-                                                        <th>Monto</th>
-                                                        <th>PDF</th>
-                                                    </thead>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-sm mb-0">
+                                                        <thead>
+                                                            <th>Fecha</th>
+                                                            <th>Folio</th>
+                                                            <th>Monto</th>
+                                                            <th>PDF</th>
+                                                        </thead>
                                                     <tbody>
                                                         @foreach($centro["ordenes"] as $orden)
                                                         <tr>
@@ -226,8 +236,9 @@
                                                             </td>
                                                         </tr>
                                                         @endforeach
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -248,13 +259,14 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <table class="table table-sm">
-                                                    <thead>
-                                                        <th>Fecha</th>
-                                                        <th>Folio</th>
-                                                        <th>Monto</th>
-                                                        <th>PDF</th>
-                                                    </thead>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-sm mb-0">
+                                                        <thead>
+                                                            <th>Fecha</th>
+                                                            <th>Folio</th>
+                                                            <th>Monto</th>
+                                                            <th>PDF</th>
+                                                        </thead>
                                                     <tbody>
                                                         @foreach($centro["notas"] as $nota)
                                                         <tr>
@@ -266,8 +278,9 @@
                                                             </td>
                                                         </tr>
                                                         @endforeach
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -277,7 +290,8 @@
                         </tr>
                         @endforeach
                     </tbody>
-                </table>
+                    </table>
+                </div>
 
             </div>
         </div>
