@@ -42,85 +42,32 @@
                     overflow-x: hidden;
                 }
 
-                /* Prevenir flash de contenido sin estilo (FOUC) */
-                .sidebar, #sidenav {
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                    transform: none !important;
-                }
-
                 h1{font-size:1.6rem;font-weight:700;margin-bottom:.4rem}
                 h2{font-size:1.25rem;font-weight:600;margin-bottom:.35rem}
                 h3{font-size:1.05rem;font-weight:600;margin-bottom:.3rem}
                 small{font-size:.825rem;color:#6b7280}
 
-                /* Sidebar refinements */
+                /* Sidebar refinements - simple y estable */
                 nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar{
                     background: #374151 !important;
                     font-size: .95rem;
+                    margin: 0 !important;
+                    padding: 0 !important;
                 }
 
-                /* Fix: asegurar que el sidebar y contenido funcionen correctamente */
-                @media (min-width: 768px) {
-                    .col-md-2 { 
-                        flex: 0 0 16.666667%;
-                        max-width: 16.666667%;
-                    }
-                    .col-md-10 { 
-                        flex: 0 0 83.333333%;
-                        max-width: 83.333333%;
-                    }
-                    nav.bg-light.sidebar, .bg-light.sidebar { 
-                        box-sizing: border-box;
-                    }
+                /* Eliminar espacios en el sidebar */
+                .sidebar .nav-link:first-child {
+                    margin-top: 0 !important;
+                }
+                
+                .sidebar .nav-link:last-child {
+                    margin-bottom: 0 !important;
                 }
 
-                /* Fix para pantallas grandes: limitar ancho de sidebar */
-                @media (min-width: 1200px) {
-                    .col-md-2 { 
-                        flex: 0 0 250px;
-                        max-width: 250px;
-                        width: 250px;
-                    }
-                    .col-md-10 { 
-                        flex: 1;
-                        max-width: calc(100% - 250px);
-                        margin-left: 250px;
-                    }
-                    #sidenav {
-                        position: fixed;
-                        left: 0;
-                        top: 0;
-                        height: 100vh;
-                        z-index: 999;
-                        padding-top: 70px; /* Altura del header */
-                    }
-                    main.col-md-10 {
-                        margin-left: 250px;
-                        width: calc(100% - 250px);
-                    }
-                }
-
-                /* Fix para pantallas extra grandes: mantener sidebar controlado */
-                @media (min-width: 1400px) {
-                    .col-md-2 { 
-                        flex: 0 0 280px;
-                        max-width: 280px;
-                        width: 280px;
-                    }
-                    .col-md-10 { 
-                        flex: 1;
-                        max-width: calc(100% - 280px);
-                        margin-left: 280px;
-                    }
-                    #sidenav {
-                        width: 280px;
-                        padding-top: 70px;
-                    }
-                    main.col-md-10 {
-                        margin-left: 280px;
-                        width: calc(100% - 280px);
-                    }
+                /* Asegurar que no haya gaps */
+                .container-fluid, .row, #sidenav {
+                    margin: 0 !important;
+                    padding: 0 !important;
                 }
 
                 .sidebar .nav-link{
@@ -249,11 +196,11 @@
                 @endif
             </header>
 
-            <div class="container-fluid" style="padding: 0;">
+            <div class="container-fluid" style="padding: 0; margin: 0;">
                 <div class="row" style="margin: 0;">
                     <div id="sidenav" class="col-md-2 collapse show" style="padding: 0;">
-                        <nav class="d-none d-md-block bg-light sidebar" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; margin-top: 0 !important;">
-                            <div class="nav flex-column" style="margin-top: 0 !important;">
+                        <nav class="d-none d-md-block bg-light sidebar" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 100; margin: 0;">
+                            <div class="nav flex-column" style="padding: 0; margin: 0;">
                                 @hasSection('nav-menu')
                                 @yield('nav-menu')
                                 @endif
