@@ -158,7 +158,7 @@
 <body class="bg-grey-lightest font-sans leading-normal tracking-normal">
     <div id="app">
         <v-app>
-            <header class="navbar navbar-dark flex-md-nowrap px-4 py-1 shadow" style="position: relative; z-index: 1000; background-color: #374151;">
+            <header class="navbar navbar-light flex-md-nowrap px-4 py-1 shadow" style="position: relative; z-index: 1000; background-color: #ffffff;">
                 @auth
                 <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#sidenav" aria-expanded="true" aria-controls="sidenav" id="sidenavBtn" hidden>
                     <i class="fas fa-bars"></i>

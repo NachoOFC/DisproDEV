@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h3 class="font-bold text-md border-bottom mb-3"><i class="fas fa-tachometer-alt"></i> Accesos Directo:</h3>
+                        <h3 class="font-bold text-md border-bottom mb-3"><i class="fas fa-tachometer-alt"></i> Accesos Directos</h3>
                         <div class="d-flex flex-row justify-content-around align-items-end">
                             @if (Auth::user()->userable->name == 'Compras')
                                 <a class="btn bg-blue-500 hover:bg-blue-700 text-white" href="{{ route('compass.pedidos.verificar')}}">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h3 class="font-bold text-md border-bottom mb-3"><i class="fas fa-chart-line"></i> Reportes:</h3>
+                        <h3 class="font-bold text-md border-bottom mb-3"><i class="fas fa-chart-line"></i> Reportes</h3>
                         @component('partials.index',
                             ['type' => 2,
                             'empresas' =>
