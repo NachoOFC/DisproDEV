@@ -29,61 +29,214 @@
 @import "./scss/brands.scss";
 
 // Tailwind
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Removed Tailwind directives: @tailwind base; @tailwind components; @tailwind utilities; */
 
 body {
   background-color: #ffffff;
 }
 
-/* Acordeón del menú Compass - estilo profesional */
-.sidebar {
-  background: #ffffff; /* blanco limpio */
-  border-right: 1px solid #e6e9ee;
+/* Sidebar - Estilo oscuro con texto blanco */
+.sidebar,
+nav.bg-light.sidebar,
+.bg-light.sidebar,
+.d-md-block.bg-light.sidebar {
+  background: $sidebar-bg !important;
+  border-right: 1px solid #333;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-.sidebar .nav-link {
-  font-family: 'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  font-size: 14px;
-  color: #2b3a42;
-  padding: .6rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: .6rem;
+.sidebar .nav-link,
+.sidebar a.nav-link,
+nav.bg-light.sidebar .nav-link,
+nav.bg-light.sidebar a.nav-link,
+.bg-light.sidebar .nav-link,
+.bg-light.sidebar a.nav-link {
+  color: $sidebar-text !important;
+  font-size: 0.95rem;
+  padding: 10px 12px;
   border-radius: 6px;
+  transition: background 0.18s ease, color 0.12s ease, transform 0.12s ease;
+  font-weight: 500;
 }
 
 .sidebar .nav-link i,
-.sidebar .nav-link v-icon {
-  color: #6b7b84; /* icon color */
-  min-width: 20px;
+.sidebar .nav-link .fas,
+.sidebar .nav-link .far,
+.sidebar .nav-link .fab,
+.sidebar a.nav-link i,
+nav.bg-light.sidebar .nav-link i,
+nav.bg-light.sidebar a.nav-link i,
+.bg-light.sidebar .nav-link i,
+.bg-light.sidebar a.nav-link i {
+  color: $sidebar-icon-color !important;
+  margin-right: 8px;
 }
 
-.sidebar .nav-link:hover {
-  background: #f6f8fa;
-  color: #0d6efd; /* azul suave en hover */
+.sidebar .nav-link:hover,
+.sidebar a.nav-link:hover,
+nav.bg-light.sidebar .nav-link:hover,
+nav.bg-light.sidebar a.nav-link:hover,
+.bg-light.sidebar .nav-link:hover,
+.bg-light.sidebar a.nav-link:hover {
+  background: $sidebar-bg-hover !important;
+  color: $sidebar-text-hover !important;
+  text-decoration: none;
+  transform: translateX(2px);
+}
+
+/* Accordion styles para sidebar */
+.sidebar .accordion-item { 
+  border-radius: 6px; 
+  overflow: hidden; 
+  margin-bottom: 4px;
+}
+
+.sidebar .accordion-toggle,
+.sidebar a.accordion-toggle,
+nav.bg-light.sidebar .accordion-toggle,
+.bg-light.sidebar .accordion-toggle {
+  display: flex; 
+  align-items: center; 
+  justify-content: flex-start; 
+  padding: 10px 12px; 
+  cursor: pointer; 
+  font-weight: 500; 
+  color: $sidebar-text !important; 
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: background 0.18s ease, color 0.12s ease;
+}
+
+.sidebar .accordion-toggle:hover,
+nav.bg-light.sidebar .accordion-toggle:hover,
+.bg-light.sidebar .accordion-toggle:hover {
+  background: $sidebar-bg-hover !important;
+  color: $sidebar-text-hover !important;
   text-decoration: none;
 }
 
-.sidebar .accordion-item { border-radius: 6px; overflow: hidden; }
-.sidebar .accordion-toggle { display: flex; align-items: center; justify-content: space-between; padding-right: 8px; cursor: pointer; font-weight: 600; color: #21303a; }
-.sidebar .accordion-toggle .fa-chevron-down{ transition: transform .22s ease, color .18s ease; margin-left: 8px; color: #9aa6b2; }
+.sidebar .accordion-toggle .fa-chevron-down,
+.sidebar .accordion-toggle i { 
+  transition: transform 0.22s ease, color 0.18s ease; 
+  margin-left: 8px; 
+  color: $sidebar-icon-color !important; 
+  font-size: 0.9rem; 
+  position: absolute; 
+  right: 12px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+}
 
-.sidebar .accordion-panel { display: block !important; position: static !important; width: auto !important; max-height: 0; overflow: hidden; transition: max-height .28s ease, padding .2s ease; padding-left: 12px; padding-top: 0; padding-bottom: 0; }
-.sidebar .accordion-item.open > .accordion-panel { padding-top: .35rem; padding-bottom: .35rem; }
-.sidebar .accordion-item.open > .accordion-toggle .fa-chevron-down{ transform: rotate(180deg); color: #0d6efd; }
+.sidebar .accordion-panel { 
+  display: block !important; 
+  position: static !important; 
+  width: auto !important; 
+  max-height: 0; 
+  overflow: hidden; 
+  transition: max-height 0.28s ease, padding 0.2s ease; 
+  padding-left: 12px; 
+  padding-top: 0; 
+  padding-bottom: 0; 
+}
 
-.sidebar .accordion-panel a.dropdown-item { color: #556b74; padding: .35rem 1rem; display: block; border-radius: 6px; }
-.sidebar .accordion-panel a.dropdown-item:hover { background: #eef4ff; color: #0d6efd; text-decoration: none; }
+.sidebar .accordion-item.open > .accordion-panel { 
+  padding-top: 0.45rem; 
+  padding-bottom: 0.45rem; 
+}
 
-.sidebar .accordion-panel { position: static !important; transform: none !important; }
+.sidebar .accordion-item.open > .accordion-toggle .fa-chevron-down{ 
+  transform: rotate(180deg); 
+  color: $sidebar-icon-color !important; 
+}
+
+.sidebar .accordion-panel a.dropdown-item,
+.sidebar .dropdown-item,
+nav.bg-light.sidebar .dropdown-item,
+.bg-light.sidebar .dropdown-item { 
+  color: $sidebar-text !important; 
+  padding: 0.5rem 1rem; 
+  display: block; 
+  border-radius: 6px; 
+  font-size: 0.9rem; 
+  font-weight: 500; 
+  padding-left: 28px !important;
+}
+
+.sidebar .accordion-panel a.dropdown-item:hover,
+.sidebar .dropdown-item:hover,
+nav.bg-light.sidebar .dropdown-item:hover,
+.bg-light.sidebar .dropdown-item:hover { 
+  background: $sidebar-bg-hover !important; 
+  color: $sidebar-text-hover !important; 
+  text-decoration: none; 
+}
 
 .sidebar .nav-link.active,
-.sidebar .accordion-item.open > .accordion-toggle { color: #0d6efd; }
+.sidebar a.nav-link.active,
+nav.bg-light.sidebar .nav-link.active,
+nav.bg-light.sidebar a.nav-link.active,
+.bg-light.sidebar .nav-link.active,
+.bg-light.sidebar a.nav-link.active,
+.sidebar .accordion-item.open > .accordion-toggle,
+nav.bg-light.sidebar .accordion-item.open > .accordion-toggle,
+.bg-light.sidebar .accordion-item.open > .accordion-toggle { 
+  color: $sidebar-active-text !important;
+  background: $sidebar-active-bg !important;
+}
+
+/* Forzar todos los elementos del sidebar a ser blancos */
+.sidebar *,
+.sidebar a,
+.sidebar span,
+.sidebar div,
+.sidebar li,
+.sidebar p,
+.sidebar i,
+.sidebar .fas,
+.sidebar .far,
+.sidebar .fab,
+nav.bg-light.sidebar *,
+nav.bg-light.sidebar a,
+nav.bg-light.sidebar span,
+nav.bg-light.sidebar div,
+nav.bg-light.sidebar li,
+nav.bg-light.sidebar i,
+.bg-light.sidebar *,
+.bg-light.sidebar a,
+.bg-light.sidebar span,
+.bg-light.sidebar div,
+.bg-light.sidebar li,
+.bg-light.sidebar i,
+.d-md-block.bg-light.sidebar *,
+.d-md-block.bg-light.sidebar a {
+  color: $sidebar-text !important;
+}
+
+/* Sobrescribir clases Bootstrap específicas */
+.sidebar .text-dark,
+.sidebar .text-muted,
+.sidebar .text-secondary,
+.sidebar .text-primary,
+.sidebar .text-info,
+.sidebar .text-warning,
+.sidebar .text-success,
+.sidebar .text-danger,
+nav.bg-light.sidebar .text-dark,
+nav.bg-light.sidebar .text-muted,
+nav.bg-light.sidebar .text-secondary,
+.bg-light.sidebar .text-dark,
+.bg-light.sidebar .text-muted,
+.bg-light.sidebar .text-secondary {
+  color: $sidebar-text !important;
+}
 
 /* Small visual polish */
-.sidebar-heading { color: #61707a; font-weight: 700; font-size: 12px; letter-spacing: .04em; }
+.sidebar-heading { 
+  color: $sidebar-text !important; 
+  font-weight: 700; 
+  font-size: 12px; 
+  letter-spacing: 0.04em; 
+}
 
 /* Make sure nested panels transition smoothly when using inline maxHeight */
 .accordion-panel { will-change: max-height; }
@@ -95,7 +248,7 @@ body {
   left: 0;
   margin-top: 5rem;
   z-index: 1; /* Behind the navbar */
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-sticky {
@@ -105,37 +258,6 @@ body {
   padding-top: 0.5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-  }
-}
-
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
-.sidebar .nav-link.active {
-  color: #007bff;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
-}
-
-.sidebar-heading {
-  font-size: 0.75rem;
-  text-transform: uppercase;
 }
 
 thead {

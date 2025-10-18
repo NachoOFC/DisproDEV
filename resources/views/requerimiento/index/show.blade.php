@@ -16,26 +16,27 @@
 
 
 @section('main')
-<div class="container">
-<input type="button"  class="btn btn-secondary" value="Página anterior" onClick="history.go(-1);">
+<div class="w-100">
+<input type="button"  class="btn btn-secondary mb-3" value="Página anterior" onClick="history.go(-1);">
 
-    <div class="card">
+    <div class="card w-100">
         <h3 class="card-header font-bold text-xl">Lista de Ordenes de Pedido</h3>
-        <div class="card-body">
-            <h5 class="card-title h4 text-center border-bottom">{{$centro->nombre}}</h5>
-            <table id="datatable" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Folio</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Estado</th>
-                        @if ((Auth::user()->userable instanceof \App\Centro))
-                        <th scope="col">Libreria</th>
-                        @endif
-                        <th scope="col">Fecha de Creacion</th>
-                        <th scope="col">Accion</th>
-                    </tr>
-                </thead>
+        <div class="card-body p-0">
+            <h5 class="card-title h4 text-center border-bottom p-3 mb-0">{{$centro->nombre}}</h5>
+            <div class="table-responsive">
+                <table id="datatable" class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Folio</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Estado</th>
+                            @if ((Auth::user()->userable instanceof \App\Centro))
+                            <th scope="col">Libreria</th>
+                            @endif
+                            <th scope="col">Fecha de Creacion</th>
+                            <th scope="col">Accion</th>
+                        </tr>
+                    </thead>
                 <tbody>
                     @foreach($requerimientos as $requerimiento)
                     @if ( $requerimiento->estado != 'ELIMINADO')
@@ -68,7 +69,9 @@
                                             "detalle",
                                             "pivot"], pivot: "cantidad"},
                                             { data: @json(["total" => "$" . number_format($requerimiento->getTotal()) ]), type: "Object", keys: ["total"]}
-                                            ]'>Ver Orden de Pedido</modal-btn-component>
+                                            ]'>
+                                    <i class="fas fa-eye fa-lg btn btn-primary" style="cursor: pointer; padding: 8px 12px; color: black;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver Orden de Pedido"></i>
+                                </modal-btn-component>
                                             </div>
                                 @if (Auth::user()->userable instanceof \App\Centro)
                                 @if ( $requerimiento->estado === 'DESPACHADO')
@@ -83,6 +86,7 @@
                                 </a>
                                 @endif
                                 @if ( $requerimiento->estado === 'DESPACHADO')
+                                <div style="margin-right: 10px;">
                                 <modal-btn-component title="Orden de Pedido" :message='[
                                                 { data: @json([
                                                 "nombre" => $requerimiento->nombre_transportista,
@@ -91,15 +95,19 @@
                                                 ])
                                                 , type: "Object", keys: ["nombre",
                                                 "rut", "contacto"]}
-                                                ]'>Ver Transporte</modal-btn-component>
+                                                ]'>
+                                    <i class="fas fa-truck fa-lg btn btn-primary" style="cursor: pointer; padding: 8px 12px; color: black;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver transporte"></i>
+                                </modal-btn-component>
+                                </div>
                                 @endif
                             </div>
                         </td>
                     </tr>
                     @endif
                     @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

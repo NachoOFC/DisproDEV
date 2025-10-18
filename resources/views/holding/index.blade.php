@@ -29,8 +29,8 @@
                                     <th scope="row">{{ $loop->index }}</th>
                                     <td>{{ $holding->nombre }}</td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{route('holdings.edit', $holding)}}"><i class="fas fa-edit"></i></a>
-                                        <delete-btn-component action="{{ route('holdings.destroy', $holding) }}"></delete-btn-component>
+                                        <a class="btn btn-primary" href="{{route('holdings.edit', $holding)}}" title="Editar holding" aria-label="Editar holding {{ $holding->name }}"><i class="fas fa-edit" aria-hidden="true"></i><span class="sr-only">Editar</span></a>
+                                        <delete-btn-component action="{{ route('holdings.destroy', $holding) }}" title="Eliminar holding" aria-label="Eliminar holding {{ $holding->name }}"></delete-btn-component>
                                     </td>
                                 </tr>
                             @endforeach

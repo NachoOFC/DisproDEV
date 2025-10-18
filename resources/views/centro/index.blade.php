@@ -44,8 +44,8 @@
                         </td>
                     <td>
                       <a class="btn btn-warning" href="{{ route('centros.habilitar.get', $centro) }}">Cambiar estado</a>
-                      <a class="btn btn-primary" href="{{route('centros.edit', $centro)}}"><i class="fas fa-edit"></i></a>
-                      <delete-btn-component action="{{ route('centros.destroy', $centro) }}"></delete-btn-component>
+                      <a class="btn btn-primary" href="{{route('centros.edit', $centro)}}" title="Editar centro" aria-label="Editar centro {{ $centro->nombre }}"><i class="fas fa-edit" aria-hidden="true"></i><span class="sr-only">Editar</span></a>
+                      <delete-btn-component action="{{ route('centros.destroy', $centro) }}" title="Eliminar centro" aria-label="Eliminar centro {{ $centro->nombre }}"></delete-btn-component>
                     </td>
                   </tr>
                 @endforeach

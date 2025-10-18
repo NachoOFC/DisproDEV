@@ -15,11 +15,11 @@
 @endif
 
 @section('main')
-<div class="container">
-    <div class="card">
+<div class="w-100">
+    <div class="card w-100">
         <h3 class="card-header font-bold text-xl">{{ Auth::user()->getNombreRelacionado() }}: Cuadro de estado de observaciones a recepciones</h3>
-        <div class="card-body">
-            <div class="container mt-2">
+        <div class="card-body p-3">
+            <div class="w-100 mt-2">
                 <form class="flex flex-row items-end" method="POST" action="{{ route("generate_estado_general")  }}">
                     @csrf
                     @if(isset($empresas) && count($empresas) > 0)
@@ -49,14 +49,14 @@
                 </form>
             </div>
             @if(isset($aceptadas) || isset($rechazadas) || isset($observadas))
-            <div class="container mt-2">
+            <div class="w-100 mt-2">
                 <v-expansion-panels>
                     @isset($aceptadas)
                     <v-expansion-panel>
                         <v-expansion-panel-header>Aceptadas</v-expansion-panel-header>
                         <v-expansion-panel-content>
                             <div class="table-responsive">
-                                <table id="datatable" class="table table-sm">
+                                <table id="datatable" class="table table-striped table-sm mb-0">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID OP</th>
@@ -87,7 +87,7 @@
                         <v-expansion-panel-header>Rechazadas</v-expansion-panel-header>
                         <v-expansion-panel-content>
                             <div class="table-responsive">
-                                <table id="datatable" class="table table-sm">
+                                <table id="datatable" class="table table-striped table-sm mb-0">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID OP</th>
@@ -142,7 +142,7 @@
                         <v-expansion-panel-header>Recibidas con Observaciones</v-expansion-panel-header>
                         <v-expansion-panel-content>
                             <div class="table-responsive">
-                                <table id="datatable" class="table table-sm">
+                                <table id="datatable" class="table table-striped table-sm mb-0">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID OP</th>

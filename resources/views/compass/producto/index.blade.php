@@ -31,8 +31,8 @@
                     <td>{{ $producto->detalle }}</td>
                     <td>{{ $producto->costo }}</td>
                     <td>
-                      <a class="btn btn-primary" href="{{route('productos.edit', $producto)}}"><i class="fas fa-edit"></i></a>
-                      <delete-btn-component action="{{ route('productos.destroy', $producto) }}"></delete-btn-component>
+                      <a class="btn btn-primary" href="{{route('productos.edit', $producto)}}" title="Editar producto" aria-label="Editar producto {{ $producto->nombre }}"><i class="fas fa-edit" aria-hidden="true"></i><span class="sr-only">Editar</span></a>
+                      <delete-btn-component action="{{ route('productos.destroy', $producto) }}" title="Eliminar producto" aria-label="Eliminar producto {{ $producto->nombre }}"></delete-btn-component>
                     </td>
                   </tr>
                 @endforeach

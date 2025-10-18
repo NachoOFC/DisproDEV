@@ -1,13 +1,27 @@
 <template>
-  <button class="btn btn-danger" @click="onDelete">
-    <i class="fas fa-times"></i>
+  <button class="btn btn-danger" @click="onDelete" :title="titleAttr" :aria-label="ariaLabelAttr" type="button">
+    <i class="fas fa-times" aria-hidden="true"></i>
+    <span class="sr-only">{{ titleAttr }}</span>
   </button>
 </template>
 <script>
 import Swal from 'sweetalert2'
 
 export default {
-  props: ['action', 'csrf'],
+  props: {
+    action: { type: String, required: true },
+    csrf: { type: String, required: false },
+    title: { type: String, default: 'Eliminar' },
+    ariaLabel: { type: String, default: null }
+  },
+  computed: {
+    titleAttr() {
+      return this.title || 'Eliminar'
+    },
+    ariaLabelAttr() {
+      return this.ariaLabel || this.titleAttr
+    }
+  },
   methods: {
     onDelete: function () {
       Swal.fire({

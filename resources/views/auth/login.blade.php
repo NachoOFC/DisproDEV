@@ -1,10 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid h-screen" style="background-image: url({{ asset('img/campo.jpeg')  }});">
-    <div class="row justify-content-end">
-        <div class="col-md-4">
-            <div class="card max-w-sm rounded overflow-hidden shadow-lg mt-24">
+<div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 72px); background-image: url({{ asset('img/campo.jpeg')  }}); background-size: cover; background-position: center;">
+    <style>
+        /* Hide sidenav only on login page so card is perfectly centered */
+        #sidenav { display: none !important; }
+        main.col { margin-left: 0 !important; }
+        /* ensure header remains full width */
+        header.navbar { left: 0 !important; right: 0 !important; }
+    </style>
+    <div class="row w-100 justify-content-center">
+        <div class="col-md-4 d-flex justify-content-center">
+            <div class="card rounded overflow-hidden shadow-lg" style="max-width: 420px; width: 100%;">
                 <div class="px-6 py-4">
                     <h5 class="text-center border-bottom font-bold text-xl mb-4">Login</h5>
                     <form method="POST" action="{{ route('login') }}" class="px-8 pt-6 pb-8 mb-4">

@@ -34,11 +34,11 @@
                     <thead>
                         <tr>
                             <th>Fecha</th>
-                            <th>Folio</th>
-                            <th>Monto</th>
+                                    <a href="{{ route("factura_electronica_edit", $factura) }}" class="btn btn-warning mx-2" title="Editar factura" aria-label="Editar factura {{ $factura->id }}">Editar</a>
+                                    <form method="POST" action="{{ route('factura_electronica_delete', $factura)  }}">
                             <th>Acciones</th>
                         </tr>
-                    </thead>
+                                        <button class="btn btn-danger deleteBtn" type="submit" title="Eliminar factura" aria-label="Eliminar factura {{ $factura->id }}">Eliminar</button>
                     <tbody>
                         @foreach($facturas as $factura)
                         <tr>

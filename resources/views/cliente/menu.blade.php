@@ -2,31 +2,96 @@
 <style>
 nav.bg-light.sidebar, .bg-light.sidebar, .d-md-block.bg-light.sidebar {
     font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial !important;
+    background-color: #374151 !important;
 }
 nav.bg-light.sidebar a.nav-link, .bg-light.sidebar a.nav-link, .sidebar a.nav-link {
-    color: #55606a !important; /* padres: gris medio */
+    color: #ffffff !important; /* padres: blanco */
     font-weight: 600 !important;
 }
 nav.bg-light.sidebar a.nav-link i, .bg-light.sidebar a.nav-link i, .sidebar a.nav-link i {
-    color: #4b5563 !important;
+    color: #ffffff !important;
 }
 nav.bg-light.sidebar a.nav-link:hover, .bg-light.sidebar a.nav-link:hover, .sidebar a.nav-link:hover {
-    background-color: #f2f4f6 !important;
-    color: #334155 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
 }
 nav.bg-light.sidebar .dropdown-menu a.dropdown-item, .bg-light.sidebar .dropdown-menu a.dropdown-item {
-    color: #2b2f33 !important; /* subitems: gris oscuro */
+    color: #ffffff !important; /* subitems: blanco */
 }
 nav.bg-light.sidebar .dropdown-menu a.dropdown-item:hover, .bg-light.sidebar .dropdown-menu a.dropdown-item:hover {
-    background-color: #eef1f4 !important;
-    color: #334155 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
 }
 /* Forzar colores para estados activos / abiertos para evitar que reglas compiladas los pongan en azul */
 .bg-light.sidebar a.nav-link.active, nav.bg-light.sidebar a.nav-link.active, .bg-light.sidebar .nav-link.active {
-    color: #334155 !important;
+    color: #ffffff !important;
+    background-color: rgba(14,165,164,0.2) !important;
 }
 .bg-light.sidebar .accordion-item.open > .accordion-toggle, .bg-light.sidebar .accordion-toggle.active, .bg-light.sidebar .accordion-toggle[aria-expanded="true"] {
-    color: #334155 !important;
+    color: #ffffff !important;
+}
+
+/* FORZAR TODOS LOS TEXTOS A BLANCO - SUPER AGRESIVO PARA CLIENTE */
+.sidebar *,
+.sidebar a,
+.sidebar span,
+.sidebar div,
+.sidebar li,
+.sidebar p,
+.sidebar i,
+.sidebar .fas,
+.sidebar .far,
+.sidebar .fab,
+.sidebar .nav-item,
+.sidebar .nav-item *,
+.sidebar .nav-link,
+.sidebar .nav-link *,
+.sidebar .dropdown-item,
+.sidebar .dropdown-item *,
+.sidebar .dropdown-menu,
+.sidebar .dropdown-menu *,
+.sidebar .dropdown-toggle,
+.sidebar .dropdown-toggle *,
+nav.bg-light.sidebar,
+nav.bg-light.sidebar *,
+nav.bg-light.sidebar a,
+nav.bg-light.sidebar span,
+nav.bg-light.sidebar div,
+nav.bg-light.sidebar li,
+nav.bg-light.sidebar i,
+.bg-light.sidebar,
+.bg-light.sidebar *,
+.bg-light.sidebar a,
+.bg-light.sidebar span,
+.bg-light.sidebar div,
+.bg-light.sidebar li,
+.bg-light.sidebar i,
+.d-md-block.bg-light.sidebar,
+.d-md-block.bg-light.sidebar * {
+    color: #ffffff !important;
+}
+
+/* Sobrescribir cualquier clase de Bootstrap o custom para cliente */
+.sidebar .text-dark,
+.sidebar .text-muted,
+.sidebar .text-secondary,
+.sidebar .text-primary,
+.sidebar .text-info,
+.sidebar .text-warning,
+.sidebar .text-success,
+.sidebar .text-danger,
+.sidebar .text-light,
+.sidebar .text-white,
+nav.bg-light.sidebar .text-dark,
+nav.bg-light.sidebar .text-muted,
+nav.bg-light.sidebar .text-secondary,
+.bg-light.sidebar .text-dark,
+.bg-light.sidebar .text-muted,
+.bg-light.sidebar .text-secondary,
+.d-md-block.bg-light.sidebar .text-dark,
+.d-md-block.bg-light.sidebar .text-muted,
+.d-md-block.bg-light.sidebar .text-secondary {
+    color: #ffffff !important;
 }
 </style>
 
