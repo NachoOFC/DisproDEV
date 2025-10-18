@@ -166,6 +166,18 @@ table.dataTable tbody td {
     width: 100% !important;
 }
 
+/* Quitar bordes y fondo de cards internas */
+.card-body > .card.mb-3 {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.card-body > .card.mb-3 > .card-body {
+    padding: 0.5rem 0 !important;
+    background-color: transparent !important;
+}
+
 .container-fluid {
     padding-left: 5px !important;
     padding-right: 5px !important;
@@ -363,6 +375,30 @@ h3.border-bottom,
 h3 i,
 .card-header i {
   margin-right: 0.5rem !important;
+}
+
+/* CONTENEDOR DE BOTONES - Accesos Directos */
+.d-flex.flex-row.justify-content-around {
+  padding: 1.5rem 0 !important;
+  gap: 1.5rem !important;
+  background-color: transparent !important;
+  border: none !important;
+  margin: 1rem 0 !important;
+}
+
+/* Estilos para botones de accesos directos */
+.d-flex.flex-row.justify-content-around .btn {
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  flex: 1;
+  max-width: 300px;
+}
+
+.d-flex.flex-row.justify-content-around .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* HEADER BLANCO */
