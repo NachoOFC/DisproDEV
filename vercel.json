@@ -4,7 +4,7 @@
   "devCommand": "npm run dev",
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.6.1"
+      "runtime": "now-php@1.0.0"
     }
   },
   "routes": [
