@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "framework": "laravel",
   "buildCommand": "composer install && npm install && npm run prod",
   "devCommand": "npm run dev",
   "env": {
