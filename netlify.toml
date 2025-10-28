@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = ".nuxt/dist"
+  publish = ".output/public"
   functions = "netlify/functions"
 
 [build.environment]

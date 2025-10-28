@@ -1,6 +1,0 @@
-* TODO 
-  :LOGBOOK:
-  CLOCK: [2020-01-31 Fri 11:06]--[2020-01-31 Fri 11:06] =>  0:00
-  :END:
-[2020-01-31 Fri]
-[[file:~/Projects/mline-siger/app/Exports/FormatoPack.php::/**]]

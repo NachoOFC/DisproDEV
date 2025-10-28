@@ -1,9 +1,25 @@
 {
-  "private": true,
-  "name": "dispro-dev",
+  "private": false,
+  "name": "alogis-dispro",
   "type": "module",
   "version": "1.0.0",
-  "description": "Sistema de gestión de distribución",
+  "description": "ALOGIS - Sistema de Gestión de Distribución y Abastecimiento. Proyecto de Titulación.",
+  "author": {
+    "name": "NACHO OFC",
+    "url": "https://github.com/NachoOFC"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NachoOFC/DisproDEV"
+  },
+  "keywords": [
+    "nuxt",
+    "vue3",
+    "distribution",
+    "inventory",
+    "supply-chain",
+    "tailwindcss"
+  ],
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",

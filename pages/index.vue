@@ -112,18 +112,90 @@
             Acceder
           </NuxtLink>
         </div>
+
+        <!-- Módulo Ajustes -->
+        <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition p-8 border-t-4 border-orange-500">
+          <div class="flex items-center mb-4">
+            <div class="text-4xl mr-4">⚙️</div>
+            <h2 class="text-2xl font-bold text-orange-600">Ajustes de Inventario</h2>
+          </div>
+          <p class="text-gray-600 mb-6">
+            Registra ajustes y correcciones de stock en los centros.
+          </p>
+          <NuxtLink 
+            to="/ajustes" 
+            class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition font-semibold"
+          >
+            Acceder
+          </NuxtLink>
+        </div>
+
+        <!-- Módulo Cierre -->
+        <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition p-8 border-t-4 border-indigo-500">
+          <div class="flex items-center mb-4">
+            <div class="text-4xl mr-4">🔒</div>
+            <h2 class="text-2xl font-bold text-indigo-600">Cierre de Período</h2>
+          </div>
+          <p class="text-gray-600 mb-6">
+            Cierra períodos contables y genera reportes finales.
+          </p>
+          <NuxtLink 
+            to="/cierre" 
+            class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition font-semibold"
+          >
+            Acceder
+          </NuxtLink>
+        </div>
+
+        <!-- Módulo Horarios -->
+        <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition p-8 border-t-4 border-teal-500">
+          <div class="flex items-center mb-4">
+            <div class="text-4xl mr-4">🕐</div>
+            <h2 class="text-2xl font-bold text-teal-600">Gestión de Horarios</h2>
+          </div>
+          <p class="text-gray-600 mb-6">
+            Administra horarios de funcionamiento de centros.
+          </p>
+          <NuxtLink 
+            to="/horarios" 
+            class="inline-block bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition font-semibold"
+          >
+            Acceder
+          </NuxtLink>
+        </div>
+
+        <!-- Módulo Carga Inicial -->
+        <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition p-8 border-t-4 border-lime-500">
+          <div class="flex items-center mb-4">
+            <div class="text-4xl mr-4">📥</div>
+            <h2 class="text-2xl font-bold text-lime-600">Carga de Datos</h2>
+          </div>
+          <p class="text-gray-600 mb-6">
+            Importa datos maestros desde archivos CSV y Excel.
+          </p>
+          <NuxtLink 
+            to="/carga-inicial" 
+            class="inline-block bg-lime-600 text-white px-6 py-3 rounded-lg hover:bg-lime-700 transition font-semibold"
+          >
+            Acceder
+          </NuxtLink>
+        </div>
       </div>
 
       <!-- Info Section -->
       <div class="mt-12 bg-blue-50 border-l-4 border-[#039BE5] rounded p-6">
-        <h3 class="text-xl font-bold text-[#039BE5] mb-3">Características del Sistema</h3>
-        <ul class="list-disc list-inside space-y-2 text-gray-700 grid grid-cols-1 md:grid-cols-2">
-          <li>✅ Módulo de Clientes - Pedidos y seguimiento</li>
-          <li>✅ Módulo de Compass - Administración</li>
+        <h3 class="text-xl font-bold text-[#039BE5] mb-3">Módulos Disponibles</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <li>✅ Cliente - Pedidos y seguimiento</li>
+          <li>✅ Compass - Administración</li>
           <li>✅ Bodeguero - Inventario y movimientos</li>
           <li>✅ Facturación - Facturas electrónicas</li>
           <li>✅ Transporte - Guías y rastreo</li>
           <li>✅ Abastecimiento - Compras a proveedores</li>
+          <li>✅ Ajustes - Correcciones de inventario</li>
+          <li>✅ Cierre - Cierre de períodos</li>
+          <li>✅ Horarios - Gestión de horarios</li>
+          <li>✅ Carga Inicial - Importar datos maestros</li>
         </ul>
       </div>
     </main>
