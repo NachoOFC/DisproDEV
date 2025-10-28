@@ -25,104 +25,142 @@ Transformar DisproDEV de una aplicación Laravel/PHP a un frontend Nuxt 3 + Vue 
 - [x] `pages/requerimientos.vue` - Gestión de requerimientos
 - [x] `pages/productos.vue` - Catálogo de productos
 - [x] `pages/reportes.vue` - Reportes y descargas
-- [x] `composables/useMockData.js` - Datos simulados
+- [x] `composables/useMockData.js` - Datos con fetch a API
 
-### 4. Datos Simulados ✅
-- [x] 3 requerimientos de ejemplo
-- [x] 4 productos con precios y stock
-- [x] 3 reportes simulados
-- [x] 3 usuarios con roles diferentes
+### 4. Backend Express (Node.js SIN PHP) ✅
+- [x] Crear `server.js` con servidor Express
+- [x] Conectar a MariaDB usando `mysql2`
+- [x] Endpoint `/api/data/requerimientos`
+- [x] Endpoint `/api/data/productos`
+- [x] Endpoint `/api/data/reportes`
+- [x] Endpoint `/api/data/usuarios`
+- [x] Agregar CORS para comunicación con Nuxt
+- [x] Health check endpoint
 
-### 5. Estilos ✅
+### 5. Datos Reales de BD ✅
+- [x] Express consulta tabla `requerimientos`
+- [x] Express consulta tabla `productos`
+- [x] Express consulta tabla `users`
+- [x] Composable hace fetch a Express en puerto 3001
+- [x] Fallback a datos simulados si falla API
+
+### 6. Estilos ✅
 - [x] Paleta de colores celeste (#039BE5, #0277BD, #81D4FA)
 - [x] Navbar con gradiente celeste
 - [x] Tabla con estilos modernos
 - [x] Componentes responsive
 - [x] Footer con información del proyecto
 
-### 6. Configuración de Deployment ✅
-- [x] `netlify.toml` con build configuration
+### 7. Configuración de Deployment ✅
+- [x] `netlify.toml` con build configuration para Frontend
 - [x] `public/_redirects` para routing en Netlify
 - [x] Headers de seguridad configurados
 - [x] Cache headers para assets estáticos
 - [x] Environment variables documentadas
 
-### 7. Documentación ✅
-- [x] `DEPLOY_NETLIFY.md` - Guía paso a paso de deployment
-- [x] `readme.md` - Documentación actualizada para Nuxt 3
-- [x] `.gitignore` - Configurado para Nuxt project
-- [x] Scripts npm documentados
+### 8. Documentación ✅
+- [x] `RUN_BOTH_SERVERS.md` - Guía actualizada con Express
+- [x] `readme.md` - Documentación para Nuxt 3 + Express
+- [x] `.gitignore` - Configurado para Nuxt + Node.js
+- [x] Scripts npm documentados (dev, dev:server, dev:all)
 
-### 8. Testing Local ✅
-- [x] Servidor de desarrollo (`npm run dev`) funcionando
+### 9. Testing Local ✅
+- [x] Servidor de desarrollo Nuxt funcionando
+- [x] Servidor Express con BD
 - [x] Navegación entre páginas funcionando
 - [x] Componentes renderizándose correctamente
 - [x] Estilos aplicados correctamente
-- [x] Sin errores en consola del navegador
+- [x] Sin errores de CORS
 
 ## 📊 Estadísticas
 
 | Métrica | Valor |
 |---------|-------|
-| Archivos creados | 12 |
-| Dependencias instaladas | 1038 |
+| Archivos creados | 13 |
+| Dependencias npm | 1086 |
 | Líneas de código Vue | ~400 |
-| Commits realizados | 2 |
+| Líneas de código Express | ~250 |
+| Commits realizados | 3 |
 | Build size estimado | ~200KB |
-| Tiempo de setup | ~20 minutos |
+| Backend API endpoints | 5 |
+
+## 🚀 Stack Final (SIN PHP!)
+
+```
+Nuxt 3 (Vue 3)  ← → Express (Node.js)  ← → MariaDB
+Frontend           Backend             Data
+```
+
+| Capa | Tecnología | Puerto | Deployment |
+|------|-----------|--------|-----------|
+| Frontend | Nuxt 3 + Vue 3 | 3000 | Netlify |
+| Backend | Express + Node.js | 3001 | Railway/Render |
+| Database | MariaDB/MySQL | 3306 | Cloud DB |
 
 ## 🚀 Próximos Pasos
 
 ### Corto Plazo (Inmediato)
-1. [ ] Push a rama `nuxt-frontend` en GitHub
-2. [ ] Crear Pull Request de `nuxt-frontend` a `main`
-3. [ ] Conectar repositorio a Netlify
-4. [ ] Configurar auto-deployment en Netlify
-5. [ ] Testear build en producción
+1. [ ] Testear `npm run dev:server` + `npm run dev` juntos
+2. [ ] Verificar que Express trae datos reales de BD
+3. [ ] Push a rama `nuxt-frontend` en GitHub
+4. [ ] Crear Pull Request de `nuxt-frontend` a `main`
+
+### Deployment (Después de testing)
+1. [ ] Conectar repositorio a Netlify (Frontend)
+2. [ ] Conectar repositorio a Railway/Render (Backend)
+3. [ ] Configurar variables de entorno en cada plataforma
+4. [ ] Testear en producción
 
 ### Mediano Plazo
-1. [ ] Integración con API real (reemplazar mock data)
-2. [ ] Autenticación de usuarios
-3. [ ] Agregar más componentes (formularios, modales)
+1. [ ] Agregar más datos a partir de tabla BD
+2. [ ] Crear más API endpoints según necesidad
+3. [ ] Agregar autenticación/login
 4. [ ] Mejorar responsividad mobile
-5. [ ] Agregar PWA capabilities
+5. [ ] Agregar validaciones frontend
 
 ### Largo Plazo
-1. [ ] Backend API en Node.js/Express
-2. [ ] Base de datos PostgreSQL en Neon
-3. [ ] Sistema de roles y permisos
-4. [ ] Reportes interactivos con gráficos
-5. [ ] Exportación PDF/Excel
+1. [ ] Sistema completo de roles y permisos
+2. [ ] Reportes interactivos con gráficos
+3. [ ] Exportación PDF/Excel
+4. [ ] PWA capabilities
 
 ## 🔗 Links Importantes
 
 - **Repositorio**: https://github.com/NachoOFC/DisproDEV
 - **Rama de desarrollo**: `nuxt-frontend`
-- **Stack**: Nuxt 3 + Vue 3 + Tailwind CSS
-- **Deployment**: Netlify (gratis)
-- **Estado**: Ready for production
+- **Frontend Stack**: Nuxt 3 + Vue 3 + Tailwind CSS
+- **Backend Stack**: Express + Node.js + mysql2
+- **Database**: MariaDB (ya existente)
+- **Deployment Frontend**: Netlify (gratis)
+- **Deployment Backend**: Railway o Render (gratis con límites)
 
 ## 📝 Notas Importantes
 
-1. **SPA vs SSR**: El proyecto está configurado como SPA (`ssr: false`) para deploy en Netlify
-2. **Mock Data**: Actualmente usa datos simulados en `composables/useMockData.js`
-3. **Routing**: Basado en archivo (file-based routing) automático de Nuxt
-4. **Estilos**: Tailwind CSS con paleta de colores personalizada
-5. **Compatibilidad**: Totalmente independiente de PHP/Laravel
+1. **SIN PHP**: Totalmente JavaScript/Node.js
+2. **Dos procesos**: Frontend (Nuxt) y Backend (Express) corren separados
+3. **Comunicación**: API REST entre Frontend y Backend
+4. **Datos reales**: Backend consulta BD actual
+5. **CORS habilitado**: Express permite requests desde Nuxt
+6. **Fallback**: Si API falla, usa datos simulados
+7. **Environment**: Variables en `.env` para credenciales BD
 
-## 🎓 Finalidad
+## 📋 Cómo ejecutar
 
-Este proyecto es un **Proyecto de Titulación** para demostrar competencias en:
-- Desarrollo Frontend moderno con Vue 3/Nuxt 3
-- Diseño responsive y UX/UI
-- Deployment y CI/CD con Netlify
-- Control de versiones con Git
-- Documentación técnica
+```bash
+# En carpeta del proyecto
+npm run dev:all
+
+# O en dos terminales:
+# Terminal 1: npm run dev:server (Express en puerto 3001)
+# Terminal 2: npm run dev (Nuxt en puerto 3000)
+```
+
+Accede a `http://localhost:3000` y deberías ver datos de la BD.
 
 ---
 
-**Estado**: ✅ **LISTO PARA DESPLEGAR EN NETLIFY**
+**Estado**: ✅ **PROYECTO TRANSFORMADO A NUXT + EXPRESS (SIN PHP)**
 
 **Fecha**: 28 de Octubre de 2025
-**Versión**: 1.0.0 (Nuxt 3 Frontend)
+**Versión**: 1.0.0 (Nuxt 3 Frontend + Express Backend)
 **Autor**: Ignacio Ofc (NachoOFC)
