@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: dispro-nacho
+    runtime: php
+    buildCommand: "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install && npm run prod"
+    startCommand: "vendor/bin/heroku-php-apache2 public/"
+    envs:
+      - key: APP_NAME
+        value: DisproDEV
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: CACHE_DRIVER
+        value: file
+      - key: SESSION_DRIVER
+        value: cookie
