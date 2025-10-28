@@ -1,8 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "composer install --no-dev --classmap-authoritative",
   "framework": null,
-  "buildCommand": "composer install --no-interaction --prefer-dist --optimize-autoloader",
-  "outputDirectory": "public"
+  "installCommand": "composer install --no-dev --classmap-authoritative"
 }
+
 
 
