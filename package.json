@@ -1,58 +1,45 @@
 {
-  "private": true,
+  "private": false,
+  "name": "alogis-dispro",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "ALOGIS - Sistema de Gestión de Distribución y Abastecimiento. Proyecto de Titulación.",
+  "author": {
+    "name": "NACHO OFC",
+    "url": "https://github.com/NachoOFC"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NachoOFC/DisproDEV"
+  },
+  "keywords": [
+    "nuxt",
+    "vue3",
+    "distribution",
+    "inventory",
+    "supply-chain",
+    "tailwindcss"
+  ],
   "scripts": {
-    "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider node node_modules/laravel-mix/src/index.js",
-    "watch": "npm run development -- --watch",
-    "watch-poll": "npm run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider node node_modules/laravel-mix/src/index.js watch --hot",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider node node_modules/laravel-mix/src/index.js --production"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome": "^1.1.8",
-    "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "@mdi/font": "^5.5.55",
-    "autoprefixer": "^10.4.21",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.5.0",
-    "cross-env": "^5.1",
-    "jquery": "^3.5.1",
-    "laravel-mix": "^5.0.9",
-    "lodash": "^4.17.19",
-    "popper.js": "^1.16.1",
-    "postcss": "^8.5.6",
-    "resolve-url-loader": "^2.3.1",
-    "sass": "^1.26.10",
-    "sass-loader": "7.*",
-    "tailwindcss": "^3.4.17",
-    "vue": "^2.6.11",
-    "vue-loader": "^15.11.1",
-    "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.10.0",
+    "autoprefixer": "^10.4.17",
+    "nuxt": "^3.10.1",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.1",
+    "vue": "^3.4.3",
+    "vue-router": "^4.3.2"
   },
   "dependencies": {
-    "@ag-grid-community/all-modules": "^22.1.1",
-    "@ag-grid-community/vue": "^22.1.2",
-    "@fortawesome/fontawesome-free": "^5.14.0",
-    "ag-grid-community": "^22.1.1",
-    "chart.js": "^2.9.3",
-    "datatables.net-bs4": "^1.10.21",
-    "datatables.net-buttons-bs4": "^1.6.2",
-    "datatables.net-fixedheader-dt": "^3.1.7",
-    "datatables.net-responsive-bs4": "^2.2.5",
-    "datatables.net-scroller-bs4": "^2.0.2",
-    "font-awesome": "^4.7.0",
-    "jszip": "^3.5.0",
-    "pdfmake": "^0.1.67",
-    "sweetalert2": "^9.17.1",
-    "vue-chartjs": "^3.5.0",
-    "vue-property-decorator": "^8.5.1",
-    "vue-select": "^3.10.7",
-    "vue-slim-tabs": "^0.4.0",
-    "vue-tables-2": "^1.6.25",
-    "vuetable-2": "^2.0.0-beta.4",
-    "vuetify": "^2.3.9"
+    "@fortawesome/fontawesome-free": "^6.5.1",
+    "axios": "^1.6.5",
+    "chart.js": "^4.4.1",
+    "vue-chartjs": "^5.3.0"
   }
 }
