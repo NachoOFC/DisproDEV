@@ -1,37 +1,72 @@
-# DisproDEV 🚀
+# 🔵 ALOGIS - DisproDEV# DisproDEV 🚀
 
-> Sistema de gestión de distribución - Proyecto de Titulación
 
-**DisproDEV** es una aplicación web moderna construida con **Nuxt 3 + Vue 3** para la gestión integral de requerimientos, productos y reportes de una empresa de distribución.
 
-## ✨ Características
+Sistema de gestión de distribución y abastecimiento.> Sistema de gestión de distribución - Proyecto de Titulación
 
-- 📦 **Gestión de Requerimientos**: Crea, consulta y monitorea requerimientos
-- 🏪 **Catálogo de Productos**: Visualiza y administra productos con stock en tiempo real
+
+
+## 🚀 Inicio Rápido**DisproDEV** es una aplicación web moderna construida con **Nuxt 3 + Vue 3** para la gestión integral de requerimientos, productos y reportes de una empresa de distribución.
+
+
+
+```bash## ✨ Características
+
+npm install
+
+npm run dev- 📦 **Gestión de Requerimientos**: Crea, consulta y monitorea requerimientos
+
+```- 🏪 **Catálogo de Productos**: Visualiza y administra productos con stock en tiempo real
+
 - 📊 **Reportes Avanzados**: Genera y descarga reportes en PDF y Excel
-- 🎨 **Interfaz Moderna**: Diseño limpio con paleta de colores celeste
+
+Abre `http://localhost:3000`- 🎨 **Interfaz Moderna**: Diseño limpio con paleta de colores celeste
+
 - 📱 **Responsive Design**: Funciona perfectamente en desktop y mobile
-- ⚡ **Rendimiento Optimizado**: SPA (Single Page Application) con Nuxt 3
+
+## 📋 Requisitos- ⚡ **Rendimiento Optimizado**: SPA (Single Page Application) con Nuxt 3
+
 - 🔒 **Seguridad**: Headers de seguridad, validación de entrada
 
-## 🛠️ Stack Tecnológico
+- Node.js 20+
 
-- **Frontend Framework**: Nuxt 3
+- npm## 🛠️ Stack Tecnológico
+
+
+
+## 🎨 Características- **Frontend Framework**: Nuxt 3
+
 - **UI Library**: Vue 3 (Composition API)
-- **Styling**: Tailwind CSS
-- **Icónos**: FontAwesome 6
-- **HTTP Client**: Axios
-- **Deployment**: Netlify
+
+- Módulo Cliente- **Styling**: Tailwind CSS
+
+- Módulo Compass (Admin)- **Icónos**: FontAwesome 6
+
+- Interfaz Nuxt 3 + Vue 3- **HTTP Client**: Axios
+
+- Responsive Design- **Deployment**: Netlify
+
+- Paleta de colores celeste
 
 ## 📋 Requisitos
 
+## 🚢 Deploy Netlify
+
 - Node.js 20+
-- npm o yarn
-- Navegador moderno (Chrome, Firefox, Safari, Edge)
+
+```bash- npm o yarn
+
+npm run build- Navegador moderno (Chrome, Firefox, Safari, Edge)
+
+```
 
 ## 🚀 Instalación y uso
 
+---
+
 ### 1. Clonar el repositorio
+
+© 2024 - Proyecto de Titulación
 
 ```bash
 git clone https://github.com/NachoOFC/DisproDEV.git
