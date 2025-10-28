@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "framework": "laravel",
+  "buildCommand": "composer install && npm install && npm run prod",
+  "devCommand": "npm run dev",
+  "env": {
+    "APP_NAME": "DisproDEV",
+    "APP_ENV": "@APP_ENV",
+    "APP_DEBUG": "@APP_DEBUG",
+    "APP_URL": "@APP_URL",
+    "DB_CONNECTION": "@DB_CONNECTION",
+    "DB_HOST": "@DB_HOST",
+    "DB_PORT": "@DB_PORT",
+    "DB_DATABASE": "@DB_DATABASE",
+    "DB_USERNAME": "@DB_USERNAME",
+    "DB_PASSWORD": "@DB_PASSWORD"
+  },
+  "functions": {
+    "api/index.php": {
+      "runtime": "php:8.2"
+    }
+  },
+  "routes": [
+    {
+      "src": "/public/(.*)",
+      "dest": "public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
+  ]
+}
