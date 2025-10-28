@@ -326,3 +326,4 @@ const getEstadoClass = (estado) => {
   return classes[estado] || 'bg-slate-100 text-slate-800'
 }
 </script>
+
