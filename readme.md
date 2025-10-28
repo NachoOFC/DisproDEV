@@ -1,69 +1,195 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# 🌾 DisproDEV - Sistema de Logística y Abastecimiento
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+> Plataforma integral de gestión de pedidos, logística y abastecimiento para empresas de cultivo hidropónico.
 
-## About Laravel
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Laravel](https://img.shields.io/badge/Laravel-9.x-red.svg)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4.svg)](https://www.php.net)
+[![Status](https://img.shields.io/badge/status-Active-brightgreen.svg)](#)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Descripción
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**DisproDEV** es un sistema web completo de logística y abastecimiento diseñado específicamente para empresas de cultivo hidropónico. Permite la gestión integral de:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 📦 **Órdenes de pedido** y seguimiento en tiempo real
+- 🏭 **Gestión de centros de cultivo** y abastecimiento
+- 👥 **Control de usuarios** y permisos por rol
+- 📊 **Reportes y análisis** de operaciones
+- 🚚 **Planificación de despachos** y logística
+- 💾 **Control de inventario** en bodegas
+- 📄 **Generación de documentos** (guías de despacho, facturas electrónicas)
 
-## Learning Laravel
+## 🎯 Características Principales
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Módulos Implementados
+- **Gestión de Pedidos**: Crear, validar, procesar y despachar órdenes de compra
+- **Logística Integrada**: Seguimiento completo del estado de envíos
+- **Multi-empresa**: Soporte para múltiples empresas en una sola plataforma
+- **Control de Acceso**: Sistema de roles y permisos granulares
+- **Reportes Avanzados**: Análisis de datos con filtros y exportación
+- **Facturación Electrónica**: Integración con sistema tributario
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Tecnologías Utilizadas
+- **Backend**: Laravel 9.x, PHP 8.1+
+- **Frontend**: Vue.js, Bootstrap 5, Tailwind CSS
+- **Base de Datos**: MySQL/MariaDB
+- **Herramientas**: Composer, NPM, Webpack Mix
+- **Testing**: PHPUnit
 
-## Laravel Sponsors
+## 🎨 Diseño y UX
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Interfaz Moderna
+- Diseño responsivo y mobile-first
+- Paleta de colores celeste moderno (`#039BE5`)
+- Tablas interactivas con estilos personalizados
+- Componentes reutilizables
+- Animaciones suaves y transiciones
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
+### Estilos Implementados
+```css
+/* Colores Principales */
+--color-primary: #039BE5;        /* Celeste vibrante */
+--color-primary-light: #81D4FA;  /* Celeste medio */
+--color-primary-lighter: #B3E5FC; /* Celeste claro */
+```
+
+Todos los estilos personalizados están disponibles en:
+- 📄 `public/css/estilos.css` - Estilos principales
+- 📄 `public/css/portfolio-styles.css` - Estilos para portafolio
 - [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
 
-## Contributing
+## 🚀 Inicio Rápido
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Requisitos Previos
+- PHP 8.1 o superior
+- Composer
+- Node.js y NPM
+- MySQL/MariaDB 5.7+
+- Git
+
+### Instalación
+
+1. **Clonar el repositorio**
+```bash
+git clone https://github.com/NachoOFC/DisproDEV.git
+cd DisproDEV
+```
+
+2. **Instalar dependencias PHP**
+```bash
+composer install
+```
+
+3. **Instalar dependencias Frontend**
+```bash
+npm install
+```
+
+4. **Configurar archivo .env**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+5. **Configurar base de datos**
+```bash
+# Editar .env con credenciales de BD
+DB_HOST=127.0.0.1
+DB_DATABASE=dispro_dev
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+6. **Ejecutar migraciones**
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+7. **Compilar assets**
+```bash
+npm run dev
+# O para producción:
+npm run prod
+```
+
+8. **Iniciar servidor**
+```bash
+php artisan serve
+# Acceder a: http://localhost:8000
+```
+
+## 📁 Estructura del Proyecto
+
+```
+DisproDEV/
+├── app/                      # Modelos, controladores, middlewares
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   └── Middleware/
+│   ├── Models/
+│   └── Policies/
+├── resources/
+│   ├── views/               # Vistas Blade
+│   │   └── layouts/
+│   │   └── compass/
+│   └── js/                  # Componentes Vue.js
+├── routes/
+│   ├── web.php
+│   └── api.php
+├── database/
+│   ├── migrations/
+│   └── seeds/
+├── public/
+│   ├── css/
+│   │   ├── estilos.css
+│   │   └── portfolio-styles.css
+│   └── js/
+└── config/                  # Configuración
+```
+
+## 👥 Roles y Permisos
+
+El sistema cuenta con diferentes roles:
+- **Administrador**: Acceso total
+- **Compras**: Gestión de órdenes de pedido
+- **Logística**: Planificación de despachos
+- **Bodeguero**: Control de inventario
+- **Usuario**: Consulta de información
+
+## 🔧 Desarrollo
+
+### Ejecutar Tests
+```bash
+php artisan test
+# O específicos:
+php artisan test tests/Feature/PedidosTest.php
+```
+
+### Compilar Assets en Desarrollo
+```bash
+npm run watch
+```
+
+### Modo Debug
+En `.env`:
+```
+APP_DEBUG=true
+APP_ENV=local
+```
+
+## 📞 Contacto
+
+- GitHub: [@NachoOFC](https://github.com/NachoOFC)
+- Portafolio: [Tu portafolio]
+
+---
+
+**Hecho con ❤️ por Nacho OFC**
+
+**Versión**: 1.0.0  
+**Última actualización**: Octubre 2025
+
 
 ## Security Vulnerabilities
 
