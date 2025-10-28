@@ -1,33 +1,123 @@
-# 🌾 DisproDEV - Sistema de Logística y Abastecimiento
+# DisproDEV 🚀
 
-> Plataforma integral de gestión de pedidos, logística y abastecimiento para empresas de cultivo hidropónico.
+> Sistema de gestión de distribución - Proyecto de Titulación
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Laravel](https://img.shields.io/badge/Laravel-9.x-red.svg)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4.svg)](https://www.php.net)
-[![Status](https://img.shields.io/badge/status-Active-brightgreen.svg)](#)
+**DisproDEV** es una aplicación web moderna construida con **Nuxt 3 + Vue 3** para la gestión integral de requerimientos, productos y reportes de una empresa de distribución.
 
-## 📋 Descripción
+## ✨ Características
 
-**DisproDEV** es un sistema web completo de logística y abastecimiento diseñado específicamente para empresas de cultivo hidropónico. Permite la gestión integral de:
+- 📦 **Gestión de Requerimientos**: Crea, consulta y monitorea requerimientos
+- 🏪 **Catálogo de Productos**: Visualiza y administra productos con stock en tiempo real
+- 📊 **Reportes Avanzados**: Genera y descarga reportes en PDF y Excel
+- 🎨 **Interfaz Moderna**: Diseño limpio con paleta de colores celeste
+- 📱 **Responsive Design**: Funciona perfectamente en desktop y mobile
+- ⚡ **Rendimiento Optimizado**: SPA (Single Page Application) con Nuxt 3
+- 🔒 **Seguridad**: Headers de seguridad, validación de entrada
 
-- 📦 **Órdenes de pedido** y seguimiento en tiempo real
-- 🏭 **Gestión de centros de cultivo** y abastecimiento
-- 👥 **Control de usuarios** y permisos por rol
-- 📊 **Reportes y análisis** de operaciones
-- 🚚 **Planificación de despachos** y logística
-- 💾 **Control de inventario** en bodegas
-- 📄 **Generación de documentos** (guías de despacho, facturas electrónicas)
+## 🛠️ Stack Tecnológico
 
-## 🎯 Características Principales
+- **Frontend Framework**: Nuxt 3
+- **UI Library**: Vue 3 (Composition API)
+- **Styling**: Tailwind CSS
+- **Icónos**: FontAwesome 6
+- **HTTP Client**: Axios
+- **Deployment**: Netlify
 
-### Módulos Implementados
-- **Gestión de Pedidos**: Crear, validar, procesar y despachar órdenes de compra
-- **Logística Integrada**: Seguimiento completo del estado de envíos
-- **Multi-empresa**: Soporte para múltiples empresas en una sola plataforma
-- **Control de Acceso**: Sistema de roles y permisos granulares
-- **Reportes Avanzados**: Análisis de datos con filtros y exportación
-- **Facturación Electrónica**: Integración con sistema tributario
+## 📋 Requisitos
+
+- Node.js 20+
+- npm o yarn
+- Navegador moderno (Chrome, Firefox, Safari, Edge)
+
+## 🚀 Instalación y uso
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/NachoOFC/DisproDEV.git
+cd DisproDEV
+```
+
+### 2. Instalar dependencias
+
+```bash
+npm install
+```
+
+### 3. Ejecutar servidor de desarrollo
+
+```bash
+npm run dev
+```
+
+El proyecto estará disponible en `http://localhost:3000`
+
+### 4. Compilar para producción
+
+```bash
+npm run build
+npm run preview
+```
+
+Esto generará la carpeta `.nuxt/dist/` lista para deploy.
+
+## 📁 Estructura del Proyecto
+
+```
+DisproDEV/
+├── pages/                    # Páginas de la aplicación (file-based routing)
+│   ├── index.vue            # Dashboard / Inicio
+│   ├── requerimientos.vue    # Gestión de requerimientos
+│   ├── productos.vue         # Catálogo de productos
+│   └── reportes.vue          # Reportes y descargas
+├── components/              # Componentes reutilizables
+│   └── DataTable.vue        # Tabla para mostrar datos
+├── composables/             # Composables de Nuxt 3
+│   └── useMockData.js       # Datos simulados
+├── public/                  # Archivos estáticos
+│   └── _redirects           # Configuración de rutas para Netlify
+├── app.vue                  # Componente raíz
+├── nuxt.config.ts           # Configuración de Nuxt
+├── netlify.toml             # Configuración de Netlify
+└── package.json             # Dependencias del proyecto
+```
+
+## � Paleta de Colores
+
+| Color | Hex | Uso |
+|-------|-----|-----|
+| Celeste Principal | `#039BE5` | Headers, botones primarios |
+| Celeste Oscuro | `#0277BD` | Hover states |
+| Celeste Claro | `#B3E5FC` | Backgrounds, inputs |
+
+## 🚢 Deployment
+
+### En Netlify (Recomendado)
+
+1. Ve a [https://netlify.com](https://netlify.com)
+2. Conecta tu repositorio de GitHub
+3. Configura el build:
+   - **Build Command**: `npm run build`
+   - **Publish Directory**: `.nuxt/dist`
+
+Ver más detalles en [DEPLOY_NETLIFY.md](./DEPLOY_NETLIFY.md)
+
+## 🔧 Scripts Disponibles
+
+| Script | Descripción |
+|--------|-------------|
+| `npm run dev` | Inicia servidor de desarrollo |
+| `npm run build` | Compila el proyecto para producción |
+| `npm run generate` | Genera sitio estático (SSG) |
+| `npm run preview` | Visualiza la compilación final |
+
+## 👤 Autor
+
+**Ignacio Ofc** (NachoOFC)
+- 🐙 GitHub: [@NachoOFC](https://github.com/NachoOFC)
+
+**Última actualización**: Octubre 28, 2025 | **Versión**: 1.0.0 (Nuxt 3)
+
 
 ### Tecnologías Utilizadas
 - **Backend**: Laravel 9.x, PHP 8.1+

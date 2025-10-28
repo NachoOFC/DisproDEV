@@ -1,2 +1,57 @@
 vendor/
 node_modules/
+.pnp
+.pnp.js
+
+# Build
+dist/
+.nuxt/
+.output/
+out/
+
+# Cache
+.cache/
+.eslintcache
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Archivos del sistema
+.DS_Store
+*.pem
+
+# Variables de entorno
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Archivos temporales
+*.tmp
+*.bak
+~*
+
+# Netlify
+.netlify/
+
+# Laravel (mantener por compatibilidad histórica)
+/storage/
+/bootstrap/cache/
+.phpunit.result.cache
+
+# Composer
+composer.lock
+
+# Python
+__pycache__/
+*.py[cod]
