@@ -68,34 +68,6 @@
             <p class="text-slate-600 text-sm">Gestiona usuarios del sistema</p>
           </div>
         </NuxtLink>
-
-        <!-- Reportes -->
-        <NuxtLink to="/compass/reportes" class="group">
-          <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all group-hover:scale-105">
-            <div class="flex items-center justify-between mb-4">
-              <div class="bg-red-100 rounded-lg p-4">
-                <i class="fas fa-chart-line text-3xl text-red-600"></i>
-              </div>
-              <i class="fas fa-arrow-right text-2xl text-slate-300 group-hover:text-red-600 transition-colors"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-slate-900 mb-2">Reportes</h3>
-            <p class="text-slate-600 text-sm">Genera reportes del sistema</p>
-          </div>
-        </NuxtLink>
-
-        <!-- Configuración -->
-        <NuxtLink to="/compass/configuracion" class="group">
-          <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all group-hover:scale-105">
-            <div class="flex items-center justify-between mb-4">
-              <div class="bg-slate-100 rounded-lg p-4">
-                <i class="fas fa-cog text-3xl text-slate-600"></i>
-              </div>
-              <i class="fas fa-arrow-right text-2xl text-slate-300 group-hover:text-slate-600 transition-colors"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-slate-900 mb-2">Configuración</h3>
-            <p class="text-slate-600 text-sm">Ajustes del sistema</p>
-          </div>
-        </NuxtLink>
       </div>
 
       <!-- Info Card -->
