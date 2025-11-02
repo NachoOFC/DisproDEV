@@ -2,9 +2,10 @@
   <div class="min-h-screen bg-gray-50">
     <!-- Navbar -->
     <nav class="bg-gradient-to-r from-[#039BE5] to-[#0277BD] text-white shadow-lg sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <NuxtLink to="/" class="text-2xl font-bold hover:text-[#B3E5FC] transition flex items-center">
-          🔵 DisproDEV
+      <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
+        <NuxtLink to="/" class="flex items-center gap-4 hover:opacity-90 transition">
+          <img src="/img/LogoAlogis.jpeg" alt="ALOGIS" class="h-12 w-auto object-contain">
+          <span class="text-xl font-bold hidden sm:inline">DisproDEV</span>
         </NuxtLink>
         <div class="hidden md:flex space-x-6">
           <NuxtLink to="/" class="hover:text-[#B3E5FC] transition">Inicio</NuxtLink>
