@@ -24,3 +24,7 @@ export default defineNuxtConfig({
     }
   }
 })
+function defineNuxtConfig(arg0: { compatibilityDate: string; ssr: boolean; modules: string[]; nitro: { prerender: { crawlLinks: boolean; routes: string[]; }; }; app: { head: { title: string; meta: ({ charset: string; } | { name: string; content: string; })[]; link: { rel: string; type: string; href: string; }[]; }; }; }) {
+  throw new Error("Function not implemented.");
+}
+
