@@ -1,5 +1,7 @@
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-11-02',
   ssr: true,
@@ -24,7 +26,4 @@ export default defineNuxtConfig({
     }
   }
 })
-function defineNuxtConfig(arg0: { compatibilityDate: string; ssr: boolean; modules: string[]; nitro: { prerender: { crawlLinks: boolean; routes: string[]; }; }; app: { head: { title: string; meta: ({ charset: string; } | { name: string; content: string; })[]; link: { rel: string; type: string; href: string; }[]; }; }; }) {
-  throw new Error("Function not implemented.");
-}
 

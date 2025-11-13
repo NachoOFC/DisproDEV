@@ -17,9 +17,7 @@
         <NuxtLink to="/compass/empresas" class="group">
           <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all group-hover:scale-105">
             <div class="flex items-center justify-between mb-4">
-              <div class="bg-blue-100 rounded-lg p-4">
-                <i class="fas fa-building text-3xl text-blue-600"></i>
-              </div>
+              <div class="text-5xl">🏢</div>
               <i class="fas fa-arrow-right text-2xl text-slate-300 group-hover:text-blue-600 transition-colors"></i>
             </div>
             <h3 class="text-2xl font-bold text-slate-900 mb-2">Empresas</h3>
@@ -31,9 +29,7 @@
         <NuxtLink to="/compass/centros" class="group">
           <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all group-hover:scale-105">
             <div class="flex items-center justify-between mb-4">
-              <div class="bg-green-100 rounded-lg p-4">
-                <i class="fas fa-map-marker-alt text-3xl text-green-600"></i>
-              </div>
+              <div class="text-5xl">📍</div>
               <i class="fas fa-arrow-right text-2xl text-slate-300 group-hover:text-green-600 transition-colors"></i>
             </div>
             <h3 class="text-2xl font-bold text-slate-900 mb-2">Centros</h3>
@@ -45,9 +41,7 @@
         <NuxtLink to="/compass/productos" class="group">
           <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all group-hover:scale-105">
             <div class="flex items-center justify-between mb-4">
-              <div class="bg-amber-100 rounded-lg p-4">
-                <i class="fas fa-box text-3xl text-amber-600"></i>
-              </div>
+              <div class="text-5xl">📦</div>
               <i class="fas fa-arrow-right text-2xl text-slate-300 group-hover:text-amber-600 transition-colors"></i>
             </div>
             <h3 class="text-2xl font-bold text-slate-900 mb-2">Productos</h3>
@@ -59,9 +53,7 @@
         <NuxtLink to="/compass/usuarios" class="group">
           <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all group-hover:scale-105">
             <div class="flex items-center justify-between mb-4">
-              <div class="bg-purple-100 rounded-lg p-4">
-                <i class="fas fa-users text-3xl text-purple-600"></i>
-              </div>
+              <div class="text-5xl">👥</div>
               <i class="fas fa-arrow-right text-2xl text-slate-300 group-hover:text-purple-600 transition-colors"></i>
             </div>
             <h3 class="text-2xl font-bold text-slate-900 mb-2">Usuarios</h3>
