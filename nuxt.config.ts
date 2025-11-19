@@ -21,7 +21,8 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Sistema de Gestión de Distribución y Abastecimiento' }
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg?v=alogis-2025' },
+        { rel: 'apple-touch-icon', href: '/favicon.svg?v=alogis-2025' }
       ]
     }
   }

@@ -211,6 +211,25 @@
             </NuxtLink>
           </div>
         </div>
+
+        <!-- Módulo API Docs -->
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 border-t-4 border-gray-800">
+          <div class="text-center mb-4">
+            <div class="text-4xl mb-2">🔌</div>
+            <h2 class="text-xl font-bold text-gray-800">Documentación API</h2>
+          </div>
+          <p class="text-gray-600 mb-4 text-center text-sm">
+            Endpoints REST disponibles y ejemplos de integración.
+          </p>
+          <div class="flex justify-center">
+            <NuxtLink 
+              to="/api-docs" 
+              class="inline-block bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900 transition font-semibold text-base"
+            >
+              Acceder →
+            </NuxtLink>
+          </div>
+        </div>
       </div>
     </main>
   </div>

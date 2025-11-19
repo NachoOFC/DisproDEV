@@ -286,7 +286,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import jsPDF from 'jspdf'
+import { generarPdfGuia } from '~/composables/usePdfGenerator'
 
 const activeTab = ref('crear')
 const filtroGuia = ref('')
@@ -425,60 +425,6 @@ const getEventoIcon = (tipo) => {
 }
 
 const descargarGuiaPDF = (guia) => {
-  const doc = new jsPDF()
-  
-  // Encabezado
-  doc.setFillColor(3, 155, 229)
-  doc.rect(0, 0, 210, 30, 'F')
-  doc.setTextColor(255, 255, 255)
-  doc.setFontSize(24)
-  doc.text('ALOGIS', 20, 20)
-  
-  // Título
-  doc.setTextColor(0, 0, 0)
-  doc.setFontSize(18)
-  doc.text(`GUÍA DE DESPACHO`, 20, 50)
-  
-  // Información principal
-  doc.setFontSize(10)
-  doc.text(`Número: ${guia.numero}`, 20, 65)
-  doc.text(`Orden Compra: ${guia.ordenCompra}`, 20, 73)
-  doc.text(`Cliente: ${guia.cliente}`, 20, 81)
-  doc.text(`Transportista: ${guia.transportista}`, 20, 89)
-  
-  // Detalles
-  doc.setFontSize(12)
-  doc.text('Detalles del Envío', 20, 110)
-  
-  doc.setFontSize(10)
-  doc.setTextColor(80, 80, 80)
-  let yPosition = 130
-  doc.text(`Patente: ${guia.patente}`, 20, yPosition)
-  yPosition += 8
-  doc.text(`Cantidad de Bidones: ${guia.cantidadBidones}`, 20, yPosition)
-  yPosition += 8
-  doc.text(`Fecha Despacho: ${formatDate(guia.fechaDespacho)}`, 20, yPosition)
-  yPosition += 8
-  doc.text(`Fecha Entrega Estimada: ${formatDate(guia.fechaEntregaEstimada)}`, 20, yPosition)
-  yPosition += 8
-  doc.text(`Estado: ${guia.estado}`, 20, yPosition)
-  
-  // Observaciones
-  yPosition += 15
-  doc.setFontSize(11)
-  doc.text('Observaciones:', 20, yPosition)
-  yPosition += 8
-  doc.setFontSize(10)
-  doc.text(guia.observaciones || 'Sin observaciones', 20, yPosition)
-  
-  // Pie de página
-  doc.setFont(undefined, 'normal')
-  doc.setFontSize(8)
-  doc.setTextColor(150, 150, 150)
-  doc.text('© 2024 ALOGIS - Sistema de Gestión de Distribución', 20, 280)
-  doc.text('Powered by Nuxt 3 + Vue 3', 20, 285)
-  
-  // Descargar
-  doc.save(`Guia_${guia.numero}.pdf`)
+  generarPdfGuia(guia, formatDate)
 }
 </script>

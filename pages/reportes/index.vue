@@ -174,7 +174,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import jsPDF from 'jspdf'
+import { generarPdfReporte } from '~/composables/usePdfGenerator'
 
 const activeTab = ref('ventas')
 
@@ -246,60 +246,11 @@ const reportes = {
 
 const descargarReporte = (tipo) => {
   const reporte = reportes[tipo]
-  const doc = new jsPDF()
-  
-  // Encabezado
-  doc.setFillColor(3, 155, 229)
-  doc.rect(0, 0, 210, 30, 'F')
-  doc.setTextColor(255, 255, 255)
-  doc.setFontSize(24)
-  doc.text('ALOGIS', 20, 20)
-  
-  // Título
-  doc.setTextColor(0, 0, 0)
-  doc.setFontSize(18)
-  doc.text(reporte.titulo, 20, 50)
-  
-  // Período
-  doc.setFontSize(10)
-  doc.setTextColor(100, 100, 100)
-  doc.text(`Período: ${reporte.periodo}`, 20, 60)
-  doc.text(`Generado: ${new Date().toLocaleDateString('es-ES')} ${new Date().toLocaleTimeString('es-ES')}`, 20, 68)
-  
-  // Línea separadora
-  doc.setDrawColor(200, 200, 200)
-  doc.line(20, 75, 190, 75)
-  
-  // Contenido
-  let yPosition = 90
-  doc.setFontSize(11)
-  doc.setTextColor(0, 0, 0)
-  
-  reporte.datos.forEach((dato, index) => {
-    doc.setFont(undefined, 'bold')
-    doc.text(`${dato.label}:`, 20, yPosition)
-    doc.setFont(undefined, 'normal')
-    doc.text(dato.valor, 100, yPosition)
-    yPosition += 10
+  generarPdfReporte({
+    titulo: reporte.titulo,
+    periodo: reporte.periodo,
+    datos: reporte.datos,
+    tipo: tipo
   })
-  
-  // Información adicional
-  yPosition += 15
-  doc.setFontSize(10)
-  doc.setTextColor(100, 100, 100)
-  doc.text('Este reporte fue generado automáticamente por el sistema ALOGIS.', 20, yPosition)
-  yPosition += 8
-  doc.text('Para más información, contacte a soporte@dispro.com', 20, yPosition)
-  
-  // Pie de página
-  doc.setFont(undefined, 'normal')
-  doc.setFontSize(8)
-  doc.setTextColor(150, 150, 150)
-  doc.text('© 2024 ALOGIS - Sistema de Gestión de Distribución', 20, 280)
-  doc.text('Powered by Nuxt 3 + Vue 3', 20, 285)
-  
-  // Descargar
-  const nombreArchivo = `Reporte_${tipo}_${new Date().getTime()}.pdf`
-  doc.save(nombreArchivo)
 }
 </script>
