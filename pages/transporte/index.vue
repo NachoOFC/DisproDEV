@@ -285,7 +285,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { generarPdfGuia } from '~/composables/usePdfGenerator'
 
 const activeTab = ref('crear')
@@ -309,42 +309,27 @@ const formularioGuia = ref({
   observaciones: ''
 })
 
-const guias = ref([
-  {
-    id: 1,
-    numero: 'GD-2024-001',
-    ordenCompra: 'OC-2024-001',
-    cliente: 'Centro Santiago',
-    transportista: 'TransLogis',
-    patente: '1234-AB',
-    cantidadBidones: 10,
-    fechaDespacho: '2024-10-25',
-    fechaEntregaEstimada: '2024-10-27',
-    fechaEntrega: '2024-10-27',
-    estado: 'Entregada',
-    eventos: [
-      { tipo: 'Despachada', ubicacion: 'Bodega Principal', fecha: '2024-10-25', hora: '09:30', descripcion: 'Orden preparada y cargada' },
-      { tipo: 'En Tránsito', ubicacion: 'Ruta 5 Sur', fecha: '2024-10-25', hora: '14:00', descripcion: 'En camino al destino' },
-      { tipo: 'Entregada', ubicacion: 'Centro Santiago', fecha: '2024-10-27', hora: '10:45', descripcion: 'Recibido por cliente' }
-    ]
-  },
-  {
-    id: 2,
-    numero: 'GD-2024-002',
-    ordenCompra: 'OC-2024-002',
-    cliente: 'Centro Valparaíso',
-    transportista: 'Transportes Sur',
-    patente: '5678-CD',
-    cantidadBidones: 8,
-    fechaDespacho: '2024-10-26',
-    fechaEntregaEstimada: '2024-10-28',
-    estado: 'En Tránsito',
-    eventos: [
-      { tipo: 'Despachada', ubicacion: 'Bodega Principal', fecha: '2024-10-26', hora: '08:00', descripcion: 'Orden preparada' },
-      { tipo: 'En Tránsito', ubicacion: 'Valparaíso', fecha: '2024-10-27', hora: '16:30', descripcion: 'Próximo a llegar' }
-    ]
-  },
-])
+// Cargar desde PostgreSQL
+const guias = ref([])
+const loading = ref(false)
+
+const loadGuias = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/guias-despacho')
+    const data = await response.json()
+    guias.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando guías de despacho:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadGuias()
+})
 
 const guiasFiltradas = computed(() => {
   return guias.value.filter(g =>

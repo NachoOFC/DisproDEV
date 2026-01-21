@@ -230,6 +230,25 @@
             </NuxtLink>
           </div>
         </div>
+
+        <!-- Test Base de Datos - NUEVO -->
+        <div class="bg-gradient-to-br from-cyan-50 to-blue-100 rounded-lg shadow-md hover:shadow-xl transition p-6 border-t-4 border-cyan-500">
+          <div class="text-center mb-4">
+            <div class="text-4xl mb-2">🔵</div>
+            <h2 class="text-xl font-bold text-cyan-700">Test Base de Datos</h2>
+          </div>
+          <p class="text-gray-600 mb-4 text-center text-sm">
+            Verifica la conexión a PostgreSQL (Neon) y prueba los endpoints.
+          </p>
+          <div class="flex justify-center">
+            <NuxtLink 
+              to="/test-db" 
+              class="inline-block bg-cyan-600 text-white px-6 py-2 rounded-lg hover:bg-cyan-700 transition font-semibold text-base"
+            >
+              Probar Ahora →
+            </NuxtLink>
+          </div>
+        </div>
       </div>
     </main>
   </div>

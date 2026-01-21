@@ -45,9 +45,9 @@
                   required
                 >
                   <option value="">-- Selecciona proveedor --</option>
-                  <option value="Proveedor A">Proveedor A</option>
-                  <option value="Proveedor B">Proveedor B</option>
-                  <option value="Proveedor C">Proveedor C</option>
+                  <option v-for="prov in proveedores" :key="prov.id" :value="prov.id">
+                    {{ prov.nombre }}
+                  </option>
                 </select>
               </div>
               <div>
@@ -58,8 +58,9 @@
                   required
                 >
                   <option value="">-- Selecciona centro --</option>
-                  <option value="Centro Santiago">Centro Santiago</option>
-                  <option value="Centro Valparaíso">Centro Valparaíso</option>
+                  <option v-for="centro in centros" :key="centro.id" :value="centro.id">
+                    {{ centro.nombre }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -96,9 +97,9 @@
                       class="px-3 py-2 border border-slate-300 rounded text-sm"
                     >
                       <option value="">-- Producto --</option>
-                      <option value="Bidón 20L">Bidón 20L</option>
-                      <option value="Bidón 10L">Bidón 10L</option>
-                      <option value="Bidón 5L">Bidón 5L</option>
+                      <option v-for="prod in productos" :key="prod.id" :value="prod.id">
+                        {{ prod.nombre }}
+                      </option>
                     </select>
                     <input
                       v-model.number="item.cantidad"
@@ -321,11 +322,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const activeTab = ref('crear')
 const filtroOC = ref('')
 const mostrarFormProveedor = ref(false)
+const loading = ref(false)
 
 const tabs = [
   { id: 'crear', label: 'Crear OC', icon: 'fas fa-file-invoice' },
@@ -351,45 +353,64 @@ const nuevoProveedor = ref({
   direccion: ''
 })
 
-const ordenesCompra = ref([
-  {
-    id: 1,
-    numero: 'OC-2024-001',
-    proveedor: 'Proveedor A',
-    centro: 'Centro Santiago',
-    fecha: '2024-10-20',
-    total: 1200000,
-    estado: 'Entregada'
-  },
-  {
-    id: 2,
-    numero: 'OC-2024-002',
-    proveedor: 'Proveedor B',
-    centro: 'Centro Valparaíso',
-    fecha: '2024-10-22',
-    total: 850000,
-    estado: 'En Tránsito'
-  },
-])
+// Cargar desde PostgreSQL
+const ordenesCompra = ref([])
 
-const proveedores = ref([
-  {
-    id: 1,
-    nombre: 'Proveedor A',
-    contacto: 'Juan Pérez',
-    email: 'juan@proveedora.com',
-    telefono: '+56 9 1234 5678',
-    direccion: 'Av. Principal 123, Santiago'
-  },
-  {
-    id: 2,
-    nombre: 'Proveedor B',
-    contacto: 'María García',
-    email: 'maria@proveedorb.com',
-    telefono: '+56 9 8765 4321',
-    direccion: 'Calle Secundaria 456, Valparaíso'
-  },
-])
+const loadOrdenesCompra = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/ordenes-compra')
+    const data = await response.json()
+    ordenesCompra.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando órdenes de compra:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar desde PostgreSQL
+const proveedores = ref([])
+const centros = ref([])
+const productos = ref([])
+
+const loadProveedores = async () => {
+  try {
+    const response = await fetch('/api/proveedores')
+    const data = await response.json()
+    proveedores.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando proveedores:', error)
+  }
+}
+
+const loadCentros = async () => {
+  try {
+    const response = await fetch('/api/centros')
+    const data = await response.json()
+    centros.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando centros:', error)
+  }
+}
+
+const loadProductos = async () => {
+  try {
+    const response = await fetch('/api/productos')
+    const data = await response.json()
+    productos.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando productos:', error)
+  }
+}
+
+// Cargar al montar componente
+onMounted(() => {
+  loadProveedores()
+  loadCentros()
+  loadProductos()
+  loadOrdenesCompra()
+})
 
 const totalOC = computed(() => {
   return formularioOC.value.items.reduce((sum, item) => sum + (item.cantidad * item.valorUnitario), 0)
@@ -421,27 +442,44 @@ const crearOrdenCompra = () => {
   activeTab.value = 'ordenes'
 }
 
-const agregarProveedor = () => {
+const agregarProveedor = async () => {
   if (!nuevoProveedor.value.nombre || !nuevoProveedor.value.email) {
     alert('Por favor completa los campos requeridos')
     return
   }
 
-  proveedores.value.push({
-    id: proveedores.value.length + 1,
-    ...nuevoProveedor.value
-  })
-
-  nuevoProveedor.value = {
-    nombre: '',
-    contacto: '',
-    email: '',
-    telefono: '',
-    direccion: ''
+  try {
+    const response = await fetch('/api/proveedores', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: nuevoProveedor.value.nombre,
+        rut: '00.000.000-0', // TODO: agregar campo RUT al formulario
+        contacto: nuevoProveedor.value.contacto,
+        telefono: nuevoProveedor.value.telefono,
+        email: nuevoProveedor.value.email
+      })
+    })
+    
+    const data = await response.json()
+    if (data.success) {
+      await loadProveedores() // Recargar lista
+      
+      nuevoProveedor.value = {
+        nombre: '',
+        contacto: '',
+        email: '',
+        telefono: '',
+        direccion: ''
+      }
+      
+      mostrarFormProveedor.value = false
+      alert('Proveedor agregado exitosamente a PostgreSQL')
+    }
+  } catch (error) {
+    console.error('Error agregando proveedor:', error)
+    alert('Error al agregar proveedor')
   }
-
-  mostrarFormProveedor.value = false
-  alert('Proveedor agregado exitosamente')
 }
 
 const formatCurrency = (value) => {

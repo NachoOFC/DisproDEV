@@ -253,7 +253,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { generarPdfFactura } from '~/composables/usePdfGenerator'
 
 const activeTab = ref('crear')
@@ -275,14 +275,39 @@ const formularioFactura = ref({
   ]
 })
 
-const facturas = ref([
-  { id: 1, folio: 'F-2024-001', cliente: 'Centro Santiago', fecha: '2024-10-25', total: 500000, estado: 'Pagada' },
-  { id: 2, folio: 'F-2024-000', cliente: 'Empresa A', fecha: '2024-10-20', total: 750000, estado: 'Pagada' },
-])
+// Cargar desde PostgreSQL
+const facturas = ref([])
+const notasCredito = ref([])
+const loading = ref(false)
 
-const notasCredito = ref([
-  { id: 1, numero: 'NC-2024-001', facturaAsociada: 'F-2024-001', monto: 50000, motivo: 'Devolución de producto', fecha: '2024-10-26' },
-])
+const loadFacturas = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/facturas')
+    const data = await response.json()
+    facturas.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando facturas:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+const loadNotasCredito = async () => {
+  try {
+    const response = await fetch('/api/notas-credito')
+    const data = await response.json()
+    notasCredito.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando notas de crédito:', error)
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadFacturas()
+  loadNotasCredito()
+})
 
 const subtotal = computed(() => {
   return formularioFactura.value.detalles.reduce((sum, d) => sum + (d.cantidad * d.valorUnitario), 0)

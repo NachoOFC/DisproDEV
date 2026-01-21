@@ -227,7 +227,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const activeTab = ref('crear')
 const filtroAjuste = ref('')
@@ -247,37 +247,28 @@ const formularioAjuste = ref({
   motivo: ''
 })
 
-const ajustes = ref([
-  {
-    id: 1,
-    fecha: '2024-10-20',
-    centro: 'Centro Santiago',
-    producto: 'Bidón 20L',
-    tipo: 'Aumento',
-    cantidad: 10,
-    motivo: 'Recepción de compra OC-2024-001'
-  },
-  {
-    id: 2,
-    fecha: '2024-10-21',
-    centro: 'Centro Santiago',
-    producto: 'Bidón 10L',
-    tipo: 'Disminución',
-    cantidad: 5,
-    motivo: 'Ajuste por daño durante transporte'
-  },
-  {
-    id: 3,
-    fecha: '2024-10-22',
-    centro: 'Centro Valparaíso',
-    producto: 'Bidón 5L',
-    tipo: 'Corrección',
-    cantidad: 3,
-    motivo: 'Corrección de conteo físico'
-  },
-])
+// Cargar desde PostgreSQL
+const ajustes = ref([])
+const loading = ref(false)
 
-const centros = ['Centro Santiago', 'Centro Valparaíso']
+const loadAjustes = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/ajustes')
+    const data = await response.json()
+    ajustes.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando ajustes:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadAjustes()
+})
+
 
 const ajustesFiltrados = computed(() => {
   return ajustes.value.filter(a =>

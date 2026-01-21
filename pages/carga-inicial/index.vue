@@ -196,7 +196,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const activeTab = ref('cargar')
 const previewCarga = ref(false)
@@ -241,28 +241,27 @@ const tiposCarga = [
   }
 ]
 
-const cargas = ref([
-  {
-    id: 1,
-    tipo: 'Productos',
-    fecha: '2024-10-20',
-    hora: '09:30',
-    estado: 'Completada',
-    registros: 150,
-    exitosos: 150,
-    errores: 0
-  },
-  {
-    id: 2,
-    tipo: 'Proveedores',
-    fecha: '2024-10-18',
-    hora: '14:15',
-    estado: 'Completada con Errores',
-    registros: 45,
-    exitosos: 43,
-    errores: 2
-  },
-])
+// Cargar desde PostgreSQL
+const cargas = ref([])
+const loading = ref(false)
+
+const loadCargas = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/cargas-iniciales')
+    const data = await response.json()
+    cargas.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando cargas iniciales:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadCargas()
+})
 
 const plantillas = [
   {

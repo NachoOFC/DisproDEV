@@ -114,17 +114,27 @@
               <thead class="bg-slate-100 border-b border-slate-300">
                 <tr>
                   <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">#</th>
-                  <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Nombre</th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Número</th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Cliente</th>
                   <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Fecha</th>
+                  <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Total</th>
                   <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Estado</th>
                   <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Acciones</th>
                 </tr>
               </thead>
               <tbody>
+                <tr v-if="loading" class="border-b border-slate-200">
+                  <td colspan="7" class="px-6 py-8 text-center text-slate-600">
+                    <i class="fas fa-spinner fa-spin mr-2"></i>
+                    Cargando órdenes desde PostgreSQL...
+                  </td>
+                </tr>
                 <tr v-for="(orden, idx) in requerimientos" :key="orden.id" class="border-b border-slate-200 hover:bg-slate-50">
                   <td class="px-6 py-3 text-sm text-slate-900">{{ idx + 1 }}</td>
-                  <td class="px-6 py-3 text-sm text-slate-900">{{ orden.nombre }}</td>
+                  <td class="px-6 py-3 text-sm text-slate-900 font-semibold">{{ orden.numero }}</td>
+                  <td class="px-6 py-3 text-sm text-slate-900">{{ orden.cliente || 'Sin asignar' }}</td>
                   <td class="px-6 py-3 text-sm text-slate-900">{{ formatDate(orden.fecha) }}</td>
+                  <td class="px-6 py-3 text-sm text-slate-900">${{ orden.total?.toLocaleString() || '0' }}</td>
                   <td class="px-6 py-3 text-sm">
                     <span :class="['px-3 py-1 rounded-full text-xs font-semibold', getStatusClass(orden.estado)]">
                       {{ orden.estado }}
@@ -160,8 +170,14 @@
             </table>
           </div>
 
-          <div v-if="requerimientos.length === 0" class="text-center py-8">
-            <p class="text-slate-600 text-lg">No hay órdenes de pedido aún</p>
+          <div v-if="requerimientos.length === 0 && !loading" class="text-center py-8">
+            <p class="text-slate-600 text-lg mb-2">
+              <i class="fas fa-database mr-2"></i>
+              No hay órdenes de pedido en la base de datos
+            </p>
+            <p class="text-sm text-slate-500">
+              Los datos se cargan desde PostgreSQL. Ejecuta SEED_DATA.sql en Neon para agregar datos de prueba.
+            </p>
           </div>
         </div>
 
@@ -250,7 +266,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const activeTab = ref('crear')
 
@@ -267,28 +283,69 @@ const form = ref({
   productos: []
 })
 
-// Mock data - será reemplazado por datos reales de la API
-const productos = ref([
-  { id: 1, nombre: 'Producto A', precio: 1500 },
-  { id: 2, nombre: 'Producto B', precio: 2500 },
-  { id: 3, nombre: 'Producto C', precio: 3500 },
-  { id: 4, nombre: 'Producto D', precio: 4500 },
-])
+// Datos desde BD PostgreSQL
+const productos = ref([])
+const requerimientos = ref([])
+const loading = ref(false)
 
-const requerimientos = ref([
-  { id: 1, nombre: 'Orden Octubre 2024', fecha: '2024-10-15', estado: 'Aprobada', productos: 5 },
-  { id: 2, nombre: 'Orden Septiembre 2024', fecha: '2024-09-20', estado: 'Entregada', productos: 3 },
-  { id: 3, nombre: 'Orden Agosto 2024', fecha: '2024-08-10', estado: 'Pendiente', productos: 7 },
-])
+// Cargar productos desde la BD
+const loadProductos = async () => {
+  try {
+    const response = await fetch('/api/productos')
+    const data = await response.json()
+    productos.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando productos:', error)
+  }
+}
 
-const ordenesParaValidar = ref([
-  { id: 10, nombre: 'Orden Centro Sur', solicitante: 'Centro 1', fecha: '2024-10-25' },
-  { id: 11, nombre: 'Orden Centro Norte', solicitante: 'Centro 2', fecha: '2024-10-26' },
-])
+// Cargar requerimientos desde la BD
+const loadRequerimientos = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/requerimientos')
+    const data = await response.json()
+    requerimientos.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando requerimientos:', error)
+  } finally {
+    loading.value = false
+  }
+}
 
-const ordenesRechazadas = ref([
-  { id: 20, nombre: 'Orden Julio 2024', motivo: 'Productos sin stock', fechaRechazo: '2024-07-15' },
-])
+// Cargar desde PostgreSQL según estado
+const ordenesParaValidar = ref([])
+const ordenesRechazadas = ref([])
+
+// Función para cargar órdenes por validar (estado = 'Por Validar')
+const loadOrdenesParaValidar = async () => {
+  try {
+    const response = await fetch('/api/requerimientos')
+    const data = await response.json()
+    ordenesParaValidar.value = (data.data || []).filter(orden => orden.estado === 'Por Validar')
+  } catch (error) {
+    console.error('Error cargando órdenes para validar:', error)
+  }
+}
+
+// Función para cargar órdenes rechazadas (estado = 'Rechazado')
+const loadOrdenesRechazadas = async () => {
+  try {
+    const response = await fetch('/api/requerimientos')
+    const data = await response.json()
+    ordenesRechazadas.value = (data.data || []).filter(orden => orden.estado === 'Rechazado')
+  } catch (error) {
+    console.error('Error cargando órdenes rechazadas:', error)
+  }
+}
+
+// Cargar datos al montar el componente
+onMounted(() => {
+  loadProductos()
+  loadRequerimientos()
+  loadOrdenesParaValidar()
+  loadOrdenesRechazadas()
+})
 
 const handleCreateOrder = () => {
   if (!form.value.nombre) {
@@ -383,10 +440,15 @@ const formatDate = (dateString) => {
 const getStatusClass = (estado) => {
   const classes = {
     'Pendiente': 'bg-yellow-100 text-yellow-800',
+    'pendiente': 'bg-yellow-100 text-yellow-800',
     'Aprobada': 'bg-green-100 text-green-800',
+    'aprobada': 'bg-green-100 text-green-800',
     'Entregada': 'bg-blue-100 text-blue-800',
+    'entregada': 'bg-blue-100 text-blue-800',
     'Rechazada': 'bg-red-100 text-red-800',
-    'Reenviada': 'bg-purple-100 text-purple-800'
+    'rechazada': 'bg-red-100 text-red-800',
+    'Reenviada': 'bg-purple-100 text-purple-800',
+    'reenviada': 'bg-purple-100 text-purple-800'
   }
   return classes[estado] || 'bg-slate-100 text-slate-800'
 }

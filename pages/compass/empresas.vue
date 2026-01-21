@@ -153,15 +153,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const mostrarFormulario = ref(false)
 const formularioEditando = ref(null)
+const loading = ref(false)
 
-const empresas = ref([
-  { id: 1, nombre: 'Empresa A', rut: '12.345.678-9', email: 'contacto@empresaa.cl', telefono: '+56 9 1234 5678', direccion: 'Calle 1, Santiago', estado: 'Activa' },
-  { id: 2, nombre: 'Empresa B', rut: '98.765.432-1', email: 'contacto@empresab.cl', telefono: '+56 9 8765 4321', direccion: 'Calle 2, Valparaíso', estado: 'Activa' },
-])
+// Cargar desde PostgreSQL
+const empresas = ref([])
+
+// Función para cargar empresas desde la BD
+const loadEmpresas = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/empresas')
+    const data = await response.json()
+    empresas.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando empresas:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadEmpresas()
+})
 
 const formulario = ref({
   nombre: '',
