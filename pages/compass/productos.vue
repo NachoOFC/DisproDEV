@@ -210,18 +210,35 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const mostrarFormulario = ref(false)
 const formularioEditando = ref(null)
 const busqueda = ref('')
 const filtroCategoria = ref('')
+const loading = ref(false)
 
-const productos = ref([
-  { id: 1, nombre: 'Producto A', codigo: 'PA-001', categoria: 'Repuestos', precio: 15000, stock: 25, stockMinimo: 5, descripcion: 'Descripción del producto A' },
-  { id: 2, nombre: 'Producto B', codigo: 'PB-002', categoria: 'Accesorios', precio: 8500, stock: 45, stockMinimo: 10, descripcion: 'Descripción del producto B' },
-  { id: 3, nombre: 'Producto C', codigo: 'PC-003', categoria: 'Consumibles', precio: 3200, stock: 2, stockMinimo: 20, descripcion: 'Descripción del producto C' },
-])
+// Cargar desde PostgreSQL
+const productos = ref([])
+
+// Función para cargar productos desde la BD
+const loadProductos = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/productos')
+    const data = await response.json()
+    productos.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando productos:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadProductos()
+})
 
 const formulario = ref({
   nombre: '',

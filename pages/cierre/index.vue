@@ -249,7 +249,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const activeTab = ref('nuevo')
 
@@ -274,26 +274,27 @@ const validaciones = ref({
   ajustesRealizados: false
 })
 
-const cierres = ref([
-  {
-    id: 1,
-    periodo: 'Septiembre 2024',
-    centro: 'Centro Santiago',
-    fechaCierre: '2024-09-30',
-    estado: 'Cerrado',
-    ingresos: 5000000,
-    egresos: 3200000
-  },
-  {
-    id: 2,
-    periodo: 'Septiembre 2024',
-    centro: 'Centro Valparaíso',
-    fechaCierre: '2024-09-30',
-    estado: 'Cerrado',
-    ingresos: 3500000,
-    egresos: 2100000
-  },
-])
+// Cargar desde PostgreSQL
+const cierres = ref([])
+const loading = ref(false)
+
+const loadCierres = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/cierres')
+    const data = await response.json()
+    cierres.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando cierres:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadCierres()
+})
 
 const todasValidacionesOK = computed(() => {
   return validaciones.value.inventarioContado &&

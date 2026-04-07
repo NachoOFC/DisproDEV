@@ -180,17 +180,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const mostrarFormulario = ref(false)
 const formularioEditando = ref(null)
+const loading = ref(false)
 
-const usuarios = ref([
-  { id: 1, nombre: 'Admin User', email: 'admin@alogis.cl', rol: 'Administrador', relacionado: 'Sistema', estado: 'Activo', ultimoAcceso: '2024-10-26 14:32' },
-  { id: 2, nombre: 'Juan García', email: 'juan@empresaa.cl', rol: 'Gerente', relacionado: 'Empresa A', estado: 'Activo', ultimoAcceso: '2024-10-26 10:15' },
-  { id: 3, nombre: 'María López', email: 'maria@centro1.cl', rol: 'Bodeguero', relacionado: 'Centro Santiago', estado: 'Activo', ultimoAcceso: '2024-10-25 16:45' },
-  { id: 4, nombre: 'Carlos Pérez', email: 'carlos@empresab.cl', rol: 'Cliente', relacionado: 'Empresa B', estado: 'Inactivo', ultimoAcceso: '2024-10-10 09:20' },
-])
+// Cargar desde PostgreSQL
+const usuarios = ref([])
+
+// Función para cargar usuarios desde la BD
+const loadUsuarios = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/usuarios')
+    const data = await response.json()
+    usuarios.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando usuarios:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadUsuarios()
+})
 
 const formulario = ref({
   nombre: '',

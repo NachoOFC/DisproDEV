@@ -262,25 +262,51 @@ const balanceData = ref({
   deuda: 120000
 })
 
-const movimientos = ref([
-  { id: 1, fecha: '2024-10-25', tipo: 'Abono', descripcion: 'Pago Factura #001', monto: 50000, saldo: 150000 },
-  { id: 2, fecha: '2024-10-20', tipo: 'Cargo', descripcion: 'Factura #001', monto: 45000, saldo: 100000 },
-  { id: 3, fecha: '2024-10-15', tipo: 'Abono', descripcion: 'Pago Factura #000', monto: 75000, saldo: 145000 },
-  { id: 4, fecha: '2024-10-10', tipo: 'Cargo', descripcion: 'Factura #000', monto: 70000, saldo: 70000 },
-])
+// Cargar desde PostgreSQL
+const movimientos = ref([])
+const facturas = ref([])
+const notasCredito = ref([])
+const loading = ref(false)
 
-const facturas = ref([
-  { id: 1, numero: '001', fecha: '2024-10-20', vencimiento: '2024-11-20', total: 450000, pagado: 330000, saldo: 120000, estado: 'Parcial' },
-  { id: 2, numero: '000', fecha: '2024-10-10', vencimiento: '2024-11-10', total: 700000, pagado: 700000, saldo: 0, estado: 'Pagado' },
-])
+const loadPresupuestos = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/presupuestos')
+    const data = await response.json()
+    movimientos.value = data.data || [] // Usar presupuestos como movimientos
+  } catch (error) {
+    console.error('Error cargando presupuestos:', error)
+  } finally {
+    loading.value = false
+  }
+}
 
-const facturasConSaldo = computed(() => {
-  return facturas.value.filter(f => f.saldo > 0)
+const loadFacturas = async () => {
+  try {
+    const response = await fetch('/api/facturas')
+    const data = await response.json()
+    facturas.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando facturas:', error)
+  }
+}
+
+const loadNotasCredito = async () => {
+  try {
+    const response = await fetch('/api/notas-credito')
+    const data = await response.json()
+    notasCredito.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando notas de crédito:', error)
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadPresupuestos()
+  loadFacturas()
+  loadNotasCredito()
 })
-
-const notasCredito = ref([
-  { id: 1, numero: 'NC-001', facturaNumero: '001', fecha: '2024-10-22', monto: 15000, motivo: 'Devolución de producto' },
-])
 
 const pago = ref({
   facturaId: '',

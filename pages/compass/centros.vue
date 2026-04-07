@@ -159,15 +159,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const mostrarFormulario = ref(false)
 const formularioEditando = ref(null)
+const loading = ref(false)
 
-const centros = ref([
-  { id: 1, nombre: 'Centro Santiago Sur', empresa: 'Empresa A', ciudad: 'Santiago', contacto: 'Juan Pérez', telefono: '+56 9 1234 5678', estado: 'Activo' },
-  { id: 2, nombre: 'Centro Valparaíso', empresa: 'Empresa B', ciudad: 'Valparaíso', contacto: 'María García', telefono: '+56 9 8765 4321', estado: 'Activo' },
-])
+// Cargar desde PostgreSQL
+const centros = ref([])
+
+// Función para cargar centros desde la BD
+const loadCentros = async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/centros')
+    const data = await response.json()
+    centros.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando centros:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Cargar al montar
+onMounted(() => {
+  loadCentros()
+})
 
 const formulario = ref({
   nombre: '',
