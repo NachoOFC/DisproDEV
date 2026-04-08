@@ -1,9 +1,8 @@
 import jsPDF from 'jspdf'
 
-export const usePdfGenerator = () => {
-  // Generar PDF para Facturas
-  const generarPdfFactura = (factura) => {
-    const doc = new jsPDF()
+// Generar PDF para Facturas
+export const generarPdfFactura = (factura) => {
+  const doc = new jsPDF()
     
     // Encabezado
     doc.setFillColor(3, 155, 229)
@@ -80,13 +79,13 @@ export const usePdfGenerator = () => {
     doc.text('© 2024 ALOGIS - Sistema de Gestión de Distribución', 20, 280)
     doc.text('Powered by Nuxt 3 + Vue 3', 20, 285)
     
-    // Descargar
-    doc.save(`Factura_${factura.folio}.pdf`)
-  }
+  // Descargar
+  doc.save(`Factura_${factura.folio}.pdf`)
+}
 
-  // Generar PDF para Guías de Despacho
-  const generarPdfGuia = (guia, formatDate) => {
-    const doc = new jsPDF()
+// Generar PDF para Guías de Despacho
+export const generarPdfGuia = (guia, formatDate) => {
+  const doc = new jsPDF()
     
     // Encabezado
     doc.setFillColor(3, 155, 229)
@@ -139,13 +138,13 @@ export const usePdfGenerator = () => {
     doc.text('© 2024 ALOGIS - Sistema de Gestión de Distribución', 20, 280)
     doc.text('Powered by Nuxt 3 + Vue 3', 20, 285)
     
-    // Descargar
-    doc.save(`Guia_${guia.numero}.pdf`)
-  }
+  // Descargar
+  doc.save(`Guia_${guia.numero}.pdf`)
+}
 
-  // Generar PDF para Reportes generales
-  const generarPdfReporte = (reporte) => {
-    const doc = new jsPDF()
+// Generar PDF para Reportes generales
+export const generarPdfReporte = (reporte) => {
+  const doc = new jsPDF()
     
     // Encabezado
     doc.setFillColor(3, 155, 229)
@@ -197,11 +196,12 @@ export const usePdfGenerator = () => {
     doc.text('© 2024 ALOGIS - Sistema de Gestión de Distribución', 20, 280)
     doc.text('Powered by Nuxt 3 + Vue 3', 20, 285)
     
-    // Descargar
-    const nombreArchivo = `${reporte.tipo}_${new Date().getTime()}.pdf`
-    doc.save(nombreArchivo)
-  }
+  // Descargar
+  const nombreArchivo = `${reporte.tipo}_${new Date().getTime()}.pdf`
+  doc.save(nombreArchivo)
+}
 
+export const usePdfGenerator = () => {
   return {
     generarPdfFactura,
     generarPdfGuia,
