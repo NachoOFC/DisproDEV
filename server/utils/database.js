@@ -21,16 +21,23 @@ export function getDatabase() {
 }
 
 /**
- * Ejecuta una query SQL usando tagged templates (requerido por Neon)
- * @param {Array} strings - Strings del template
- * @param {Array} values - Valores a insertar
+ * Ejecuta una query SQL con Neon.
+ * Soporta tanto tagged templates como consultas parametrizadas clasicas.
+ * @param {string|Array} query - SQL en texto plano o arreglo de strings del template
+ * @param {Array|any} values - Parametros de la consulta
  * @returns {Promise<Array>} Resultados de la query
  */
-export async function executeQuery(strings, ...values) {
+export async function executeQuery(query, values = []) {
   try {
     const sql = getDatabase()
-    // Neon requiere que uses tagged templates: sql`SELECT * FROM table`
-    const result = await sql(strings, ...values)
+    if (Array.isArray(query)) {
+      const templateValues = Array.isArray(values) ? values : [values]
+      const result = await sql(query, ...templateValues)
+      return result
+    }
+
+    const params = Array.isArray(values) ? values : [values]
+    const result = await sql.query(query, params)
     return result
   } catch (error) {
     console.error('Error ejecutando query:', error)
