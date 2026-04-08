@@ -1,17 +1,10 @@
 [build]
   command = "corepack enable && pnpm run build"
   publish = ".output/public"
-  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
   NPM_VERSION = "10"
-
-# Redirects para Vue Router (file-based routing)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
 
 # Headers de seguridad
 [[headers]]

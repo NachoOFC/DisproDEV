@@ -1,6 +1,5 @@
 import { getDatabase } from '../../utils/database'
 import { defineEventHandler } from 'h3'
-import { getEventContext } from 'h3'
 
 export default defineEventHandler(async (event) => {
   try {
