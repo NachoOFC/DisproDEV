@@ -8,10 +8,15 @@ let sql = null
  */
 export function getDatabase() {
   if (!sql) {
-    const databaseUrl = process.env.DATABASE_URL
+    const databaseUrl =
+      process.env.DATABASE_URL ||
+      process.env.NETLIFY_DATABASE_URL ||
+      process.env.NETLIFY_DATABASE_URL_UNPOOLED
     
     if (!databaseUrl) {
-      throw new Error('DATABASE_URL no está configurada en las variables de entorno')
+      throw new Error(
+        'URL de base de datos no configurada. Configura DATABASE_URL o usa NETLIFY_DATABASE_URL/NETLIFY_DATABASE_URL_UNPOOLED.'
+      )
     }
     
     sql = neon(databaseUrl)
