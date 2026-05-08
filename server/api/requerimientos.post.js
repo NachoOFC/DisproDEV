@@ -21,15 +21,18 @@ export default defineEventHandler(async (event) => {
     const total = body.total || 0
     const estado = body.estado || 'pendiente'
     
+    const nombre = body.nombre || `Requerimiento ${numero}`
+    
     const result = await sql`
-      INSERT INTO requerimientos (cliente_id, numero, fecha, total, estado, created_at, updated_at) 
-      VALUES (${cliente_id}, ${numero}, ${fecha}, ${total}, ${estado}, NOW(), NOW()) 
+      INSERT INTO requerimientos (cliente_id, numero, nombre, fecha, total, estado, created_at, updated_at) 
+      VALUES (${cliente_id}, ${numero}, ${nombre}, ${fecha}, ${total}, ${estado}, NOW(), NOW()) 
       RETURNING *
     `
     
     return { data: result[0], success: true }
   } catch (error) {
-    console.error('Error creando requerimiento:', error)
+    console.error('Error creando requerimiento:', error.message)
+    console.error('Stack:', error.stack)
     return { 
       statusCode: 500,
       message: 'Error al crear requerimiento',

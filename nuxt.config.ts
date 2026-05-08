@@ -24,7 +24,11 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg?v=alogis-2025' },
-        { rel: 'apple-touch-icon', href: '/favicon.svg?v=alogis-2025' }
+        { rel: 'apple-touch-icon', href: '/favicon.svg?v=alogis-2025' },
+        {
+          rel: 'stylesheet',
+          href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'
+        }
       ]
     }
   }

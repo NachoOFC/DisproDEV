@@ -222,7 +222,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const activeTab = ref('ordenes')
 
@@ -232,28 +232,55 @@ const tabs = [
   { id: 'entregas', label: 'Entregas', icon: 'fas fa-truck' }
 ]
 
-const reporteOrdenes = ref([
-  { id: 1, numero: 'REQ-2024-001', fechaCreacion: '2024-10-15', cantidadProductos: 5, estado: 'Aprobada', ultimaActualizacion: '2024-10-25' },
-  { id: 2, numero: 'REQ-2024-000', fechaCreacion: '2024-10-10', cantidadProductos: 7, estado: 'Entregada', ultimaActualizacion: '2024-10-22' },
-  { id: 3, numero: 'REQ-2024-002', fechaCreacion: '2024-10-20', cantidadProductos: 3, estado: 'Pendiente', ultimaActualizacion: '2024-10-26' },
-])
+const reporteOrdenes = ref([])
+const reporteFacturas = ref([])
+const reporteEntregas = ref([])
 
-const reporteFacturas = ref([
-  { id: 1, numero: '001', fecha: '2024-10-20', total: 450000, pagado: 330000, saldo: 120000, estado: 'Parcial' },
-  { id: 2, numero: '000', fecha: '2024-10-10', total: 700000, pagado: 700000, saldo: 0, estado: 'Pagado' },
-  { id: 3, numero: '002', fecha: '2024-10-25', total: 250000, pagado: 0, saldo: 250000, estado: 'Vencido' },
-])
+const normalizeEstado = (estado) => String(estado || '').toLowerCase()
 
-const reporteEntregas = ref([
-  { id: 1, pedido: 'REQ-2024-001', fechaDespacho: '2024-10-20', fechaEstimada: '2024-10-28', fechaEntrega: null, transporte: 'Logística Express', estado: 'En Tránsito' },
-  { id: 2, pedido: 'REQ-2024-000', fechaDespacho: '2024-10-15', fechaEstimada: '2024-10-22', fechaEntrega: '2024-10-22', transporte: 'Logística Express', estado: 'Entregada' },
-  { id: 3, pedido: 'REQ-2024-003', fechaDespacho: '2024-10-18', fechaEstimada: '2024-10-25', fechaEntrega: null, transporte: 'Transporte Regional', estado: 'Retrasada' },
-])
+const loadReporteOrdenes = async () => {
+  try {
+    const response = await fetch('/api/reportes/ordenes')
+    const data = await response.json()
+    reporteOrdenes.value = data?.data || []
+  } catch (error) {
+    console.error('Error cargando reporte de órdenes:', error)
+    reporteOrdenes.value = []
+  }
+}
+
+const loadReporteFacturacion = async () => {
+  try {
+    const response = await fetch('/api/reportes/facturacion')
+    const data = await response.json()
+    reporteFacturas.value = data?.data || []
+  } catch (error) {
+    console.error('Error cargando reporte de facturación:', error)
+    reporteFacturas.value = []
+  }
+}
+
+const loadReporteEntregas = async () => {
+  try {
+    const response = await fetch('/api/reportes/entregas')
+    const data = await response.json()
+    reporteEntregas.value = data?.data || []
+  } catch (error) {
+    console.error('Error cargando reporte de entregas:', error)
+    reporteEntregas.value = []
+  }
+}
+
+onMounted(() => {
+  loadReporteOrdenes()
+  loadReporteFacturacion()
+  loadReporteEntregas()
+})
 
 const totalOrdenes = computed(() => reporteOrdenes.value.length)
-const ordenesAprobadas = computed(() => reporteOrdenes.value.filter(o => o.estado === 'Aprobada').length)
-const ordenesPendientes = computed(() => reporteOrdenes.value.filter(o => o.estado === 'Pendiente').length)
-const ordenesRechazadas = computed(() => reporteOrdenes.value.filter(o => o.estado === 'Rechazada').length)
+const ordenesAprobadas = computed(() => reporteOrdenes.value.filter(o => normalizeEstado(o.estado) === 'aprobada').length)
+const ordenesPendientes = computed(() => reporteOrdenes.value.filter(o => normalizeEstado(o.estado) === 'pendiente').length)
+const ordenesRechazadas = computed(() => reporteOrdenes.value.filter(o => normalizeEstado(o.estado) === 'rechazada').length)
 
 const totalFacturado = computed(() => reporteFacturas.value.reduce((sum, f) => sum + f.total, 0))
 const totalPagado = computed(() => reporteFacturas.value.reduce((sum, f) => sum + f.pagado, 0))
@@ -264,9 +291,9 @@ const porcentajeCobranza = computed(() => {
 })
 
 const totalEntregas = computed(() => reporteEntregas.value.length)
-const entregasCompletadas = computed(() => reporteEntregas.value.filter(e => e.estado === 'Entregada').length)
-const entregasEnTransito = computed(() => reporteEntregas.value.filter(e => e.estado === 'En Tránsito').length)
-const entregasRetrasadas = computed(() => reporteEntregas.value.filter(e => e.estado === 'Retrasada').length)
+const entregasCompletadas = computed(() => reporteEntregas.value.filter(e => normalizeEstado(e.estado) === 'entregada').length)
+const entregasEnTransito = computed(() => reporteEntregas.value.filter(e => normalizeEstado(e.estado) === 'en tránsito' || normalizeEstado(e.estado) === 'en transito').length)
+const entregasRetrasadas = computed(() => reporteEntregas.value.filter(e => normalizeEstado(e.estado) === 'retrasada').length)
 
 const formatDate = (dateString) => {
   const date = new Date(dateString)
@@ -278,31 +305,37 @@ const formatCurrency = (value) => {
 }
 
 const getStatusClass = (estado) => {
+  const s = normalizeEstado(estado)
   const classes = {
-    'Aprobada': 'bg-green-100 text-green-800',
-    'Pendiente': 'bg-yellow-100 text-yellow-800',
-    'Entregada': 'bg-blue-100 text-blue-800',
-    'Rechazada': 'bg-red-100 text-red-800'
+    'aprobada': 'bg-green-100 text-green-800',
+    'pendiente': 'bg-yellow-100 text-yellow-800',
+    'entregada': 'bg-blue-100 text-blue-800',
+    'rechazada': 'bg-red-100 text-red-800'
   }
-  return classes[estado] || 'bg-slate-100 text-slate-800'
+  return classes[s] || 'bg-slate-100 text-slate-800'
 }
 
 const getFaturacionStatusClass = (estado) => {
+  const s = normalizeEstado(estado)
   const classes = {
-    'Pagado': 'bg-green-100 text-green-800',
-    'Parcial': 'bg-yellow-100 text-yellow-800',
-    'Vencido': 'bg-red-100 text-red-800'
+    'pagado': 'bg-green-100 text-green-800',
+    'parcial': 'bg-yellow-100 text-yellow-800',
+    'pendiente': 'bg-yellow-100 text-yellow-800',
+    'vencido': 'bg-red-100 text-red-800'
   }
-  return classes[estado] || 'bg-slate-100 text-slate-800'
+  return classes[s] || 'bg-slate-100 text-slate-800'
 }
 
 const getEntregaStatusClass = (estado) => {
+  const s = normalizeEstado(estado)
   const classes = {
-    'Entregada': 'bg-green-100 text-green-800',
-    'En Tránsito': 'bg-blue-100 text-blue-800',
-    'Retrasada': 'bg-red-100 text-red-800'
+    'entregada': 'bg-green-100 text-green-800',
+    'en tránsito': 'bg-blue-100 text-blue-800',
+    'en transito': 'bg-blue-100 text-blue-800',
+    'pendiente': 'bg-yellow-100 text-yellow-800',
+    'retrasada': 'bg-red-100 text-red-800'
   }
-  return classes[estado] || 'bg-slate-100 text-slate-800'
+  return classes[s] || 'bg-slate-100 text-slate-800'
 }
 
 const exportarExcel = (tipo) => {

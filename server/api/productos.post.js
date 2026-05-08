@@ -17,13 +17,15 @@ export default defineEventHandler(async (event) => {
     const sql = getDatabase()
     const codigo = body.codigo || `PROD-${Date.now()}`
     const nombre = body.nombre
+    const categoriaId = body.categoria_id ?? null
     const descripcion = body.descripcion || null
     const precio = body.precio || 0
     const stock = body.stock || 0
+    const stockMinimo = body.stock_minimo || 0
     
     const result = await sql`
-      INSERT INTO productos (codigo, nombre, descripcion, precio, stock, created_at, updated_at) 
-      VALUES (${codigo}, ${nombre}, ${descripcion}, ${precio}, ${stock}, NOW(), NOW()) 
+      INSERT INTO productos (codigo, nombre, categoria_id, descripcion, precio, stock, stock_minimo, created_at, updated_at) 
+      VALUES (${codigo}, ${nombre}, ${categoriaId}, ${descripcion}, ${precio}, ${stock}, ${stockMinimo}, NOW(), NOW()) 
       RETURNING *
     `
     

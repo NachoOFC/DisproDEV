@@ -7,7 +7,9 @@ export default defineEventHandler(async () => {
     const requerimientos = await sql`
       SELECT 
         r.id, 
+        r.cliente_id,
         r.numero,
+        r.nombre,
         r.fecha, 
         r.total,
         r.estado,

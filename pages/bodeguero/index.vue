@@ -164,6 +164,108 @@
           </div>
         </div>
 
+        <!-- Requerimientos (Aprobación/Rechazo) -->
+        <div v-if="activeTab === 'requerimientos'" class="p-8">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Requerimientos por Validar</h2>
+
+          <div v-if="loadingRequerimientos" class="py-10 text-center text-slate-600">
+            <i class="fas fa-spinner fa-spin mr-2"></i>
+            Cargando requerimientos...
+          </div>
+
+          <div v-else class="space-y-4">
+            <div
+              v-for="req in requerimientosPendientes"
+              :key="req.id"
+              class="border border-slate-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+            >
+              <div class="flex justify-between items-start gap-4">
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <h3 class="font-semibold text-slate-900">{{ req.numero || `REQ-${req.id}` }}</h3>
+                    <span :class="['px-3 py-1 rounded-full text-xs font-semibold', getRequerimientoStatusClass(req.estado)]">
+                      {{ req.estado }}
+                    </span>
+                  </div>
+                  <p class="text-sm text-slate-600 font-medium mb-1">{{ req.nombre || 'Sin nombre' }}</p>
+                  <p class="text-sm text-slate-600">Cliente: {{ req.cliente || 'Sin asignar' }}</p>
+                  <p class="text-sm text-slate-600">Fecha: {{ formatDate(req.fecha) }}</p>
+                  <p class="text-sm text-slate-600">Total: ${{ req.total?.toLocaleString?.() || req.total || '0' }}</p>
+                </div>
+
+                <div class="flex gap-2 shrink-0">
+                  <button
+                    @click="openViewModal(req)"
+                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+                    type="button"
+                  >
+                    <i class="fas fa-eye mr-1" aria-hidden="true"></i>
+                    Ver
+                  </button>
+                  <button
+                    @click="aprobarRequerimiento(req.id)"
+                    class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-sm"
+                    type="button"
+                  >
+                    <i class="fas fa-check mr-1" aria-hidden="true"></i>
+                    Aprobar
+                  </button>
+                  <button
+                    @click="rechazarRequerimiento(req.id)"
+                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
+                    type="button"
+                  >
+                    <i class="fas fa-times mr-1" aria-hidden="true"></i>
+                    Rechazar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div v-if="requerimientosPendientes.length === 0" class="text-center py-8">
+              <p class="text-slate-600 text-lg">No hay requerimientos pendientes</p>
+            </div>
+          </div>
+
+          <div v-if="requerimientosRechazados.length > 0" class="mt-10">
+            <h3 class="text-lg font-bold text-slate-900 mb-4">Requerimientos Rechazados</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-slate-100 border-b border-slate-300">
+                  <tr>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Número</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Cliente</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Fecha</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Estado</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-slate-700">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="req in requerimientosRechazados" :key="`rech-${req.id}`" class="border-b border-slate-200 hover:bg-slate-50">
+                    <td class="px-6 py-3 text-sm font-semibold text-slate-900">{{ req.numero || `REQ-${req.id}` }}</td>
+                    <td class="px-6 py-3 text-sm text-slate-900">{{ req.cliente || 'Sin asignar' }}</td>
+                    <td class="px-6 py-3 text-sm text-slate-900">{{ formatDate(req.fecha) }}</td>
+                    <td class="px-6 py-3 text-sm">
+                      <span :class="['px-3 py-1 rounded-full text-xs font-semibold', getRequerimientoStatusClass(req.estado)]">
+                        {{ req.estado }}
+                      </span>
+                    </td>
+                    <td class="px-6 py-3 text-sm">
+                      <button
+                        @click="openViewModal(req)"
+                        class="px-3 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors text-xs font-semibold"
+                        type="button"
+                      >
+                        Ver
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <!-- Inventario -->
         <div v-if="activeTab === 'inventario'" class="p-8">
           <h2 class="text-2xl font-bold text-slate-900 mb-6">Estado de Inventario</h2>
@@ -236,21 +338,166 @@
           </div>
         </div>
       </div>
+
+      <!-- Modal: Ver Requerimiento -->
+      <div
+        v-if="isViewModalOpen"
+        class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+        @click.self="closeViewModal"
+      >
+        <div class="bg-white rounded-xl shadow-2xl p-6 max-w-lg w-full mx-4">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <h3 class="text-xl font-bold text-slate-900">Detalle de Requerimiento</h3>
+            <button
+              @click="closeViewModal"
+              class="text-slate-400 hover:text-slate-600"
+              type="button"
+              aria-label="Cerrar"
+              title="Cerrar"
+            >
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div v-if="viewingReq" class="space-y-3 text-sm">
+            <div class="flex justify-between gap-4">
+              <span class="text-slate-500">Número</span>
+              <span class="text-slate-900 font-semibold">{{ viewingReq.numero || `REQ-${viewingReq.id}` }}</span>
+            </div>
+            <div class="flex justify-between gap-4">
+              <span class="text-slate-500">Nombre</span>
+              <span class="text-slate-900 font-semibold">{{ viewingReq.nombre || 'Sin nombre' }}</span>
+            </div>
+            <div class="flex justify-between gap-4">
+              <span class="text-slate-500">Cliente</span>
+              <span class="text-slate-900 font-semibold">{{ viewingReq.cliente || 'Sin asignar' }}</span>
+            </div>
+            <div class="flex justify-between gap-4">
+              <span class="text-slate-500">Fecha</span>
+              <span class="text-slate-900 font-semibold">{{ formatDate(viewingReq.fecha) }}</span>
+            </div>
+            <div class="flex justify-between gap-4">
+              <span class="text-slate-500">Total</span>
+              <span class="text-slate-900 font-semibold">${{ viewingReq.total?.toLocaleString?.() || viewingReq.total || '0' }}</span>
+            </div>
+            <div class="flex justify-between gap-4 items-center">
+              <span class="text-slate-500">Estado</span>
+              <span :class="['px-3 py-1 rounded-full text-xs font-semibold', getRequerimientoStatusClass(viewingReq.estado)]">
+                {{ viewingReq.estado }}
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-6 flex justify-end">
+            <button
+              @click="closeViewModal"
+              class="bg-slate-200 text-slate-700 px-4 py-2 rounded-lg hover:bg-slate-300 transition-colors text-sm font-semibold"
+              type="button"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const activeTab = ref('recepcion')
 
 const tabs = [
   { id: 'recepcion', label: 'Recepción', icon: 'fas fa-inbox' },
   { id: 'despacho', label: 'Despacho', icon: 'fas fa-truck' },
+  { id: 'requerimientos', label: 'Requerimientos', icon: 'fas fa-clipboard-check' },
   { id: 'inventario', label: 'Inventario', icon: 'fas fa-warehouse' },
   { id: 'movimientos', label: 'Movimientos', icon: 'fas fa-exchange-alt' }
 ]
+
+// Requerimientos (pedidos) - aprobaciones del bodeguero
+const requerimientos = ref([])
+const loadingRequerimientos = ref(false)
+
+const isViewModalOpen = ref(false)
+const viewingReq = ref(null)
+
+const normalizeEstado = (estado) => String(estado || '').toLowerCase().trim()
+const isPendiente = (estado) => {
+  const s = normalizeEstado(estado)
+  return s === 'pendiente' || s === 'reenviada'
+}
+
+const requerimientosPendientes = computed(() => (requerimientos.value || []).filter((r) => isPendiente(r.estado)))
+const requerimientosRechazados = computed(() => (requerimientos.value || []).filter((r) => normalizeEstado(r.estado) === 'rechazada' || normalizeEstado(r.estado) === 'rechazado'))
+
+const getRequerimientoStatusClass = (estado) => {
+  const s = normalizeEstado(estado)
+  if (s === 'pendiente') return 'bg-yellow-100 text-yellow-800'
+  if (s === 'aprobada' || s === 'aprobado') return 'bg-green-100 text-green-800'
+  if (s === 'rechazada' || s === 'rechazado') return 'bg-red-100 text-red-800'
+  if (s === 'reenviada') return 'bg-purple-100 text-purple-800'
+  return 'bg-slate-100 text-slate-800'
+}
+
+const openViewModal = (req) => {
+  viewingReq.value = req || null
+  isViewModalOpen.value = true
+}
+
+const closeViewModal = () => {
+  isViewModalOpen.value = false
+  viewingReq.value = null
+}
+
+const loadRequerimientos = async () => {
+  try {
+    loadingRequerimientos.value = true
+    const response = await fetch('/api/requerimientos')
+    const data = await response.json()
+    requerimientos.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando requerimientos:', error)
+    useToast().error('No se pudieron cargar los requerimientos')
+  } finally {
+    loadingRequerimientos.value = false
+  }
+}
+
+const updateEstadoRequerimiento = async (id, estado) => {
+  const toast = useToast()
+  try {
+    if (id === undefined || id === null || String(id).trim() === '' || String(id) === 'undefined') {
+      throw new Error('No se encontró el id del requerimiento')
+    }
+
+    const response = await fetch(`/api/requerimientos/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ estado })
+    })
+
+    const data = await response.json()
+    if (!response.ok || data?.success === false || data?.statusCode) {
+      const msg = data?.errors?.[0] || data?.message || 'No se pudo actualizar el estado'
+      throw new Error(msg)
+    }
+
+    await loadRequerimientos()
+    toast.success(`Requerimiento ${estado}`)
+  } catch (error) {
+    console.error('Error actualizando requerimiento:', error)
+    toast.error(`Error: ${error.message || error}`)
+  }
+}
+
+const aprobarRequerimiento = (id) => updateEstadoRequerimiento(id, 'aprobada')
+const rechazarRequerimiento = (id) => updateEstadoRequerimiento(id, 'rechazada')
+
+onMounted(() => {
+  loadRequerimientos()
+})
 
 const busquedaProducto = ref('')
 

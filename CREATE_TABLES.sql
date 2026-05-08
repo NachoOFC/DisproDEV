@@ -41,17 +41,48 @@ CREATE TABLE IF NOT EXISTS "centros" (
 );
 
 -- Tabla: productos (CatÃ¡logo de productos)
-CREATE TABLE IF NOT EXISTS "productos" (
+-- Tabla: categorias_productos (CategorÃ­as del catÃ¡logo)
+CREATE TABLE IF NOT EXISTS "categorias_productos" (
   "id" BIGSERIAL PRIMARY KEY,
-  "codigo" VARCHAR(255) UNIQUE NOT NULL,
-  "nombre" VARCHAR(500) NOT NULL,
-  "descripcion" TEXT NULL,
-  "precio" DECIMAL(10,2) NULL,
-  "stock" INT DEFAULT 0,
+  "nombre" VARCHAR(255) UNIQUE NOT NULL,
   "deleted_at" TIMESTAMP NULL,
   "created_at" TIMESTAMP NULL,
   "updated_at" TIMESTAMP NULL
 );
+
+CREATE TABLE IF NOT EXISTS "productos" (
+  "id" BIGSERIAL PRIMARY KEY,
+  "codigo" VARCHAR(255) UNIQUE NOT NULL,
+  "nombre" VARCHAR(500) NOT NULL,
+  "categoria_id" BIGINT NULL,
+  "descripcion" TEXT NULL,
+  "precio" DECIMAL(10,2) NULL,
+  "stock" INT DEFAULT 0,
+  "stock_minimo" INT DEFAULT 0,
+  "deleted_at" TIMESTAMP NULL,
+  "created_at" TIMESTAMP NULL,
+  "updated_at" TIMESTAMP NULL,
+  FOREIGN KEY ("categoria_id") REFERENCES "categorias_productos" ("id")
+);
+
+-- Compatibilidad: si ya existÃ­a la tabla productos, agregar columnas faltantes.
+ALTER TABLE "productos" ADD COLUMN IF NOT EXISTS "categoria_id" BIGINT NULL;
+ALTER TABLE "productos" ADD COLUMN IF NOT EXISTS "stock_minimo" INT DEFAULT 0;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE conname = 'productos_categoria_id_fkey'
+  ) THEN
+    ALTER TABLE "productos"
+      ADD CONSTRAINT productos_categoria_id_fkey
+      FOREIGN KEY ("categoria_id")
+      REFERENCES "categorias_productos" ("id");
+  END IF;
+END
+$$;
 
 -- Tabla: proveedores
 CREATE TABLE IF NOT EXISTS "proveedors" (
@@ -85,6 +116,7 @@ CREATE TABLE IF NOT EXISTS "requerimientos" (
   "id" BIGSERIAL PRIMARY KEY,
   "cliente_id" BIGINT NOT NULL,
   "numero" VARCHAR(50) UNIQUE NOT NULL,
+  "nombre" VARCHAR(255) NULL,
   "fecha" DATE NOT NULL,
   "total" DECIMAL(12,2) NULL,
   "estado" VARCHAR(50) DEFAULT 'pendiente',
@@ -93,6 +125,8 @@ CREATE TABLE IF NOT EXISTS "requerimientos" (
   "updated_at" TIMESTAMP NULL,
   FOREIGN KEY ("cliente_id") REFERENCES "clientes" ("id")
 );
+
+ALTER TABLE "requerimientos" ADD COLUMN IF NOT EXISTS "nombre" VARCHAR(255) NULL;
 
 -- Tabla: requerimiento_user (RelaciÃ³n entre requerimientos y usuarios)
 CREATE TABLE IF NOT EXISTS "requerimiento_user" (

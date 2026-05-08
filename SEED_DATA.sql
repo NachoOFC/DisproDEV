@@ -10,13 +10,21 @@ INSERT INTO "users" (name, email, password, created_at, updated_at) VALUES
 ('María García', 'maria@dispro.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW(), NOW())
 ON CONFLICT (email) DO NOTHING;
 
+-- 🗂️ Categorías de productos
+INSERT INTO "categorias_productos" (nombre, created_at, updated_at) VALUES
+('Aguas', NOW(), NOW()),
+('Envases', NOW(), NOW()),
+('Accesorios', NOW(), NOW()),
+('Servicios', NOW(), NOW())
+ON CONFLICT (nombre) DO NOTHING;
+
 -- 📦 Productos de prueba
-INSERT INTO "productos" (codigo, nombre, descripcion, precio, stock, created_at, updated_at) VALUES
-('PROD-001', 'Agua Filtrada 5L', 'Agua filtrada purificada en bidón de 5 litros', 2500.00, 150, NOW(), NOW()),
-('PROD-002', 'Agua Destilada 5L', 'Agua destilada para uso industrial', 3000.00, 89, NOW(), NOW()),
-('PROD-003', 'Agua Purificada 10L', 'Agua purificada en bidón de 10 litros', 5000.00, 45, NOW(), NOW()),
-('PROD-004', 'Agua Mineral 5L', 'Agua mineral natural', 3500.00, 120, NOW(), NOW()),
-('PROD-005', 'Agua Alcalina 5L', 'Agua alcalina ionizada', 4000.00, 75, NOW(), NOW())
+INSERT INTO "productos" (codigo, nombre, categoria_id, descripcion, precio, stock, created_at, updated_at) VALUES
+('PROD-001', 'Agua Filtrada 5L', (SELECT id FROM "categorias_productos" WHERE nombre = 'Aguas'), 'Agua filtrada purificada en bidón de 5 litros', 2500.00, 150, NOW(), NOW()),
+('PROD-002', 'Agua Destilada 5L', (SELECT id FROM "categorias_productos" WHERE nombre = 'Aguas'), 'Agua destilada para uso industrial', 3000.00, 89, NOW(), NOW()),
+('PROD-003', 'Agua Purificada 10L', (SELECT id FROM "categorias_productos" WHERE nombre = 'Aguas'), 'Agua purificada en bidón de 10 litros', 5000.00, 45, NOW(), NOW()),
+('PROD-004', 'Agua Mineral 5L', (SELECT id FROM "categorias_productos" WHERE nombre = 'Aguas'), 'Agua mineral natural', 3500.00, 120, NOW(), NOW()),
+('PROD-005', 'Agua Alcalina 5L', (SELECT id FROM "categorias_productos" WHERE nombre = 'Aguas'), 'Agua alcalina ionizada', 4000.00, 75, NOW(), NOW())
 ON CONFLICT (codigo) DO NOTHING;
 
 -- 🏢 Clientes de prueba

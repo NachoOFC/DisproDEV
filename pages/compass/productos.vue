@@ -27,9 +27,7 @@
               class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             >
               <option value="">-- Todas --</option>
-              <option value="Repuestos">Repuestos</option>
-              <option value="Accesorios">Accesorios</option>
-              <option value="Consumibles">Consumibles</option>
+              <option v-for="c in categorias" :key="c.id" :value="String(c.id)">{{ c.nombre }}</option>
             </select>
           </div>
 
@@ -65,7 +63,7 @@
             <div class="grid grid-cols-2 gap-2 mb-4 text-sm">
               <div>
                 <p class="text-slate-600">Categoría</p>
-                <p class="font-semibold text-slate-900">{{ producto.categoria }}</p>
+                <p class="font-semibold text-slate-900">{{ producto.categoria || 'Sin categoría' }}</p>
               </div>
               <div>
                 <p class="text-slate-600">Stock</p>
@@ -136,14 +134,12 @@
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-2">Categoría</label>
                 <select
-                  v-model="formulario.categoria"
+                  v-model="formulario.categoria_id"
                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   required
                 >
                   <option value="">-- Selecciona --</option>
-                  <option value="Repuestos">Repuestos</option>
-                  <option value="Accesorios">Accesorios</option>
-                  <option value="Consumibles">Consumibles</option>
+                  <option v-for="c in categorias" :key="c.id" :value="String(c.id)">{{ c.nombre }}</option>
                 </select>
               </div>
               <div>
@@ -220,6 +216,20 @@ const loading = ref(false)
 
 // Cargar desde PostgreSQL
 const productos = ref([])
+const categorias = ref([])
+
+const toast = useToast()
+
+const loadCategorias = async () => {
+  try {
+    const response = await fetch('/api/categorias-productos')
+    const data = await response.json()
+    categorias.value = data.data || []
+  } catch (error) {
+    console.error('Error cargando categorías:', error)
+    categorias.value = []
+  }
+}
 
 // Función para cargar productos desde la BD
 const loadProductos = async () => {
@@ -237,13 +247,14 @@ const loadProductos = async () => {
 
 // Cargar al montar
 onMounted(() => {
+  loadCategorias()
   loadProductos()
 })
 
 const formulario = ref({
   nombre: '',
   codigo: '',
-  categoria: '',
+  categoria_id: '',
   precio: 0,
   stock: 0,
   stockMinimo: 0,
@@ -256,7 +267,7 @@ const productosFiltrados = computed(() => {
   return productos.value.filter(p => {
     const coincideBusqueda = p.nombre.toLowerCase().includes(busqueda.value.toLowerCase()) || 
                             p.codigo.toLowerCase().includes(busqueda.value.toLowerCase())
-    const coincideCategoria = filtroCategoria.value === '' || p.categoria === filtroCategoria.value
+    const coincideCategoria = filtroCategoria.value === '' || String(p.categoria_id || '') === String(filtroCategoria.value)
     return coincideBusqueda && coincideCategoria
   })
 })
@@ -265,34 +276,78 @@ const editarProducto = (id) => {
   const producto = productos.value.find(p => p.id === id)
   if (producto) {
     formularioEditando.value = id
-    formulario.value = { ...producto }
+    formulario.value = {
+      nombre: producto.nombre || '',
+      codigo: producto.codigo || '',
+      categoria_id: producto.categoria_id ? String(producto.categoria_id) : '',
+      precio: Number(producto.precio || 0),
+      stock: Number(producto.stock || 0),
+      stockMinimo: Number(producto.stock_minimo || 0),
+      descripcion: producto.descripcion || ''
+    }
     formularioTitulo.value = 'Editar Producto'
     mostrarFormulario.value = true
   }
 }
 
-const guardarProducto = () => {
-  if (formularioEditando.value) {
-    const index = productos.value.findIndex(p => p.id === formularioEditando.value)
-    if (index !== -1) {
-      productos.value[index] = {
-        ...productos.value[index],
-        ...formulario.value
-      }
+const guardarProducto = async () => {
+  try {
+    loading.value = true
+
+    const payload = {
+      nombre: formulario.value.nombre,
+      codigo: formulario.value.codigo,
+      categoria_id: formulario.value.categoria_id ? Number(formulario.value.categoria_id) : null,
+      descripcion: formulario.value.descripcion || null,
+      precio: Number(formulario.value.precio || 0),
+      stock: Number(formulario.value.stock || 0),
+      stock_minimo: Number(formulario.value.stockMinimo || 0)
     }
-  } else {
-    productos.value.push({
-      id: Date.now(),
-      ...formulario.value
+
+    const url = formularioEditando.value ? `/api/productos/${formularioEditando.value}` : '/api/productos'
+    const method = formularioEditando.value ? 'PATCH' : 'POST'
+
+    const response = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     })
+
+    const data = await response.json()
+    if (!response.ok || data?.statusCode) {
+      const msg = data?.errors?.[0] || data?.message || 'No se pudo guardar el producto'
+      throw new Error(msg)
+    }
+
+    await loadProductos()
+    toast.success(formularioEditando.value ? 'Producto actualizado' : 'Producto creado')
+    cerrarFormulario()
+  } catch (error) {
+    console.error('Error guardando producto:', error)
+    toast.error(`Error: ${error.message || error}`)
+  } finally {
+    loading.value = false
   }
-  
-  cerrarFormulario()
 }
 
 const eliminarProducto = (id) => {
   if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-    productos.value = productos.value.filter(p => p.id !== id)
+    ;(async () => {
+      try {
+        const response = await fetch(`/api/productos/${id}`, { method: 'DELETE' })
+        const data = await response.json().catch(() => ({}))
+        if (!response.ok || data?.statusCode) {
+          const msg = data?.errors?.[0] || data?.message || 'No se pudo eliminar el producto'
+          throw new Error(msg)
+        }
+
+        await loadProductos()
+        toast.success('Producto eliminado')
+      } catch (error) {
+        console.error('Error eliminando producto:', error)
+        toast.error(`Error: ${error.message || error}`)
+      }
+    })()
   }
 }
 
@@ -303,7 +358,7 @@ const cerrarFormulario = () => {
   formulario.value = {
     nombre: '',
     codigo: '',
-    categoria: '',
+    categoria_id: '',
     precio: 0,
     stock: 0,
     stockMinimo: 0,

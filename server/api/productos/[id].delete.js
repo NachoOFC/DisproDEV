@@ -8,30 +8,34 @@ export default defineEventHandler(async (event) => {
       event?.context?.params?.id ||
       event?.params?.id
 
-    if (!id || String(id).trim() === '' || String(id) === 'undefined') {
+    if (!id || String(id).trim() === '') {
       return {
         statusCode: 400,
         message: 'Bad Request',
         errors: ['El id es requerido']
       }
     }
-    
+
     const sql = getDatabase()
-    const result = await sql`SELECT * FROM productos WHERE id = ${id} AND deleted_at IS NULL`
-    
-    const producto = result[0]
-    
-    if (!producto) {
+
+    const result = await sql`
+      UPDATE productos
+      SET deleted_at = NOW(), updated_at = NOW()
+      WHERE id = ${id} AND deleted_at IS NULL
+      RETURNING id
+    `
+
+    if (!result?.[0]) {
       return { statusCode: 404, message: 'Producto no encontrado' }
     }
-    
-    return { data: producto }
+
+    return { success: true }
   } catch (error) {
-    console.error('Error obteniendo producto:', error)
-    return { 
-      statusCode: 500, 
-      message: 'Error al obtener producto',
-      error: error.message 
+    console.error('Error eliminando producto:', error)
+    return {
+      statusCode: 500,
+      message: 'Error al eliminar producto',
+      error: error.message
     }
   }
 })

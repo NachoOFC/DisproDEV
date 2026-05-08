@@ -27,23 +27,36 @@ Edita el archivo `.env.local` y reemplaza con tu URL real:
 DATABASE_URL=tu_url_de_conexion_aqui
 ```
 
-### 3. Insertar Datos de Prueba (Opcional)
+### 3. Crear tablas y cargar datos (Recomendado)
 
-En la consola de Neon o usando un cliente SQL, ejecuta:
+#### Opción A (rápida): Neon SQL Editor
+
+1. Abre el SQL Editor de Neon
+2. Ejecuta el contenido de `CREATE_TABLES.sql` (si aún no lo hiciste)
+3. Ejecuta el contenido de `SEED_DATA_DEMO.sql`
+
+Nota: `SEED_DATA_DEMO.sql` está pensado para la app (esquema del repo), mete pocos datos y respeta FKs.
+
+#### Opción B (recomendada): usando psql desde tu PC
+
+Si tienes `psql` instalado, desde la raíz del proyecto:
 
 ```bash
-# Copia el contenido de SEED_DATA.sql
-# Pégalo en el SQL Editor de Neon
-# Ejecuta el script
+psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f CREATE_TABLES.sql
+psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f SEED_DATA_DEMO.sql
 ```
 
-O usa el archivo `SEED_DATA.sql` directamente en Neon Console.
+Si solo quieres unos pocos registros “base”, también puedes usar `SEED_DATA.sql`,
+pero `SEED_DATA_DEMO.sql` cubre todas las tablas y está ordenado para no romper FKs.
 
 ### 4. Probar la Conexión
 
 ```bash
 # Inicia el servidor de desarrollo
-npm run dev
+pnpm dev
+
+# (alternativa)
+# npm run dev
 
 # En tu navegador, visita:
 # http://localhost:3000/api/test-db
@@ -55,7 +68,7 @@ Deberías ver algo como:
   "success": true,
   "message": "✅ Conexión exitosa a Neon PostgreSQL",
   "database": {
-    "totalTablas": 45,
+    "totalTablas": 46,
     "estadisticas": {
       "productos": 5,
       "clientes": 3,
@@ -71,6 +84,11 @@ Deberías ver algo como:
 - `GET /api/productos` - Listar todos los productos
 - `GET /api/productos/[id]` - Obtener producto por ID
 - `POST /api/productos` - Crear nuevo producto
+- `PATCH /api/productos/[id]` - Actualizar producto
+- `DELETE /api/productos/[id]` - Eliminar (soft delete)
+
+### Categorías de productos
+- `GET /api/categorias-productos` - Listar categorías (para Admin)
 
 ### Usuarios
 - `GET /api/usuarios` - Listar usuarios
@@ -84,7 +102,7 @@ Deberías ver algo como:
 
 ## 📊 Estructura de la Base de Datos
 
-Tu base de datos tiene **45 tablas** principales:
+Tu base de datos tiene **46 tablas** en el schema `public` (puede variar si agregas/quitas tablas):
 
 - 👥 `users` - Usuarios del sistema
 - 📦 `productos` - Catálogo de productos
@@ -101,7 +119,7 @@ Tu base de datos tiene **45 tablas** principales:
 
 ### Error: "DATABASE_URL no está configurada"
 - Asegúrate de tener el archivo `.env.local` con la URL correcta
-- Reinicia el servidor: `Ctrl+C` y luego `npm run dev`
+- Reinicia el servidor: `Ctrl+C` y luego `pnpm dev` (o `npm run dev`)
 
 ### Error: "Connection timeout"
 - Verifica que tu URL de Neon sea correcta
