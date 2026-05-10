@@ -64,9 +64,7 @@
           </button>
         </form>
 
-        <div class="mt-6 text-xs text-slate-500 text-center">
-          Demo: usa un usuario existente en <b>users</b>.
-        </div>
+        
       </div>
     </div>
   </div>

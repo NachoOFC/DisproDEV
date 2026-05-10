@@ -51,6 +51,27 @@ export default defineEventHandler(async (event) => {
 
     const sql = getDatabase()
 
+    const current = await sql`
+      SELECT id, estado
+      FROM requerimientos
+      WHERE id = ${id} AND deleted_at IS NULL
+      LIMIT 1
+    `
+
+    if (!current?.length) {
+      return { statusCode: 404, message: 'Requerimiento no encontrado' }
+    }
+
+    const currentEstado = String(current[0]?.estado || '').toLowerCase().trim()
+
+    if (estado === 'reenviada' && currentEstado !== 'rechazada' && currentEstado !== 'rechazado') {
+      return {
+        statusCode: 409,
+        message: 'Conflict',
+        errors: ['Solo se puede reenviar cuando el requerimiento está rechazado']
+      }
+    }
+
     const result = await sql`
       UPDATE requerimientos
       SET estado = ${estado}, updated_at = NOW()

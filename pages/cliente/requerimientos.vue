@@ -201,7 +201,7 @@
                         <i class="fas fa-edit" aria-hidden="true"></i>
                       </button>
                       <button
-                        v-if="isPendiente(orden.estado)"
+                        v-if="isRechazada(orden.estado)"
                         @click="reenviarOrder(orden.id)"
                         class="text-purple-600 hover:text-purple-700 transition-colors text-base"
                         type="button"
