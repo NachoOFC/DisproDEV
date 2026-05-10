@@ -82,10 +82,12 @@ const loading = ref(false)
 const error = ref('')
 
 const authToken = useCookie('auth_token', {
+  path: '/',
   sameSite: 'lax',
   secure: process.env.NODE_ENV === 'production'
 })
 const authUser = useCookie('auth_user', {
+  path: '/',
   sameSite: 'lax',
   secure: process.env.NODE_ENV === 'production'
 })

@@ -20,12 +20,7 @@
       <slot />
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 mt-16 py-6">
-      <div class="max-w-7xl mx-auto px-4 text-center text-sm">
-        <p>© 2024 ALOGIS - Proyecto de Titulación | Powered by Nuxt 3 + Vue 3</p>
-      </div>
-    </footer>
+   
 
     <CommonToastContainer />
   </div>

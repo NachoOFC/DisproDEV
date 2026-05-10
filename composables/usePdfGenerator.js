@@ -72,12 +72,6 @@ export const generarPdfFactura = (factura) => {
     doc.setFont(undefined, 'bold')
     doc.text(`TOTAL: $${total.toFixed(0)}`, 130, yPosition)
     
-    // Pie de página
-    doc.setFont(undefined, 'normal')
-    doc.setFontSize(8)
-    doc.setTextColor(150, 150, 150)
-    doc.text('© 2024 ALOGIS - Sistema de Gestión de Distribución', 20, 280)
-    doc.text('Powered by Nuxt 3 + Vue 3', 20, 285)
     
   // Descargar
   doc.save(`Factura_${factura.folio}.pdf`)
@@ -131,12 +125,7 @@ export const generarPdfGuia = (guia, formatDate) => {
     doc.setFontSize(10)
     doc.text(guia.observaciones || 'Sin observaciones', 20, yPosition)
     
-    // Pie de página
-    doc.setFont(undefined, 'normal')
-    doc.setFontSize(8)
-    doc.setTextColor(150, 150, 150)
-    doc.text('© 2024 ALOGIS - Sistema de Gestión de Distribución', 20, 280)
-    doc.text('Powered by Nuxt 3 + Vue 3', 20, 285)
+   
     
   // Descargar
   doc.save(`Guia_${guia.numero}.pdf`)
@@ -189,12 +178,7 @@ export const generarPdfReporte = (reporte) => {
     yPosition += 8
     doc.text('Para más información, contacte a soporte@dispro.com', 20, yPosition)
     
-    // Pie de página
-    doc.setFont(undefined, 'normal')
-    doc.setFontSize(8)
-    doc.setTextColor(150, 150, 150)
-    doc.text('© 2024 ALOGIS - Sistema de Gestión de Distribución', 20, 280)
-    doc.text('Powered by Nuxt 3 + Vue 3', 20, 285)
+    
     
   // Descargar
   const nombreArchivo = `${reporte.tipo}_${new Date().getTime()}.pdf`
