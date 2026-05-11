@@ -87,8 +87,9 @@
                 Editar
               </button>
               <button
-                @click="eliminarProducto(producto.id)"
+                @click="openDeleteModal(producto)"
                 class="flex-1 text-red-500 hover:text-red-700 py-2 hover:bg-red-50 rounded transition-colors"
+                type="button"
               >
                 <i class="fas fa-trash mr-1"></i>
                 Eliminar
@@ -207,6 +208,65 @@
           </form>
         </div>
       </div>
+
+      <!-- Modal: Confirmar Eliminación -->
+      <div
+        v-if="isDeleteModalOpen"
+        class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+        @click.self="closeDeleteModal"
+      >
+        <div class="bg-white rounded-xl shadow-2xl p-6 max-w-md w-full mx-4">
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <h3 class="text-xl font-bold text-slate-900">Eliminar Producto</h3>
+            <button
+              @click="closeDeleteModal"
+              class="text-slate-400 hover:text-slate-600"
+              type="button"
+              aria-label="Cerrar"
+              title="Cerrar"
+            >
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <p class="text-slate-700 text-sm mb-4">
+            ¿Seguro que deseas eliminar este producto? Esta acción lo marcará como eliminado.
+          </p>
+
+          <div v-if="productoToDelete" class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm mb-5">
+            <div class="flex justify-between gap-4">
+              <span class="text-slate-500">Nombre</span>
+              <span class="text-slate-900 font-semibold text-right">{{ productoToDelete.nombre }}</span>
+            </div>
+            <div class="flex justify-between gap-4 mt-1">
+              <span class="text-slate-500">Código</span>
+              <span class="text-slate-900 font-semibold">{{ productoToDelete.codigo }}</span>
+            </div>
+          </div>
+
+          <div class="flex gap-3 justify-end">
+            <button
+              @click="closeDeleteModal"
+              class="bg-slate-200 text-slate-700 px-4 py-2 rounded-lg hover:bg-slate-300 transition-colors text-sm font-semibold"
+              type="button"
+            >
+              Cancelar
+            </button>
+            <button
+              @click="confirmDelete"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-sm font-semibold"
+              type="button"
+              :disabled="deleting"
+            >
+              <span v-if="!deleting">Eliminar</span>
+              <span v-else>
+                <i class="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i>
+                Eliminando...
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -225,6 +285,45 @@ const productos = ref([])
 const categorias = ref([])
 
 const toast = useToast()
+const isDeleteModalOpen = ref(false)
+const productoToDelete = ref(null)
+const deleting = ref(false)
+
+const openDeleteModal = (producto) => {
+  productoToDelete.value = producto || null
+  isDeleteModalOpen.value = true
+}
+
+const closeDeleteModal = (options = {}) => {
+  const { force = false } = options
+  if (deleting.value && !force) return
+  isDeleteModalOpen.value = false
+  productoToDelete.value = null
+}
+
+const confirmDelete = async () => {
+  const id = productoToDelete.value?.id
+  if (!id) return
+
+  try {
+    deleting.value = true
+    const response = await fetch(`/api/productos/${id}`, { method: 'DELETE' })
+    const data = await response.json().catch(() => ({}))
+    if (!response.ok || data?.statusCode) {
+      const msg = data?.errors?.[0] || data?.message || 'No se pudo eliminar el producto'
+      throw new Error(msg)
+    }
+
+    await loadProductos()
+    closeDeleteModal({ force: true })
+    toast.success('Producto eliminado')
+  } catch (error) {
+    console.error('Error eliminando producto:', error)
+    toast.error(`Error: ${error.message || error}`)
+  } finally {
+    deleting.value = false
+  }
+}
 const evitarNegativos = (objeto, campo) => {
   if (objeto[campo] < 0 || isNaN(objeto[campo])) {
     objeto[campo] = 0
@@ -338,27 +437,6 @@ const guardarProducto = async () => {
     toast.error(`Error: ${error.message || error}`)
   } finally {
     loading.value = false
-  }
-}
-
-const eliminarProducto = (id) => {
-  if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-    ;(async () => {
-      try {
-        const response = await fetch(`/api/productos/${id}`, { method: 'DELETE' })
-        const data = await response.json().catch(() => ({}))
-        if (!response.ok || data?.statusCode) {
-          const msg = data?.errors?.[0] || data?.message || 'No se pudo eliminar el producto'
-          throw new Error(msg)
-        }
-
-        await loadProductos()
-        toast.success('Producto eliminado')
-      } catch (error) {
-        console.error('Error eliminando producto:', error)
-        toast.error(`Error: ${error.message || error}`)
-      }
-    })()
   }
 }
 
