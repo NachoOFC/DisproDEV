@@ -8,11 +8,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
   // @ts-ignore Nuxt runtime supports `nitro`, but Nuxt 3.21.2 schema types currently mark it as `never`.
   nitro: {
-    preset: 'netlify',
-    prerender: {
-      crawlLinks: true,
-      routes: ['/']
-    }
+    preset: 'netlify'
   },
   app: {
     head: {

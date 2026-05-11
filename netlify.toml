@@ -1,6 +1,9 @@
 [build]
   command = "corepack enable && pnpm run build"
-  publish = "dist"
+  publish = ".output/public"
+
+[functions]
+  directory = ".netlify/functions-internal"
 
 [build.environment]
   NODE_VERSION = "20"
