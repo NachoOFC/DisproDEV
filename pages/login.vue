@@ -81,16 +81,18 @@ const showPassword = ref(false)
 const loading = ref(false)
 const error = ref('')
 
-const authToken = useCookie('auth_token', {
+const isProd = process.env.NODE_ENV === 'production'
+const cookieOptions = {
   path: '/',
-  sameSite: 'lax',
-  secure: process.env.NODE_ENV === 'production'
-})
-const authUser = useCookie('auth_user', {
-  path: '/',
-  sameSite: 'lax',
-  secure: process.env.NODE_ENV === 'production'
-})
+  // En producción, algunos navegadores bloquean cookies en previews/iframes si no son SameSite=None
+  sameSite: isProd ? 'none' : 'lax',
+  secure: isProd,
+  // 7 días (en segundos)
+  maxAge: 60 * 60 * 24 * 7
+}
+
+const authToken = useCookie('auth_token', cookieOptions)
+const authUser = useCookie('auth_user', cookieOptions)
 
 const handleLogin = async () => {
   error.value = ''
