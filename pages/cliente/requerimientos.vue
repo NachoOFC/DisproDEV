@@ -5,11 +5,13 @@
       <div v-if="!clienteId" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
         <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4">
           <h3 class="text-2xl font-bold text-slate-900 mb-6">Seleccionar Cliente</h3>
+          
+
           <select
-            v-model.number="selectedClienteId"
+            v-model="selectedClienteId"
             class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-6"
           >
-            <option value="">-- Selecciona un cliente --</option>
+            <option value="" disabled>Selecciona un cliente</option>
             <option v-for="c in clientes" :key="c.id" :value="c.id">
               {{ c.nombre }}
             </option>
@@ -34,7 +36,7 @@
             Cliente seleccionado: <strong>{{ clienteNombre }}</strong>
           </span>
           <button
-            @click="clienteId = null; selectedClienteId = null; sessionStorage.removeItem('clienteId')"
+            @click="clienteId = null; selectedClienteId = ''; sessionStorage.removeItem('clienteId')"
             class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200 transition-colors"
             type="button"
           >
@@ -366,7 +368,7 @@
 import { ref, onMounted, computed, watch } from 'vue'
 
 const activeTab = ref('crear')
-const selectedClienteId = ref(null)
+const selectedClienteId = ref('')
 const clienteId = ref(null)
 const clientes = ref([])
 
@@ -463,7 +465,7 @@ const loadRequerimientos = async () => {
 
 const confirmCliente = () => {
   if (!selectedClienteId.value) return
-  clienteId.value = selectedClienteId.value
+  clienteId.value = Number(selectedClienteId.value)
   activeTab.value = 'historial'
 }
 
@@ -489,7 +491,7 @@ onMounted(async () => {
       // Si el cliente no existe, limpiar y resetear
       sessionStorage.clear()
       clienteId.value = null
-      selectedClienteId.value = null
+      selectedClienteId.value = ''
     }
   }
 })
