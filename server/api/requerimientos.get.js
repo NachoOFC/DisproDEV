@@ -10,7 +10,7 @@ export default defineEventHandler(async () => {
         r.cliente_id,
         r.numero,
         r.nombre,
-        r.fecha, 
+        r.fecha::text as fecha, 
         r.total,
         r.estado,
         c.nombre as cliente,

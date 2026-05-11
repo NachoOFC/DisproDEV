@@ -5,6 +5,13 @@ import { defineEventHandler } from 'h3'
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
+
+    const getLocalISODate = (d = new Date()) => {
+      const year = d.getFullYear()
+      const month = String(d.getMonth() + 1).padStart(2, '0')
+      const day = String(d.getDate()).padStart(2, '0')
+      return `${year}-${month}-${day}`
+    }
     
     if (!body || !body.cliente_id) {
       return {
@@ -21,7 +28,7 @@ export default defineEventHandler(async (event) => {
       [
         body.numero || `F-${Date.now()}`,
         body.cliente_id,
-        body.fecha || new Date().toISOString().split('T')[0],
+        body.fecha || getLocalISODate(),
         body.total || 0,
         body.estado || 'pendiente'
       ]

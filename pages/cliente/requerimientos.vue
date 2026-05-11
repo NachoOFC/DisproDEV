@@ -401,6 +401,13 @@ const clienteNombre = computed(() => {
   return cliente?.nombre || ''
 })
 
+const getLocalISODate = (d = new Date()) => {
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 // Generar número único para requerimiento
 const generateNumero = () => {
   const timestamp = Date.now()
@@ -535,7 +542,7 @@ const handleCreateOrder = async () => {
         cliente_id: clienteId.value,
         numero: form.value.numero,
         nombre: form.value.nombre,
-        fecha: new Date().toISOString().split('T')[0],
+        fecha: getLocalISODate(),
         total,
         estado: 'pendiente'
       })
@@ -585,8 +592,9 @@ const openDeleteModal = (orden) => {
   isDeleteModalOpen.value = true
 }
 
-const closeDeleteModal = () => {
-  if (deleting.value) return
+const closeDeleteModal = (options = {}) => {
+  const { force = false } = options
+  if (deleting.value && !force) return
   isDeleteModalOpen.value = false
   ordenToDelete.value = null
 }
@@ -604,7 +612,7 @@ const confirmDelete = async () => {
     }
 
     await loadRequerimientos()
-    closeDeleteModal()
+    closeDeleteModal({ force: true })
     toast.success('Orden eliminada')
   } catch (error) {
     console.error('Error eliminando orden:', error)
@@ -614,8 +622,27 @@ const confirmDelete = async () => {
   }
 }
 
-const formatDate = (dateString) => {
-  const date = new Date(dateString)
+const formatDate = (dateInput) => {
+  if (!dateInput) return ''
+
+  // Evita corrimientos por zona horaria:
+  // Si viene como ISO/string ("YYYY-MM-DD" o "YYYY-MM-DDTHH:mm:ssZ"), tomamos solo la parte de fecha.
+  const raw = typeof dateInput === 'string' ? dateInput : String(dateInput)
+  const match = raw.match(/^(\d{4})-(\d{2})-(\d{2})/)
+  if (match) {
+    const year = Number(match[1])
+    const month = Number(match[2])
+    const day = Number(match[3])
+    const dateUtc = new Date(Date.UTC(year, month - 1, day))
+    return dateUtc.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC'
+    })
+  }
+
+  const date = new Date(dateInput)
   return date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
