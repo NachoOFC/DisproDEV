@@ -1,5 +1,5 @@
 import { executeQuery } from '../utils/database'
-import { defineEventHandler, readBody } from 'h3'
+import { defineEventHandler, readBody, setCookie } from 'h3'
 import bcrypt from 'bcryptjs'
 
 export default defineEventHandler(async (event) => {
@@ -51,6 +51,29 @@ export default defineEventHandler(async (event) => {
     
     // Mock token generation (después implementar JWT real)
     const token = 'token-' + Math.random().toString(36).substr(2, 9)
+
+    const isProd = process.env.NODE_ENV === 'production'
+    const cookieOptions = {
+      path: '/',
+      sameSite: 'lax',
+      secure: isProd,
+      // 7 días (segundos)
+      maxAge: 60 * 60 * 24 * 7
+    }
+
+    // Setear cookies en el response para que persistan en producción (Netlify)
+    setCookie(event, 'auth_token', token, cookieOptions)
+    setCookie(
+      event,
+      'auth_user',
+      JSON.stringify({
+        id: user.id,
+        nombre: user.name,
+        email: user.email,
+        role: 'admin'
+      }),
+      cookieOptions
+    )
     
     return {
       status: 'success',
