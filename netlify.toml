@@ -1,6 +1,6 @@
 [build]
   command = "corepack enable && pnpm run build"
-  publish = ".output/public"
+  publish = "dist"
 
 [functions]
   directory = ".netlify/functions-internal"
